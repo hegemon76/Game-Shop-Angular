@@ -31,7 +31,7 @@ namespace API.Entities
         public virtual Address Address { get; set; }
         public int BasketId { get; set; }
         public virtual Basket Basket { get; set; }
-        public ICollection<Order> Orders { get; set; }
-
+        public List<Order> Orders { get; set; }
+        public List<UserQuestion> UserQuestions { get; set; }
     }
 }

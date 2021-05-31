@@ -20,26 +20,30 @@ namespace API.Controllers
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> GetAll([FromQuery] SearchQuery query)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll([FromQuery] SearchQuery query)
         {
-            var productsDtos = _service.GetAll(query);
+            var productsDtos =await _service.GetAll(query);
 
             return Ok(productsDtos);
         }
 
         [HttpGet("product/{id}")]
-        public ActionResult<ProductDto> Get([FromRoute] int id)
+        public async Task<ActionResult<ProductDto>> Get([FromRoute] int id)
         {
-            var product = _service.GetById(id);
+            var product =await _service.GetById(id);
 
             return Ok(product);
         }
+       
         [HttpPost("question")]
-        public ActionResult<ProductDto> AskQuestion([FromBody] AskQuestionDto dto)
+        public async Task<ActionResult<ProductDto>> AskQuestion([FromBody] AskQuestionDto dto)
         {
-            _service.AskQuestion(dto);
+           await _service.AskQuestion(dto);
 
             return Ok("Question send");
         }
+        
+     
+
     }
 }

@@ -22,16 +22,16 @@ namespace API.Controllers
         }
 
         [HttpPost("product/{id}/addopinion")]
-        public ActionResult<CreateNewOpinionDto> AddOpinion ([FromBody] CreateNewOpinionDto dto, [FromRoute] int id)
+        public async Task <ActionResult<CreateNewOpinionDto>> AddOpinion ([FromBody] CreateNewOpinionDto dto, [FromRoute] int id)
         {
-            _service.AddOpinion(dto, id);
+            await _service.AddOpinion(dto, id);
             return Created($"api/videogames/search/product/id", null);
         }
         
         [HttpGet("myorders")]
-        public ActionResult<OrderDto> MyOrders()
+        public async Task<ActionResult<OrderDto>> MyOrders()
         {
-            var myOrders= _service.MyOrders();
+            var myOrders= await _service.MyOrders();
             return Ok(myOrders);
         }
 

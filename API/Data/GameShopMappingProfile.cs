@@ -13,23 +13,22 @@ namespace API.Data
         public GameShopMappingProfile()
         {
             CreateMap<Order, OrderDto>()
-                .ForMember(m => m.BasketPrice, c => c.MapFrom(s => s.User.Basket.Price))
-                .ForMember(m => m.DeliveryName, c => c.MapFrom(s => s.Delivery.Name))
-                .ForMember(m => m.DeliveryPrice, c => c.MapFrom(s => s.Delivery.Price))
+                .ForMember(m => m.BasketPrice, c => c.MapFrom(s => s.User.Basket.TotalPrice))
+                .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
                 .ForMember(m => m.ItemCount, c => c.MapFrom(s => s.User.Basket.ItemCount))
-                .ForMember(m => m.UserFirstName, c => c.MapFrom(s => s.User.FirstName))
-                .ForMember(m => m.UserLastName, c => c.MapFrom(s => s.User.LastName))
-                .ForMember(m => m.PaymentName, c => c.MapFrom(s => s.Payment.Name))
+                .ForMember(m => m.User, c => c.MapFrom(s => s.User))
+                .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
                 .ForMember(m => m.Products, c => c.MapFrom(s => s.User.Basket.Products));
 
-            //CreateMap<Dish, DishDto>();
+            CreateMap<OrderDto, Order>()
+                .ForMember(m => m.DateOfOrder, c => c.MapFrom(s => s.DateOfOrder))
+                .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
+                .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
+                .ForMember(m => m.User, c => c.MapFrom(s => s.User));
 
-            //CreateMap<CreateRestaurantDto, Restaurant>()
-            //    .ForMember(r => r.Address, c => c.MapFrom(dto => new Address()
-            //            { City = dto.City, ZipCode = dto.ZipCode, Street = dto.Street }));
 
-            //CreateMap<CreateDishDto, Dish>();
-            
+
+            CreateMap<Basket, BasketDto>();
             CreateMap<ProductDto, Product>();
             CreateMap<Product, ProductDto>();
         

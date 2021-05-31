@@ -57,8 +57,14 @@ namespace API.Migrations
                     b.Property<int>("ItemCount")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -74,6 +80,9 @@ namespace API.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -114,6 +123,9 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DateOfOrder")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DeliveryId")
                         .HasColumnType("int");
 
@@ -149,6 +161,9 @@ namespace API.Migrations
 
                     b.Property<bool>("Invoice")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -216,6 +231,9 @@ namespace API.Migrations
                     b.Property<int>("BasketId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BasketId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -245,8 +263,7 @@ namespace API.Migrations
                     b.HasIndex("AddressId")
                         .IsUnique();
 
-                    b.HasIndex("BasketId")
-                        .IsUnique();
+                    b.HasIndex("BasketId1");
 
                     b.HasIndex("RoleId");
 
@@ -337,11 +354,9 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Product", b =>
                 {
-                    b.HasOne("API.Entities.Basket", "Basket")
+                    b.HasOne("API.Entities.Basket", null)
                         .WithMany("Products")
                         .HasForeignKey("BasketId");
-
-                    b.Navigation("Basket");
                 });
 
             modelBuilder.Entity("API.Entities.User", b =>
@@ -353,10 +368,8 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.HasOne("API.Entities.Basket", "Basket")
-                        .WithOne("User")
-                        .HasForeignKey("API.Entities.User", "BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("BasketId1");
 
                     b.HasOne("API.Entities.Role", "Role")
                         .WithMany()
@@ -374,7 +387,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.UserQuestion", b =>
                 {
                     b.HasOne("API.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("UserQuestions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -390,8 +403,6 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.Basket", b =>
                 {
                     b.Navigation("Products");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Entities.Delivery", b =>
@@ -407,6 +418,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.User", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("UserQuestions");
                 });
 #pragma warning restore 612, 618
         }

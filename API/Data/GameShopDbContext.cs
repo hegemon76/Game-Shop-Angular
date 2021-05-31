@@ -21,39 +21,16 @@ namespace API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Opinion> Opinions { get; set; }
 
+        public DbSet<BankTransfer> BankTransfer { get; set; }
+        public DbSet<Cash> Cash { get; set; }
+        public DbSet<Courier> Courier { get; set; }
+        public DbSet<ParcelLocker> ParcelLocker { get; set; }
+        public DbSet<InPerson> InPerson { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<BankTransfer>();
-            builder.Entity<Cash>();
-            builder.Entity<Courier>();
-            builder.Entity<ParcelLocker>();
-            builder.Entity<InPerson>();
 
-
-
-
-            // builder.Entity<User>()
-            //.HasOne(b => b.Basket)
-            //.WithOne(i => i.User)
-            //.HasForeignKey<Basket>(b => b.UserId);
-
-            // builder.Entity<Order>()
-            //.HasOne(b => b.Payment)
-            //.WithOne(i => i.Order)
-            //.HasForeignKey<Payment>(b => b.OrderId);
-
-            // builder.Entity<Order>()
-            //.HasOne(b => b.Delivery)
-            //.WithOne(i => i.Order)
-            //.HasForeignKey<Delivery>(b => b.OrderId);
-
-
-            base.OnModelCreating(builder);
-
-        }
     }
 }

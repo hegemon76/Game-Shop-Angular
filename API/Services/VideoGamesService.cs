@@ -3,6 +3,7 @@ using API.Entities;
 using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,9 @@ namespace API.Services
 {
     public interface IVideoGamesService
     {
-        PagedResult<ProductDto> GetAll(SearchQuery query);
-        ProductDto GetById(int id);
-        void AskQuestion(AskQuestionDto dto);
+        Task<PagedResult<ProductDto>> GetAll(SearchQuery query);
+        Task<ProductDto> GetById(int id);
+        Task AskQuestion(AskQuestionDto dto);
     }
 
     public class VideoGamesService : IVideoGamesService
@@ -31,11 +32,11 @@ namespace API.Services
             _mapper = mapper;
             _userContextService = userContextService;
         }
-        public ProductDto GetById(int id)
+        public async Task<ProductDto> GetById(int id)
         {
-            var product = _context
+            var product =await _context
                 .Products
-                .FirstOrDefault(r => r.Id == id);
+                .FirstOrDefaultAsync(r => r.Id == id);
 
             if (product is null)
                 throw new NotFoundException("Product not found");
@@ -44,7 +45,7 @@ namespace API.Services
             return result;
         }
 
-        public PagedResult<ProductDto> GetAll(SearchQuery query)
+        public async Task<PagedResult<ProductDto>> GetAll(SearchQuery query)
         {
             var baseQuery = _context
                 .Products
@@ -69,10 +70,10 @@ namespace API.Services
                     : baseQuery.OrderByDescending(selectedColumn);
             }
 
-            var restaurants = baseQuery
+            var restaurants =await baseQuery
                 .Skip(query.PageSize * (query.PageNumber - 1))
                 .Take(query.PageSize)
-                .ToList();
+                .ToListAsync();
 
             var totalItemsCount = baseQuery.Count();
 
@@ -83,7 +84,7 @@ namespace API.Services
             return result;
         }
 
-        public void AskQuestion (AskQuestionDto dto)
+        public async Task AskQuestion (AskQuestionDto dto)
         {
             var question = new UserQuestion()
             {
@@ -93,7 +94,7 @@ namespace API.Services
             };
 
             _context.UserQuestions.Add(question);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
 

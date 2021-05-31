@@ -4,6 +4,7 @@ using API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace API.Data
@@ -18,7 +19,7 @@ namespace API.Data
             _dbContext = dbContext;
             _service = service;
         }
-        public void Seed()
+        public void SeedAsync()
         {
             if (_dbContext.Database.CanConnect())
             {
@@ -36,19 +37,19 @@ namespace API.Data
                 }
                 if (!_dbContext.Users.Any())
                 {
-                     GetUsers();
+                    GetUsers();  
                 }
                 if (!_dbContext.UserQuestions.Any())
                 {
-                    var userQuestion = GetUserQuestions();
-                    _dbContext.UserQuestions.AddRange(userQuestion);
+                    var userQuestions =GetUserQuestions();
+                    _dbContext.UserQuestions.AddRange(userQuestions);
                     _dbContext.SaveChanges();
                 }
                 if (!_dbContext.Orders.Any())
                 {
                     var orders = GetOrders();
-                    _dbContext.Orders.AddRange(orders);
-                    _dbContext.SaveChanges();
+                   _dbContext.Orders.AddRange(orders);
+                   _dbContext.SaveChanges();
                 }
 
             }
@@ -97,7 +98,7 @@ namespace API.Data
             return products;
         }
 
-        private void GetUsers()
+        private async Task GetUsers()
         {
             var newUser = new RegisterUserDto() {
                 UserName = "test",
@@ -112,7 +113,7 @@ namespace API.Data
                 Street = "iii",
                 DateOfBirth = new DateTime(1998,06,02),
             };
-            _service.Register(newUser);
+            await _service.Register(newUser);
 
             var newUser2 = new RegisterUserDto()
             {
@@ -128,7 +129,7 @@ namespace API.Data
                 Street = "yyy",
                 DateOfBirth = new DateTime(1978, 01,07),
             };
-            _service.Register(newUser2);
+            await _service.Register(newUser2);
             var newUser3 = new RegisterUserDto()
             {
                 UserName = "admin",
@@ -144,8 +145,8 @@ namespace API.Data
                 DateOfBirth = new DateTime(2000,01 ,11),
                 RoleId = 2
             };
-            _service.Register(newUser3);
-
+            await _service.Register(newUser3);
+        
         }
         private IEnumerable<UserQuestion> GetUserQuestions()
         {
@@ -180,6 +181,7 @@ namespace API.Data
                     UserId=1,
                     Delivery=new InPerson(),
                     Payment=new Cash(),
+                    DateOfOrder=DateTime.Now
                 },
             };
             return orders;

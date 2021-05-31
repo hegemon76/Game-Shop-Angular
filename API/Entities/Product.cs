@@ -21,7 +21,6 @@ namespace API.Entities
         public int Quantity { get; set; }
         public string Description { get; set; }
 
-        public int? BasketId { get; set; }
-        public virtual Basket Basket { get; set; }
+
     }
 }

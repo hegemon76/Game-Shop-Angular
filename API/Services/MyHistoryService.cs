@@ -14,8 +14,8 @@ namespace API.Services
 {
     public interface IMyHistoryService
     {
-        void AddOpinion(CreateNewOpinionDto opinion, int productId);
-        List<OrderDto> MyOrders();
+        Task AddOpinion(CreateNewOpinionDto opinion, int productId);
+        Task<List<OrderDto>> MyOrders();
     }
 
     public class MyHistoryService : IMyHistoryService
@@ -30,23 +30,21 @@ namespace API.Services
             _mapper = mapper;
             _userContextService = userContextService;
         }
-        public List<OrderDto> MyOrders()
+        public async Task<List<OrderDto>> MyOrders()
         {
-            var myOrders = _context.Orders
+            var myOrders =await _context.Orders
                 .Include(x => x.User)
-                
                 .Where(x => x.UserId == _userContextService.GetUserId)
                 .Include(x => x.Payment)
                 .Include(x => x.Delivery)
-                .ToList();
+                .ToListAsync();
           
             var result = _mapper.Map<List<OrderDto>>(myOrders);
-
             return result;
         }
-        public void AddOpinion(CreateNewOpinionDto opinion, int productId)
+        public async Task AddOpinion(CreateNewOpinionDto opinion, int productId)
         {
-            var product = _context.Products.FirstOrDefault(x => x.Id == productId);
+            var product =await _context.Products.FirstOrDefaultAsync(x => x.Id == productId);
             if (product is null)
                 throw new NotFoundException("Nie znaleziono produktu");
 

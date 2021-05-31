@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    //[Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin")]
     [ApiController]
     [Route("api/admin")]
     public class AdminController : ControllerBase
@@ -26,25 +26,25 @@ namespace API.Controllers
 
 
         [HttpPost("newproduct")]
-        public ActionResult CreateNewProduct ([FromBody] ProductDto dto)
+        public async Task<ActionResult> CreateNewProduct ([FromBody] ProductDto dto)
         {
-            var newProductId = _service.CreateNewProduct(dto);
+            var newProductId =await _service.CreateNewProduct(dto);
 
             return Created("api/videogames/search/product/{newProductId}", null);
         }
 
         [HttpDelete("delete/product/{productId}")]
-        public ActionResult DeleteProduct (int productId)
+        public async Task<ActionResult> DeleteProduct (int productId)
         {
-            _service.DeleteProduct(productId);
+            await _service.DeleteProduct(productId);
             
             return NoContent();
         }
 
         [HttpPut("product/{productId}/update")]
-        public ActionResult UpdateProduct([FromBody] ProductDto dto, int productId)
+        public async Task<ActionResult> UpdateProduct([FromBody] ProductDto dto, int productId)
         {
-            _service.UpdateProduct(dto, productId);
+            await _service.UpdateProduct(dto, productId);
             return Redirect("api/videogames/search/product/{productId}");
         }
     }

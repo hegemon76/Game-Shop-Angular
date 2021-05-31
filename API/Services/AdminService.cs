@@ -3,6 +3,7 @@ using API.Entities;
 using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace API.Services
 {
     public interface IAdminService
     {
-        int CreateNewProduct(ProductDto dto);
-        void DeleteProduct(int productId);
-        void UpdateProduct(ProductDto dto, int productId);
+        Task<int> CreateNewProduct(ProductDto dto);
+        Task DeleteProduct(int productId);
+        Task UpdateProduct(ProductDto dto, int productId);
     }
 
     public class AdminService : IAdminService
@@ -34,31 +35,29 @@ namespace API.Services
             _userContextService = userContextService;
         }
 
-        public int CreateNewProduct(ProductDto dto)
+        public async Task<int> CreateNewProduct(ProductDto dto)
         {
             var newProduct = _mapper.Map<Product>(dto);
             _context.Products.Add(newProduct);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
 
             return newProduct.Id;
         }
-        public void DeleteProduct(int productId)
+        public async Task DeleteProduct(int productId)
         {
-            var product = GetProduct(productId);
+            var product =await GetProduct(productId);
 
             _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
            
-                _context.Products.Remove(product);
-            _context.SaveChanges();
-            
-
+           _context.Products.Remove(product);
+           await _context.SaveChangesAsync();
         }
 
-        public void UpdateProduct(ProductDto dto, int productId)
+        public async Task UpdateProduct(ProductDto dto, int productId)
         {
-            var product = GetProduct(productId);
+            var product =await GetProduct(productId);
             
             _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
            
@@ -67,14 +66,14 @@ namespace API.Services
             product.Quantity = dto.Quantity;
             product.Price = dto.Quantity;
             
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
         }
 
-        private Product GetProduct(int productId)
+        private async Task<Product> GetProduct(int productId)
         {
-            var product = _context.Products
-                           .FirstOrDefault(x => x.Id == productId);
+            var product = await _context.Products
+                           .FirstOrDefaultAsync(x => x.Id == productId);
             if (product is null)
                 throw new NotFoundException("Nie znaleziono produktu");
             

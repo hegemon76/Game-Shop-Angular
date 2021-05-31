@@ -18,8 +18,8 @@ namespace API.Services
 {
     public interface IAccountService
     {
-        string GenerateJwt(LoginDto dto);
-        void Register(RegisterUserDto dto);
+        Task<string> GenerateJwt(LoginDto dto);
+        Task Register(RegisterUserDto dto);
     }
 
     public class AccountService : IAccountService
@@ -35,7 +35,7 @@ namespace API.Services
             _passwordHasher = passwordHasher;
         }
 
-        public void Register(RegisterUserDto dto)
+        public async Task Register(RegisterUserDto dto)
         {
             var newUser = new User()
             {
@@ -44,7 +44,6 @@ namespace API.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
-                Basket = new Basket(),
                 Address =new Address()
                     {
                     City=dto.City,
@@ -59,13 +58,13 @@ namespace API.Services
 
             newUser.PasswordHash = hashedPassword;
             _context.Users.Add(newUser);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public string GenerateJwt(LoginDto dto)
+        public async Task<string> GenerateJwt(LoginDto dto)
         {
-            var user = _context.Users
+            var user =await _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefault(u => u.UserName == dto.UserName);
+                .FirstOrDefaultAsync(u => u.UserName == dto.UserName);
 
             if (user is null)
             {
@@ -85,9 +84,7 @@ namespace API.Services
                 new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                 new Claim(ClaimTypes.Role, $"{user.Role.Name}"),
                 new Claim("DateOfBirth", user.DateOfBirth.Value.ToString("yyyy-MM-dd")),
-                new Claim("Basket", user.BasketId.ToString()),
                 new Claim("Address", user.AddressId.ToString()),
-
             };
 
 

@@ -67,7 +67,9 @@ namespace API
             services.AddScoped<IVideoGamesService, VideoGamesService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IMyHistoryService, MyHistoryService>();
+
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
@@ -85,7 +87,7 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GameShopSeeder seeder)
         {
-            seeder.Seed();
+            seeder.SeedAsync();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

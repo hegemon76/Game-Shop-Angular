@@ -8,11 +8,9 @@ namespace API.Models
 {
     public class OrderDto
     {
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
-        public string DeliveryName { get; set; }
-        public int DeliveryPrice { get; set; }
-        public string PaymentName { get; set; }
+        public User User { get; set; }
+        public Payment Payment { get; set; }
+        public Delivery Delivery { get; set; }
         public DateTime DateOfOrder { get; set; }
         public int BasketPrice { get; set; }
         public int ItemCount { get; set; }
