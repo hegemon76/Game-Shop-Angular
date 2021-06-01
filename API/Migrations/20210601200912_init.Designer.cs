@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(GameShopDbContext))]
-    [Migration("20210531132220_Init")]
-    partial class Init
+    [Migration("20210601200912_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,13 +125,16 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateOfOrder")
+                    b.Property<DateTime>("DateOfOrder")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DeliveryId")
                         .HasColumnType("int");
 
                     b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")

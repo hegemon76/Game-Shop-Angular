@@ -20,14 +20,14 @@ namespace API.Controllers
         }
 
        [HttpPost("register")]
-       public async Task<ActionResult<RegisterUserDto>> CreateNewUser ([FromBody] RegisterUserDto dto)
+       public ActionResult<RegisterUserDto> CreateNewUser ([FromBody] RegisterUserDto dto)
         {
-            await _service.Register(dto);
+             _service.Register(dto);
             return Ok("User created");
         }
         
         [HttpPost("login")]
-        public async Task<ActionResult<LoginDto>> CreateNewUser([FromBody] LoginDto dto)
+        public async Task<ActionResult<LoginDto>> Login ([FromBody] LoginDto dto)
         {
             var token =await _service.GenerateJwt(dto);
             return Ok(token);

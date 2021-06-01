@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -19,7 +20,7 @@ namespace API.Services
     public interface IAccountService
     {
         Task<string> GenerateJwt(LoginDto dto);
-        Task Register(RegisterUserDto dto);
+        void Register(RegisterUserDto dto);
     }
 
     public class AccountService : IAccountService
@@ -35,7 +36,7 @@ namespace API.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task Register(RegisterUserDto dto)
+        public void Register(RegisterUserDto dto)
         {
             var newUser = new User()
             {
@@ -58,7 +59,7 @@ namespace API.Services
 
             newUser.PasswordHash = hashedPassword;
             _context.Users.Add(newUser);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         public async Task<string> GenerateJwt(LoginDto dto)
         {

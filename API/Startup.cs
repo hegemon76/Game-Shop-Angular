@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Extensions;
 using API.Middleware;
 using API.Models;
 using API.Models.Validator;
@@ -37,51 +38,11 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var authenticationSettings = new AuthenticationSettings();
-
-            Configuration.GetSection("Authentication").Bind(authenticationSettings);
-
-            services.AddSingleton(authenticationSettings);
-            services.AddAuthentication(option =>
-            {
-                option.DefaultAuthenticateScheme = "Bearer";
-                option.DefaultScheme = "Bearer";
-                option.DefaultChallengeScheme = "Bearer";
-            }).AddJwtBearer(cfg =>
-            {
-                cfg.RequireHttpsMetadata = false;
-                cfg.SaveToken = true;
-                cfg.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = authenticationSettings.JwtIssuer,
-                    ValidAudience = authenticationSettings.JwtIssuer,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
-                };
-            });
-
-
-            services.AddControllers().AddFluentValidation();
-
-            services.AddScoped<GameShopSeeder>();
+            services.AddIdentityServices(Configuration);
+            services.AddApplicationServices(Configuration);
+           
             services.AddAutoMapper(this.GetType().Assembly);
-            services.AddScoped<IVideoGamesService, VideoGamesService>();
-            services.AddScoped<IAdminService, AdminService>();
-            services.AddScoped<IMyHistoryService, MyHistoryService>();
-
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IBasketService, BasketService>();
-            services.AddScoped<ErrorHandlingMiddleware>();
-            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
-            services.AddScoped<IValidator<SearchQuery>, ProductQueryValidator>();
-            services.AddScoped<RequestTimeMiddleware>();
-            services.AddScoped<IUserContextService, UserContextService>();
-            services.AddHttpContextAccessor();
-            services.AddDbContext<GameShopDbContext>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            });
+            services.AddControllers().AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

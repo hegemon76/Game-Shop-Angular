@@ -16,7 +16,6 @@ namespace API.Models
         public int ItemCount { get; set; }
         public int TotalPrice { get; set; }
         public bool Invoice { get; set; }
-        public List<Product> Products { get; set; }
 
     }
 }

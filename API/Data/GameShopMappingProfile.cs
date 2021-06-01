@@ -13,18 +13,16 @@ namespace API.Data
         public GameShopMappingProfile()
         {
             CreateMap<Order, OrderDto>()
-                .ForMember(m => m.BasketPrice, c => c.MapFrom(s => s.User.Basket.TotalPrice))
                 .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
-                .ForMember(m => m.ItemCount, c => c.MapFrom(s => s.User.Basket.ItemCount))
-                .ForMember(m => m.User, c => c.MapFrom(s => s.User))
                 .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
-                .ForMember(m => m.Products, c => c.MapFrom(s => s.User.Basket.Products));
+                .ForMember(m => m.Invoice, c => c.MapFrom(s => s.Payment.Invoice))
+                
+                ;
 
-            CreateMap<OrderDto, Order>()
-                .ForMember(m => m.DateOfOrder, c => c.MapFrom(s => s.DateOfOrder))
-                .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
-                .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
-                .ForMember(m => m.User, c => c.MapFrom(s => s.User));
+            //CreateMap<OrderDto, Order>()
+            //    .ForMember(m => m.DeliveryId, c => c.MapFrom(s => s.Delivery.Id))
+            //    .ForMember(m => m.PaymentId, c => c.MapFrom(s => s.Payment.Id))
+            //    .ForMember(m => m.TotalPrice, c => c.MapFrom(s => s.TotalPrice));
 
 
 

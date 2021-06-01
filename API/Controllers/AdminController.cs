@@ -15,12 +15,10 @@ namespace API.Controllers
     [Route("api/admin")]
     public class AdminController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IAdminService _service;
 
-        public AdminController(IMapper mapper, IAdminService service)
+        public AdminController( IAdminService service)
         {
-            _mapper = mapper;
             _service = service;
         }
 

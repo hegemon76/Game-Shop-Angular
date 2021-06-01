@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace API.Controllers
 {
     [Authorize]
-    [ApiController]
+  //  [ApiController]
     [Route("api")]
     public class BasketController : ControllerBase
     {

@@ -37,7 +37,7 @@ namespace API.Data
                 }
                 if (!_dbContext.Users.Any())
                 {
-                    GetUsers();  
+                    GetUsers();
                 }
                 if (!_dbContext.UserQuestions.Any())
                 {
@@ -98,7 +98,7 @@ namespace API.Data
             return products;
         }
 
-        private async Task GetUsers()
+        private void GetUsers()
         {
             var newUser = new RegisterUserDto() {
                 UserName = "test",
@@ -113,7 +113,7 @@ namespace API.Data
                 Street = "iii",
                 DateOfBirth = new DateTime(1998,06,02),
             };
-            await _service.Register(newUser);
+            _service.Register(newUser);
 
             var newUser2 = new RegisterUserDto()
             {
@@ -129,7 +129,7 @@ namespace API.Data
                 Street = "yyy",
                 DateOfBirth = new DateTime(1978, 01,07),
             };
-            await _service.Register(newUser2);
+             _service.Register(newUser2);
             var newUser3 = new RegisterUserDto()
             {
                 UserName = "admin",
@@ -145,7 +145,7 @@ namespace API.Data
                 DateOfBirth = new DateTime(2000,01 ,11),
                 RoleId = 2
             };
-            await _service.Register(newUser3);
+             _service.Register(newUser3);
         
         }
         private IEnumerable<UserQuestion> GetUserQuestions()

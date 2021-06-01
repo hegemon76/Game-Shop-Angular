@@ -16,7 +16,7 @@ namespace API.Services
         Task AddToBasket(int id);
         Task DeleteFromBasket(int id);
         Task<BasketDto> GetBasket();
-        Task<OrderDto> CreateOrder(OrderDto dto);
+        Task CreateOrder(OrderDto dto);
     }
 
     public class BasketService : IBasketService
@@ -61,13 +61,16 @@ namespace API.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<OrderDto> CreateOrder(OrderDto dto)
+        public async Task CreateOrder(OrderDto dto)
         {
-            await _context.SaveChangesAsync();
-            throw new NotImplementedException();
+            var newOrder = _mapper.Map<Order>(dto);
+            newOrder.UserId =(int)_userContextService.GetUserId;
+
+            await _context.Orders.AddAsync(newOrder);
+            await _context.SaveChangesAsync();  
         }
      
-        //privates
+        //privates methods
         private async Task<Basket> ReturnBasket()
         {
             var basketsRecords = await _context.Baskets

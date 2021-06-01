@@ -123,13 +123,16 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateOfOrder")
+                    b.Property<DateTime>("DateOfOrder")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DeliveryId")
                         .HasColumnType("int");
 
                     b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
