@@ -21,6 +21,5 @@ namespace API.Entities
         public int Quantity { get; set; }
         public string Description { get; set; }
 
-
     }
 }

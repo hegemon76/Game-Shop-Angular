@@ -14,7 +14,6 @@ namespace API.Services
 {
     public interface IMyHistoryService
     {
-        Task AddOpinion(CreateNewOpinionDto opinion, int productId);
         Task<List<OrderDto>> MyOrders();
     }
 
@@ -42,16 +41,6 @@ namespace API.Services
             var result = _mapper.Map<List<OrderDto>>(myOrders);
             return result;
         }
-        public async Task AddOpinion(CreateNewOpinionDto opinion, int productId)
-        {
-            var product =await _context.Products.FirstOrDefaultAsync(x => x.Id == productId);
-            if (product is null)
-                throw new NotFoundException("Nie znaleziono produktu");
 
-            var newOpinion = _mapper.Map<Opinion>(opinion);
-            _context.Opinions.Add(newOpinion);
-            _context.SaveChanges();
-
-        }
     }
 }

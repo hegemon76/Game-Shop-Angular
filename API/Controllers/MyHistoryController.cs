@@ -21,12 +21,6 @@ namespace API.Controllers
             _service = service;
         }
 
-        [HttpPost("product/{id}/addopinion")]
-        public async Task <ActionResult<CreateNewOpinionDto>> AddOpinion ([FromBody] CreateNewOpinionDto dto, [FromRoute] int id)
-        {
-            await _service.AddOpinion(dto, id);
-            return Created($"api/videogames/search/product/id", null);
-        }
         
         [HttpGet("myorders")]
         public async Task<ActionResult<OrderDto>> MyOrders()

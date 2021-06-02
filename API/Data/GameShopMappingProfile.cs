@@ -15,10 +15,13 @@ namespace API.Data
             CreateMap<Order, OrderDto>()
                 .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
                 .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
-                .ForMember(m => m.Invoice, c => c.MapFrom(s => s.Payment.Invoice))
-                
-                ;
+                .ForMember(m => m.Invoice, c => c.MapFrom(s => s.Payment.Invoice));
 
+            CreateMap<Opinion, OpinionDto>()
+                .ForMember(m => m.Description, c => c.MapFrom(s => s.Description))
+                .ForMember(m => m.UserName, c => c.MapFrom(s => s.UserName));
+
+            CreateMap<CreateNewOpinionDto, Opinion>();
             //CreateMap<OrderDto, Order>()
             //    .ForMember(m => m.DeliveryId, c => c.MapFrom(s => s.Delivery.Id))
             //    .ForMember(m => m.PaymentId, c => c.MapFrom(s => s.Payment.Id))

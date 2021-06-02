@@ -30,6 +30,7 @@ namespace API.Extensions
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IUserContextService, UserContextService>();
+            services.AddScoped<IOpinionService, OpinionService>();
 
             services.AddScoped<RequestTimeMiddleware>();
             services.AddScoped<ErrorHandlingMiddleware>();
