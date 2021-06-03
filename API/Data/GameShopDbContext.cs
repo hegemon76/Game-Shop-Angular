@@ -10,7 +10,7 @@ namespace API.Data
 {
     public class GameShopDbContext: DbContext
     {
-        private string _connectionString= "Server=.;Database=GameShopDb;Trusted_Connection=True;MultipleActiveResultSets=True;";
+        private string _connectionString= "Server=(localdb)\\MSSQLLocalDB;Database=GameShopDb;Trusted_Connection=True;MultipleActiveResultSets=True;";
 
         public DbSet<Address> Adresses { get; set; }
         public DbSet<UserQuestion> UserQuestions { get; set; }
