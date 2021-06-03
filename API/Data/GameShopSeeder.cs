@@ -22,13 +22,13 @@ namespace API.Data
             _service = service;
         }
 
-        public async Task SeedGenres()
+        public void SeedGenres()
         {
             try
             {
                 if (!_dbContext.Genres.Any())
                 {
-                    var genresData = File.ReadAllText("../Data/genres.json");
+                    var genresData = File.ReadAllText("./Data/genres.json");
 
                     var genres = JsonSerializer.Deserialize<List<Genre>>(genresData);
 
@@ -36,8 +36,8 @@ namespace API.Data
                     {
                         _dbContext.Genres.Add(item);
                     }
-                    //_dbContext.Genres.AddRange(genres);
-                    await _dbContext.SaveChangesAsync();
+                    _dbContext.Genres.AddRange(genres);
+                    _dbContext.SaveChanges();
                 }
             }
             catch (Exception)
@@ -83,6 +83,7 @@ namespace API.Data
                 }
 
                 SeedGames();
+                SeedGenres();
                 //if (!_dbContext.Products.Any())
                 //{
                 //    var products = GetProducts();

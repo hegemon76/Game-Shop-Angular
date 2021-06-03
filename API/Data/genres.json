@@ -1,26 +1,20 @@
 [
   {
-    "Id": 1,
     "Name": "RPG"
   },
   {
-    "Id": 2,
     "Name": "Przygodowa"
   },
   {
-    "Id": 3,
     "Name": "FPS"
   },
   {
-    "Id": 4,
     "Name": "TPS"
   },
   {
-    "Id": 5,
     "Name": "Strategia"
   },
   {
-    "Id": 6,
     "Name": "Akcji"
   }
 ]
