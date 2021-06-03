@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace API.Data
 {
-    public class GameShopDbContext: DbContext
+    public class GameShopDbContext : DbContext
     {
-        private string _connectionString= "Server=(localdb)\\MSSQLLocalDB;Database=GameShopDb;Trusted_Connection=True;MultipleActiveResultSets=True;";
+        private string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=GameShopDb;Trusted_Connection=True;MultipleActiveResultSets=True;";
 
         public DbSet<Address> Adresses { get; set; }
         public DbSet<UserQuestion> UserQuestions { get; set; }
@@ -26,6 +26,7 @@ namespace API.Data
         public DbSet<Courier> Courier { get; set; }
         public DbSet<ParcelLocker> ParcelLocker { get; set; }
         public DbSet<InPerson> InPerson { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

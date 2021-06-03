@@ -56,6 +56,7 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GameShopSeeder seeder)
         {
             seeder.SeedAsync();
+            seeder.SeedGenres();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

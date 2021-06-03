@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(GameShopDbContext))]
-    [Migration("20210601200912_init")]
-    partial class init
+    [Migration("20210603122650_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,6 +97,21 @@ namespace API.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Delivery");
                 });
 
+            modelBuilder.Entity("API.Entities.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
+                });
+
             modelBuilder.Entity("API.Entities.Opinion", b =>
                 {
                     b.Property<int>("Id")
@@ -110,8 +125,8 @@ namespace API.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

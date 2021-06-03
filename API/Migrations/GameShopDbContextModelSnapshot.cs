@@ -95,6 +95,21 @@ namespace API.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Delivery");
                 });
 
+            modelBuilder.Entity("API.Entities.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
+                });
+
             modelBuilder.Entity("API.Entities.Opinion", b =>
                 {
                     b.Property<int>("Id")

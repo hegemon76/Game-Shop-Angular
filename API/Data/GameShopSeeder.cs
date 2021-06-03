@@ -3,7 +3,9 @@ using API.Models;
 using API.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,6 +21,31 @@ namespace API.Data
             _dbContext = dbContext;
             _service = service;
         }
+
+        public async Task SeedGenres()
+        {
+            try
+            {
+                if (!_dbContext.Genres.Any())
+                {
+                    var genresData = File.ReadAllText("../Data/genres.json");
+
+                    var genres = JsonSerializer.Deserialize<List<Genre>>(genresData);
+
+                    foreach (var item in genres)
+                    {
+                        _dbContext.Genres.Add(item);
+                    }
+                    //_dbContext.Genres.AddRange(genres);
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public void SeedAsync()
         {
             if (_dbContext.Database.CanConnect())
@@ -29,6 +56,8 @@ namespace API.Data
                     _dbContext.Roles.AddRange(roles);
                     _dbContext.SaveChanges();
                 }
+
+
                 if (!_dbContext.Products.Any())
                 {
                     var products = GetProducts();
@@ -41,15 +70,15 @@ namespace API.Data
                 }
                 if (!_dbContext.UserQuestions.Any())
                 {
-                    var userQuestions =GetUserQuestions();
+                    var userQuestions = GetUserQuestions();
                     _dbContext.UserQuestions.AddRange(userQuestions);
                     _dbContext.SaveChanges();
                 }
                 if (!_dbContext.Orders.Any())
                 {
                     var orders = GetOrders();
-                   _dbContext.Orders.AddRange(orders);
-                   _dbContext.SaveChanges();
+                    _dbContext.Orders.AddRange(orders);
+                    _dbContext.SaveChanges();
                 }
 
             }
@@ -78,7 +107,7 @@ namespace API.Data
                 Price=50,
                 Quantity=30,
                 Description="CSGO Description",
-                
+
                 },
 
                 new Product(){
@@ -100,10 +129,11 @@ namespace API.Data
 
         private void GetUsers()
         {
-            var newUser = new RegisterUserDto() {
+            var newUser = new RegisterUserDto()
+            {
                 UserName = "test",
                 Password = "test123",
-                ConfirmPassword="test123",
+                ConfirmPassword = "test123",
                 Email = "test@gmail.com",
                 FirstName = "xxx",
                 LastName = "yyy",
@@ -111,7 +141,7 @@ namespace API.Data
                 Country = "ddd",
                 ZipCode = "55-555",
                 Street = "iii",
-                DateOfBirth = new DateTime(1998,06,02),
+                DateOfBirth = new DateTime(1998, 06, 02),
             };
             _service.Register(newUser);
 
@@ -127,9 +157,9 @@ namespace API.Data
                 Country = "kkk",
                 ZipCode = "55-555",
                 Street = "yyy",
-                DateOfBirth = new DateTime(1978, 01,07),
+                DateOfBirth = new DateTime(1978, 01, 07),
             };
-             _service.Register(newUser2);
+            _service.Register(newUser2);
             var newUser3 = new RegisterUserDto()
             {
                 UserName = "admin",
@@ -142,11 +172,11 @@ namespace API.Data
                 Country = "eee",
                 ZipCode = "99-999",
                 Street = "hhh",
-                DateOfBirth = new DateTime(2000,01 ,11),
+                DateOfBirth = new DateTime(2000, 01, 11),
                 RoleId = 2
             };
-             _service.Register(newUser3);
-        
+            _service.Register(newUser3);
+
         }
         private IEnumerable<UserQuestion> GetUserQuestions()
         {
@@ -171,7 +201,7 @@ namespace API.Data
 
             return questions;
         }
-       
+
         private IEnumerable<Order> GetOrders()
         {
             var orders = new List<Order>()
