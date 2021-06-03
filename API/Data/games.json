@@ -3,42 +3,49 @@
     "Name": "Assasins creed",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 1
   },
   {
     "Name": "CS-Go",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 50,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 2
   },
   {
     "Name": "Metin",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 23,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 3
   },
   {
     "Name": "GTA: V",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 150,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 4
   },
   {
     "Name": "Mario Kart",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 220,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 5
   },
   {
     "Name": "Overwatch",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 224,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 6
   },
   {
     "Name": "Css",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
-    "Quantity": 15
+    "Quantity": 15,
+    "GenreId": 1
   }
 ]

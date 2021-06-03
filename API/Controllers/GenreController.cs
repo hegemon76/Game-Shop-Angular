@@ -1,6 +1,8 @@
-﻿using API.Entities;
+﻿using API.Data;
+using API.Entities;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +14,17 @@ namespace API.Controllers
     [Route("api/genre")]
     public class GenreController : ControllerBase
     {
-        private readonly IGenreService _service;
+        private readonly GameShopDbContext _context;
 
-        public GenreController(IGenreService service)
+        public GenreController(GameShopDbContext context )
         {
-            _service = service;
+            _context = context;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Genre>>> GetAll()
         {
-            var genres = await _service.GetGenres();
-            return Ok(genres);
+            return await _context.Genres.ToListAsync();
         }
     }
 }
