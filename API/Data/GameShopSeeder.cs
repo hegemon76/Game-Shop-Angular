@@ -46,6 +46,31 @@ namespace API.Data
                 throw;
             }
         }
+
+        private void SeedGames()
+        {
+            try
+            {
+                if (!_dbContext.Products.Any())
+                {
+                    var productsData = File.ReadAllText("./Data/games.json");
+
+                    var products = JsonSerializer.Deserialize<List<Product>>(productsData);
+
+                    foreach (var item in products)
+                    {
+                        _dbContext.Products.Add(item);
+                    }
+                    _dbContext.Products.AddRange(products);
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public void SeedAsync()
         {
             if (_dbContext.Database.CanConnect())
@@ -57,13 +82,13 @@ namespace API.Data
                     _dbContext.SaveChanges();
                 }
 
-
-                if (!_dbContext.Products.Any())
-                {
-                    var products = GetProducts();
-                    _dbContext.Products.AddRange(products);
-                    _dbContext.SaveChanges();
-                }
+                SeedGames();
+                //if (!_dbContext.Products.Any())
+                //{
+                //    var products = GetProducts();
+                //    _dbContext.Products.AddRange(products);
+                //    _dbContext.SaveChanges();
+                //}
                 if (!_dbContext.Users.Any())
                 {
                     GetUsers();

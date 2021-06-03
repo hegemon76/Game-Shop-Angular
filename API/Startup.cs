@@ -57,6 +57,7 @@ namespace API
         {
             seeder.SeedAsync();
             seeder.SeedGenres();
+            seeder.SeedGames();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
