@@ -15,9 +15,9 @@ namespace API.Services
 {
     public interface IAdminService
     {
-        Task<int> CreateNewProduct(ProductDto dto);
+        Task<int> CreateNewProduct(CreateNewProductDto dto);
         Task DeleteProduct(int productId);
-        Task UpdateProduct(ProductDto dto, int productId);
+        Task UpdateProduct(CreateNewProductDto dto, int productId);
     }
 
     public class AdminService : IAdminService
@@ -35,7 +35,7 @@ namespace API.Services
             _userContextService = userContextService;
         }
 
-        public async Task<int> CreateNewProduct(ProductDto dto)
+        public async Task<int> CreateNewProduct(CreateNewProductDto dto)
         {
             var newProduct = _mapper.Map<Product>(dto);
             _context.Products.Add(newProduct);
@@ -55,7 +55,7 @@ namespace API.Services
            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateProduct(ProductDto dto, int productId)
+        public async Task UpdateProduct(CreateNewProductDto dto, int productId)
         {
             var product =await GetProduct(productId);
             
@@ -65,11 +65,13 @@ namespace API.Services
             product.Name = dto.Name;
             product.Quantity = dto.Quantity;
             product.Price = dto.Quantity;
+            product.GenreId = dto.GenreId;
             
             await _context.SaveChangesAsync();
             _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
         }
 
+        //privates
         private async Task<Product> GetProduct(int productId)
         {
             var product = await _context.Products

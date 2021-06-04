@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(GameShopDbContext))]
-    [Migration("20210603122650_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210603234137_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,6 +205,9 @@ namespace API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -218,6 +221,8 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Products");
                 });
@@ -377,6 +382,12 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Basket", null)
                         .WithMany("Products")
                         .HasForeignKey("BasketId");
+
+                    b.HasOne("API.Entities.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("API.Entities.User", b =>

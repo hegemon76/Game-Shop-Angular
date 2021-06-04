@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,6 +120,7 @@ namespace API.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenreId = table.Column<int>(type: "int", nullable: true),
                     BasketId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -129,6 +130,12 @@ namespace API.Migrations
                         name: "FK_Products_Baskets_BasketId",
                         column: x => x.BasketId,
                         principalTable: "Baskets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -251,6 +258,11 @@ namespace API.Migrations
                 column: "BasketId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_GenreId",
+                table: "Products",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserQuestions_UserId",
                 table: "UserQuestions",
                 column: "UserId");
@@ -275,9 +287,6 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Genres");
-
-            migrationBuilder.DropTable(
                 name: "Opinions");
 
             migrationBuilder.DropTable(
@@ -294,6 +303,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payment");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -203,7 +203,7 @@ namespace API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GenreId")
+                    b.Property<int?>("GenreId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -219,6 +219,8 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Products");
                 });
@@ -378,6 +380,12 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Basket", null)
                         .WithMany("Products")
                         .HasForeignKey("BasketId");
+
+                    b.HasOne("API.Entities.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("API.Entities.User", b =>

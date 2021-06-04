@@ -81,15 +81,9 @@ namespace API.Data
                     _dbContext.Roles.AddRange(roles);
                     _dbContext.SaveChanges();
                 }
-
-                SeedGames();
                 SeedGenres();
-                //if (!_dbContext.Products.Any())
-                //{
-                //    var products = GetProducts();
-                //    _dbContext.Products.AddRange(products);
-                //    _dbContext.SaveChanges();
-                //}
+                SeedGames();
+
                 if (!_dbContext.Users.Any())
                 {
                     GetUsers();
@@ -123,34 +117,6 @@ namespace API.Data
                         }
                     };
             return roles;
-        }
-        private IEnumerable<Product> GetProducts()
-        {
-            var products = new List<Product>()
-            {
-                new Product(){
-                Name= "CS GO",
-                Price=50,
-                Quantity=30,
-                Description="CSGO Description",
-
-                },
-
-                new Product(){
-                Name= "Assassin's creed",
-                Price=110,
-                Quantity=12,
-                Description="Assassin's creed Description",
-                },
-                new Product(){
-                Name= "Metin2",
-                Price=5,
-                Quantity=1000,
-                Description="Metin2  Description",
-                },
-            };
-
-            return products;
         }
 
         private void GetUsers()

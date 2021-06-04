@@ -49,18 +49,22 @@ namespace API.Services
         {
             var baseQuery = _context
                 .Products
+                .Include(x => x.Genre)
                 .Where(r => query.SearchPhrase == null || (r.Name.ToLower().Contains(query.SearchPhrase.ToLower())
-                                                       || r.Description.ToLower()
-                                                               .Contains(query.SearchPhrase.ToLower())));
+                                                       || r.Description.ToLower().Contains(query.SearchPhrase.ToLower())));
 
+            if (!string.IsNullOrEmpty(query.GenreFiltr)) 
+            {
+                baseQuery=baseQuery.Where(r => r.Genre.Name.ToLower().Contains(query.GenreFiltr.ToLower()));
+            }
+                
 
-            if (!string.IsNullOrEmpty(query.SortBy))
+                if (!string.IsNullOrEmpty(query.SortBy))
             {
                 var columnsSelectors = new Dictionary<string, Expression<Func<Product, object>>>
                 {
                     { nameof(Product.Name), r => r.Name },
                     { nameof(Product.Price), r => r.Price },
-                    { nameof(Product.Description), r => r.Description },
                 };
 
                 var selectedColumn = columnsSelectors[query.SortBy];
@@ -70,14 +74,14 @@ namespace API.Services
                     : baseQuery.OrderByDescending(selectedColumn);
             }
 
-            var restaurants =await baseQuery
+            var games =await baseQuery
                 .Skip(query.PageSize * (query.PageNumber - 1))
                 .Take(query.PageSize)
                 .ToListAsync();
 
             var totalItemsCount = baseQuery.Count();
 
-            var ProductsDtos = _mapper.Map<List<ProductDto>>(restaurants);
+            var ProductsDtos = _mapper.Map<List<ProductDto>>(games);
 
             var result = new PagedResult<ProductDto>(ProductsDtos, totalItemsCount, query.PageSize, query.PageNumber);
 

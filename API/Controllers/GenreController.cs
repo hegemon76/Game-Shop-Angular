@@ -1,6 +1,8 @@
 ﻿using API.Data;
 using API.Entities;
+using API.Models;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,17 +16,28 @@ namespace API.Controllers
     [Route("api/genre")]
     public class GenreController : ControllerBase
     {
-        private readonly GameShopDbContext _context;
+        private readonly IGenreService _service;
 
-        public GenreController(GameShopDbContext context )
+        public GenreController(IGenreService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GenreDto>>> GetAll()
         {
-            return await _context.Genres.ToListAsync();
+            var result = await _service.GetGenres();
+            
+            return Ok(result);
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost("add")]
+        public async Task<ActionResult<IEnumerable<GenreDto>>> AddNewGenre([FromBody] GenreDto dto)
+        {
+            await _service.AddGenre(dto);
+
+            return Created("api/genre", null);
         }
     }
 }
