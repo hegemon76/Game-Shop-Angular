@@ -13,7 +13,7 @@ namespace API.Services
 {
     public interface IOpinionService
     {
-        Task<List<OpinionDto>> GetOpinions(int id);
+        Task<SelectListAsItems<OpinionDto>> GetOpinions(int id);
         Task AddOpinion(CreateNewOpinionDto opinion, int productId);
     }
 
@@ -30,7 +30,7 @@ namespace API.Services
             _userContextService = userContextService;
         }
 
-        public async Task<List<OpinionDto>> GetOpinions(int id)
+        public async Task<SelectListAsItems<OpinionDto>> GetOpinions(int id)
         {
             var opinions = await _context
                 .Opinions
@@ -39,10 +39,12 @@ namespace API.Services
 
             if (opinions is null || opinions.Count==0)
                 throw new NotFoundException("Nie dodano jeszcze żadnych opini do tego artykułu");
+            
 
             var opinionsDto = _mapper.Map<List<OpinionDto>>(opinions);
-
-            return opinionsDto;
+            var opinionsAsList = new SelectListAsItems<OpinionDto>(opinionsDto);
+            
+            return opinionsAsList;
         }
         public async Task AddOpinion(CreateNewOpinionDto opinion, int productId)
         {
@@ -52,6 +54,7 @@ namespace API.Services
 
             var newOpinion = _mapper.Map<Opinion>(opinion);
             newOpinion.ProductId = productId;
+            newOpinion.UserName = _userContextService.GetUserName;
 
              _context.Opinions.Add(newOpinion);
             await _context.SaveChangesAsync();

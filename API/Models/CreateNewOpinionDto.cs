@@ -9,6 +9,5 @@ namespace API.Models
     public class CreateNewOpinionDto
     {
         public string Description { get; set; }
-        public string UserName { get; set; }
     }
 }
