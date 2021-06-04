@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IGenre } from '../shared/models/genres';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from '../shop/shop.service';
 
@@ -11,6 +12,7 @@ import { ShopService } from '../shop/shop.service';
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   opinions: any[];
+  genre: string;
 
   constructor(private shopService: ShopService, private activateRoute: ActivatedRoute) { }
 
@@ -21,6 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   loadProduct() {
     this.shopService.getProduct(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(product => {
       this.product = product;
+      this.genre = product.genre;
     }, error => {
       console.log(error);
     });
