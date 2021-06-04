@@ -13,7 +13,7 @@ namespace API.Models.Validator
         private int[] allowedPageSizes = new[] { 5, 10, 15 };
 
         private string[] allowedSortByColumnNames =
-            {nameof(Product.Name), nameof(Product.Price), nameof(Product.Description),};
+            {nameof(Product.Name), nameof(Product.Price)};
 
         public ProductQueryValidator()
         {

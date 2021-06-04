@@ -22,13 +22,12 @@ namespace API.Controllers
             _service = service;
         }
 
-
         [HttpPost("newproduct")]
-        public async Task<ActionResult> CreateNewProduct ([FromBody] ProductDto dto)
+        public async Task<ActionResult> CreateNewProduct ([FromBody] CreateNewProductDto dto)
         {
             var newProductId =await _service.CreateNewProduct(dto);
 
-            return Created("api/videogames/search/product/{newProductId}", null);
+            return Created($"api/videogames/search/product/{newProductId}", null);
         }
 
         [HttpDelete("delete/product/{productId}")]
@@ -40,10 +39,10 @@ namespace API.Controllers
         }
 
         [HttpPut("product/{productId}/update")]
-        public async Task<ActionResult> UpdateProduct([FromBody] ProductDto dto, int productId)
+        public async Task<ActionResult> UpdateProduct([FromBody] CreateNewProductDto dto, int productId)
         {
             await _service.UpdateProduct(dto, productId);
-            return Redirect("api/videogames/search/product/{productId}");
+            return Redirect($"api/videogames/search/product/{productId}");
         }
     }
 }

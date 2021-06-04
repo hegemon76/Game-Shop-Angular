@@ -27,11 +27,15 @@ namespace API.Data
             //    .ForMember(m => m.PaymentId, c => c.MapFrom(s => s.Payment.Id))
             //    .ForMember(m => m.TotalPrice, c => c.MapFrom(s => s.TotalPrice));
 
-
+            CreateMap<Genre, GenreDto>();
+            CreateMap<GenreDto, Genre>();
 
             CreateMap<Basket, BasketDto>();
-            CreateMap<ProductDto, Product>();
-            CreateMap<Product, ProductDto>();
+
+            CreateMap<CreateNewProductDto, Product>();
+
+            CreateMap<Product, ProductDto>()
+                .ForMember(m => m.Genre, c => c.MapFrom(s => s.Genre.Name));
         
         
         }    

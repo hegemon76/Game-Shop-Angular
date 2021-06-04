@@ -31,6 +31,7 @@ namespace API.Extensions
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IOpinionService, OpinionService>();
+            services.AddScoped<IGenreService, GenreService>();
 
             services.AddScoped<RequestTimeMiddleware>();
             services.AddScoped<ErrorHandlingMiddleware>();
