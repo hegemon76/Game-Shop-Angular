@@ -12,18 +12,28 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(genreName?: string) {
+  getProducts(genreName?: string, sort?:string) {
     let params = new HttpParams();
 
     params = params.append('PageSize', 15);
     params = params.append('PageNumber',1);
-    params = params.append('SortBy','Name');
+
+    if(sort){
+      if(sort == 'Name') params = params.append('SortBy', 'Name');
+      else if(sort == 'PriceAsc' || sort == 'PriceDesc') params = params.append('SortBy', 'Price');
+    }
+    
 
     if(genreName != 'Wszystkie' || !genreName){
       params = params.append('GenreFiltr', genreName);
     }
+
+    if(sort){
+      if(sort =='Name' || sort=='PriceAsc') params = params.append('SortDirection', 'Asc');
+      else if(sort=='PriceDesc')params = params.append('SortDirection', 'Desc');
+    }
    
-    params = params.append('SortDirection','DESC');
+    //params = params.append('SortDirection','DESC');
 
     return this.http.get<IPagination>(this.baseUrl + 'videogames/search', {observe: 'response', params})
     .pipe(

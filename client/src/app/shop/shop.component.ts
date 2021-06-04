@@ -13,6 +13,12 @@ export class ShopComponent implements OnInit {
   genres: IGenre[];
   genreNameSelected = 'Wszystkie';
   totalCount:number;
+  sortSelected = 'name';
+  sortOption = [
+    {name: 'Alfabetycznie', value: 'Name'},
+    {name: 'Cena: Rosnąco', value: 'PriceAsc'},
+    {name: 'Cena: Malejąco', value: 'PriceDesc'}
+  ];
 
   constructor(private shopService: ShopService) { }
 
@@ -22,7 +28,7 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts(this.genreNameSelected).subscribe(response => {
+    this.shopService.getProducts(this.genreNameSelected, this.sortSelected).subscribe(response => {
       this.products = response.items;
       this.totalCount = response.totalItemsCount;
     }, error => {
@@ -40,6 +46,11 @@ export class ShopComponent implements OnInit {
 
   onGenreSelected(genreName:string){
     this.genreNameSelected = genreName;
+    this.getProducts();
+  }
+
+  onSortSelected(sort:string){
+    this.sortSelected = sort;
     this.getProducts();
   }
 
