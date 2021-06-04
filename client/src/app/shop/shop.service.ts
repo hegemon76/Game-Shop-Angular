@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
 import { IPagination } from '../shared/models/pagination';
 import { map } from 'rxjs/operators';
+import { IProduct } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class ShopService {
       else if(sort == 'PriceAsc' || sort == 'PriceDesc') params = params.append('SortBy', 'Price');
     }
     
-
     if(genreName != 'Wszystkie' || !genreName){
       params = params.append('GenreFiltr', genreName);
     }
@@ -32,8 +32,6 @@ export class ShopService {
       if(sort =='Name' || sort=='PriceAsc') params = params.append('SortDirection', 'Asc');
       else if(sort=='PriceDesc')params = params.append('SortDirection', 'Desc');
     }
-   
-    //params = params.append('SortDirection','DESC');
 
     return this.http.get<IPagination>(this.baseUrl + 'videogames/search', {observe: 'response', params})
     .pipe(
@@ -42,6 +40,10 @@ export class ShopService {
       })
     );
    
+  }
+
+  getProduct(id:number){
+    return this.http.get<IProduct>(this.baseUrl + 'videogames/search/product/' + id);
   }
 
   getGenres(){

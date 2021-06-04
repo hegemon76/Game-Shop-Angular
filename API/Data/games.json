@@ -5,7 +5,7 @@
     "Price": 200,
     "Quantity": 15,
     "GenreId": 1,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/1.png"
   },
   {
     "Name": "CS-Go",
@@ -13,7 +13,7 @@
     "Price": 50,
     "Quantity": 15,
     "GenreId": 2,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/2.png"
   },
   {
     "Name": "Metin",
@@ -21,7 +21,7 @@
     "Price": 23,
     "Quantity": 15,
     "GenreId": 3,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/3.png"
   },
   {
     "Name": "GTA: V",
@@ -29,7 +29,7 @@
     "Price": 150,
     "Quantity": 15,
     "GenreId": 4,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/4.png"
   },
   {
     "Name": "Mario Kart",
@@ -37,7 +37,7 @@
     "Price": 220,
     "Quantity": 15,
     "GenreId": 5,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/5.png"
   },
   {
     "Name": "Overwatch",
@@ -45,7 +45,7 @@
     "Price": 224,
     "Quantity": 15,
     "GenreId": 6,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/6.png"
   },
   {
     "Name": "Css",
@@ -53,6 +53,6 @@
     "Price": 200,
     "Quantity": 15,
     "GenreId": 1,
-    "ImageURL": "Default.png"
+    "ImageURL": "/assets/7.png"
   }
 ]

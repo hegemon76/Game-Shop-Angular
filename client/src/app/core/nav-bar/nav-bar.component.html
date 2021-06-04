@@ -1,15 +1,16 @@
 <div
     class="d-flex flex-column flex-md-row align-items-center justify-content-between 
     p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
-    <div class="d-flex">
+    <div class="d-flex logo" routerLink="/">
         <h5 class="my-0 mr-md-auto font-weight-normal ml-3">Sklep z grami "Giercownia"</h5>
         <i class="fa fa-gamepad fa-2x ml-2"></i>
     </div>
 
     <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger;">
-        <a class="p-2 text-dark" href="#">Strona Domowa</a>
-        <a class="p-2 text-dark" href="#">Sklep</a>
-        <a class="p-2 text-dark" href="#">Kontakt</a>
+        <a class="p-2" [routerLink]="['/']" routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact:true}" >Strona Domowa</a>
+        <a class="p-2" [routerLink]="['/sklep']" routerLinkActive="active" >Sklep</a>
+        <a class="p-2" [routerLink]="['/kontakt']" routerLinkActive="active" >Kontakt</a>
     </nav>
     <div class="d-flex align-items-center">
         <a class="position-relative">
