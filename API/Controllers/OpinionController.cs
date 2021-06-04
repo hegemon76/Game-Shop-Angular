@@ -21,14 +21,12 @@ namespace API.Controllers
         }
 
         [HttpGet("opinions")]
-        public async Task<ActionResult<List<OpinionDto>>> GetOpinions ([FromRoute]int id)
+        public async Task<ActionResult<SelectListAsItems<OpinionDto>>> GetOpinions ([FromRoute]int id)
         {
             var opinions= await _service.GetOpinions(id);
-            
+
             return Ok(opinions);
-
         }
-
 
         [Authorize]
         [HttpPost("addopinion")]

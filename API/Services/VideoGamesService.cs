@@ -36,6 +36,7 @@ namespace API.Services
         {
             var product =await _context
                 .Products
+                .Include(x => x.Genre)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (product is null)

@@ -22,6 +22,7 @@ namespace API.Data
                 .ForMember(m => m.UserName, c => c.MapFrom(s => s.UserName));
 
             CreateMap<CreateNewOpinionDto, Opinion>();
+        
             //CreateMap<OrderDto, Order>()
             //    .ForMember(m => m.DeliveryId, c => c.MapFrom(s => s.Delivery.Id))
             //    .ForMember(m => m.PaymentId, c => c.MapFrom(s => s.Payment.Id))
