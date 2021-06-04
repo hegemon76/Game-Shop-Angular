@@ -3,10 +3,12 @@ using API.Entities;
 using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace API.Services
 {
     public interface IAdminService
     {
-        Task<int> CreateNewProduct(CreateNewProductDto dto);
+        Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
     }
@@ -35,10 +37,12 @@ namespace API.Services
             _userContextService = userContextService;
         }
 
-        public async Task<int> CreateNewProduct(CreateNewProductDto dto)
+        public async Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
         {
             var newProduct = _mapper.Map<Product>(dto);
-            _context.Products.Add(newProduct);
+            newProduct.ImageURL = uploadImage(image);
+
+            await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
@@ -47,17 +51,17 @@ namespace API.Services
         }
         public async Task DeleteProduct(int productId)
         {
-            var product =await GetProduct(productId);
+            var product =await getProduct(productId);
 
             _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
            
-           _context.Products.Remove(product);
+            _context.Products.Remove(product);
            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateProduct(CreateNewProductDto dto, int productId)
         {
-            var product =await GetProduct(productId);
+            var product =await getProduct(productId);
             
             _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
            
@@ -72,7 +76,7 @@ namespace API.Services
         }
 
         //privates
-        private async Task<Product> GetProduct(int productId)
+        private async Task<Product> getProduct(int productId)
         {
             var product = await _context.Products
                            .FirstOrDefaultAsync(x => x.Id == productId);
@@ -80,6 +84,26 @@ namespace API.Services
                 throw new NotFoundException("Nie znaleziono produktu");
             
             return product;
+        }
+
+        private string uploadImage(IFormFile image)
+        {
+            const string defaultName = "Default.png";
+            
+            if (image != null && image.Length>0)
+            {
+                var imageName = image.FileName;
+                var rootPath = Directory.GetCurrentDirectory();
+                var fullPath = $"{rootPath}/Images/{imageName}";
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+
+                return imageName;
+            }
+
+            return defaultName;
         }
     }
 }

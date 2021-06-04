@@ -2,6 +2,7 @@
 using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,15 @@ namespace API.Controllers
     {
         private readonly IAdminService _service;
 
-        public AdminController( IAdminService service)
+        public AdminController(IAdminService service)
         {
             _service = service;
         }
 
         [HttpPost("newproduct")]
-        public async Task<ActionResult> CreateNewProduct ([FromBody] CreateNewProductDto dto)
+        public async Task<ActionResult> CreateNewProduct ([FromBody] CreateNewProductDto dto, [FromForm] IFormFile image)
         {
-            var newProductId =await _service.CreateNewProduct(dto);
+            var newProductId =await _service.CreateNewProduct(dto, image);
 
             return Created($"api/videogames/search/product/{newProductId}", null);
         }
