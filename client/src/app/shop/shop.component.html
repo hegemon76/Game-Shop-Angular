@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="row">
+<div class="container mt-5">
+  <div class="row mt-5">
 
-    <section class="col-3">
-      <h5 class="text-warning ml-3">Sortuj:</h5>
+    <section class="col-3 mt-3">
+      <h5 class="text-warning ml-3 mt-3 mb-4">Sortuj:</h5>
       <select class="custom-select mb-3" (change)="onSortSelected($any($event.target).value)">
         <option *ngFor="let sort of sortOption" [value]="sort.value">
           {{sort.name}}
@@ -10,7 +10,7 @@
       </select>
 
       <h5 class="text-warning ml-3">Gatunki</h5>
-      <ul class="list-group my-3">
+      <ul class="list-group mb-3">
         <li class="list-group-item" *ngFor="let genre of genres" [class.active]="genre.name === this.genreNameSelected"
           [value]="genre.id" (click)="onGenreSelected(genre.name)">
           {{ genre.name }}
@@ -18,7 +18,7 @@
       </ul>
     </section>
 
-    <section class="col-9">
+    <section class="col-9 mt-5">
       <div class="d-flex justify-content-between align-items-center pb-2">
         <header>
           <span>Pokazuje <strong>10</strong> z <strong>{{ totalCount }}</strong> produktów</span>
