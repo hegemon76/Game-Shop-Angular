@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from '../models/product';
+import { IGenre } from '../shared/models/genres';
+import { IProduct } from '../shared/models/product';
 import { ShopService } from './shop.service';
 
 @Component({
@@ -9,15 +10,29 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent implements OnInit {
   products: IProduct[];
+  genres: IGenre[];
 
   constructor(private shopService: ShopService) { }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.getProducts();
+    this.getGenres();
+  }
+
+  getProducts() {
     this.shopService.getProducts().subscribe(response => {
       this.products = response.items;
     }, error => {
       console.log(error);
-    })
+    });
+  }
+
+  getGenres() {
+    this.shopService.getGenres().subscribe(response => {
+      this.genres = response;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }
