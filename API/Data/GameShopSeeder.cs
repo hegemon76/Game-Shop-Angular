@@ -32,10 +32,6 @@ namespace API.Data
 
                     var genres = JsonSerializer.Deserialize<List<Genre>>(genresData);
 
-                    foreach (var item in genres)
-                    {
-                        _dbContext.Genres.Add(item);
-                    }
                     _dbContext.Genres.AddRange(genres);
                     _dbContext.SaveChanges();
                 }
@@ -57,11 +53,27 @@ namespace API.Data
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
-                    foreach (var item in products)
-                    {
-                        _dbContext.Products.Add(item);
-                    }
                     _dbContext.Products.AddRange(products);
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private void SeedOpinions()
+        {
+            try
+            {
+                if (!_dbContext.Opinions.Any())
+                {
+                    var opinionsData = File.ReadAllText("./Data/opinions.json");
+
+                    var opinions = JsonSerializer.Deserialize<List<Opinion>>(opinionsData);
+
+                    _dbContext.Opinions.AddRange(opinions);
                     _dbContext.SaveChanges();
                 }
             }
@@ -83,6 +95,7 @@ namespace API.Data
                 }
                 SeedGenres();
                 SeedGames();
+                SeedOpinions();
 
                 if (!_dbContext.Users.Any())
                 {
