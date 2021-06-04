@@ -13,8 +13,7 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit(): void {
     let img = "/assets/" + this.product.id;
-    var imgPath = new File("/assets/1");
-    fs.stat
+    
     
   
   }

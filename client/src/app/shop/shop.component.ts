@@ -11,6 +11,8 @@ import { ShopService } from './shop.service';
 export class ShopComponent implements OnInit {
   products: IProduct[];
   genres: IGenre[];
+  genreNameSelected = 'Wszystkie';
+  totalCount:number;
 
   constructor(private shopService: ShopService) { }
 
@@ -20,8 +22,9 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts().subscribe(response => {
+    this.shopService.getProducts(this.genreNameSelected).subscribe(response => {
       this.products = response.items;
+      this.totalCount = response.totalItemsCount;
     }, error => {
       console.log(error);
     });
@@ -29,10 +32,15 @@ export class ShopComponent implements OnInit {
 
   getGenres() {
     this.shopService.getGenres().subscribe(response => {
-      this.genres = response;
+      this.genres = [{id:0, name: 'Wszystkie'}, ... response];
     }, error => {
       console.log(error);
     });
+  }
+
+  onGenreSelected(genreName:string){
+    this.genreNameSelected = genreName;
+    this.getProducts();
   }
 
 }
