@@ -12,9 +12,6 @@ export class ProductItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let img = "/assets/" + this.product.id;
-    
-    
   
   }
 

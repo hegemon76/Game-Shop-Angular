@@ -10,6 +10,7 @@ import { ShopService } from '../shop/shop.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
+  opinions: any[];
 
   constructor(private shopService: ShopService, private activateRoute: ActivatedRoute) { }
 
@@ -17,10 +18,10 @@ export class ProductDetailsComponent implements OnInit {
     this.loadProduct();
   }
 
-  loadProduct(){
+  loadProduct() {
     this.shopService.getProduct(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(product => {
       this.product = product;
-    },error => {
+    }, error => {
       console.log(error);
     });
   }

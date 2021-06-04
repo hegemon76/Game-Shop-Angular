@@ -10,11 +10,13 @@ import { ShopModule } from './shop/shop.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
+import { ProductOpinionsComponent } from './product-details/product-opinions/product-opinions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
+    ProductOpinionsComponent,
   ],
   imports: [
     BrowserModule,

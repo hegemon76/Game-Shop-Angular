@@ -18,5 +18,13 @@
             <p>{{product.description}}</p>
         </div>
     </div>
+    <div>
+        <app-product-opinions
+        *ngFor="let opinion of opinions"
+        [opinion]="opinion"
+        >
+
+        </app-product-opinions>
+    </div>
 
 </div>
