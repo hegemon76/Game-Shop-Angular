@@ -1,6 +1,9 @@
-﻿using API.Models;
+﻿using API.Data;
+using API.Entities;
+using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +16,12 @@ namespace API.Controllers
     public class VideoGamesController : ControllerBase
     {
         private readonly IVideoGamesService _service;
+        private readonly GameShopDbContext _context;
 
-        public VideoGamesController(IVideoGamesService service)
+        public VideoGamesController(IVideoGamesService service, GameShopDbContext context)
         {
             _service = service;
+            _context = context;
         }
         
         [HttpGet]
@@ -42,8 +47,14 @@ namespace API.Controllers
 
             return Ok("Question send");
         }
-        
-     
+
+        [HttpGet("genres")]
+        public async Task<ActionResult<IEnumerable<Genre>>> GetAll()
+        {
+            return await _context.Genres.ToListAsync();
+        }
+
+
 
     }
 }
