@@ -32,7 +32,6 @@ namespace API.Middleware
             }
             catch (Exception e)
             {
-
                 _logger.LogError(e, e.Message);
 
                 context.Response.StatusCode = 500;

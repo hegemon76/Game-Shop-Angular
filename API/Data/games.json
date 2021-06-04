@@ -4,48 +4,55 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
     "Quantity": 15,
-    "GenreId": 1
+    "GenreId": 1,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "CS-Go",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 50,
     "Quantity": 15,
-    "GenreId": 2
+    "GenreId": 2,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "Metin",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 23,
     "Quantity": 15,
-    "GenreId": 3
+    "GenreId": 3,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "GTA: V",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 150,
     "Quantity": 15,
-    "GenreId": 4
+    "GenreId": 4,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "Mario Kart",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 220,
     "Quantity": 15,
-    "GenreId": 5
+    "GenreId": 5,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "Overwatch",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 224,
     "Quantity": 15,
-    "GenreId": 6
+    "GenreId": 6,
+    "ImageURL": "Default.png"
   },
   {
     "Name": "Css",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
     "Quantity": 15,
-    "GenreId": 1
+    "GenreId": 1,
+    "ImageURL": "Default.png"
   }
 ]
