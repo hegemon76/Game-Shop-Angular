@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
+import { IOpinion } from '../shared/models/opinion';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from './shop.service';
 

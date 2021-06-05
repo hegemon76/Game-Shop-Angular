@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '../shared/models/genres';
+import { IOpinion } from '../shared/models/opinion';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from '../shop/shop.service';
 
@@ -11,13 +12,14 @@ import { ShopService } from '../shop/shop.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
-  opinions: any[];
+  opinions: IOpinion[];
   genre: string;
 
   constructor(private shopService: ShopService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadProduct();
+    this.loadOpinions();
   }
 
   loadProduct() {
@@ -27,6 +29,24 @@ export class ProductDetailsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  loadOpinions(){
+    this.shopService.getOpinions(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(items => {
+      this.opinions = items.items;
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  loadOpinions2(id:number){
+    this.shopService.getOpinions(id).subscribe(response => {
+      this.opinions = response.items;
+     // console.log(response[].description);
+      console.log(this.opinions);
+    }, error => {
+      console.log(error);
+    })
   }
 
 }

@@ -1,1 +1,4 @@
-<p>product-opinions works!</p>
+<div class="container" *ngFor="let opinion of opinions">
+    <h1>{{ opinion.description }}</h1>
+    <p>{{ opinion.userName }}</p>
+</div>

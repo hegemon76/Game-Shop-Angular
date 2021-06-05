@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IOpinion } from 'src/app/shared/models/opinion';
 
 @Component({
   selector: 'app-product-opinions',
@@ -6,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./product-opinions.component.scss']
 })
 export class ProductOpinionsComponent implements OnInit {
-  @Input() opinion: any;
+  @Input() opinions: IOpinion[];
+  
   constructor() { }
 
   ngOnInit(): void {

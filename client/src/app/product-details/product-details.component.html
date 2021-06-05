@@ -19,13 +19,11 @@
             <p>{{product.description}}</p>
         </div>
     </div>
-    <div>
-        <app-product-opinions
-        *ngFor="let opinion of opinions"
-        [opinion]="opinion"
-        >
-
-        </app-product-opinions>
+    <div *ngIf="opinions">
+        <div class="mt-2" *ngFor="let opinion of opinions">
+            <h3>{{opinion.userName}}</h3>
+            <h4>{{opinion.description}}</h4>
+        </div>
     </div>
 
 </div>
