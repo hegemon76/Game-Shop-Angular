@@ -45,15 +45,15 @@ namespace API.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
+                RoleId = dto.RoleId,
                 Address =new Address()
                     {
                     City=dto.City,
                     ZipCode=dto.ZipCode,
                     Country=dto.Country,
-                    Street=dto.Street
-                     },
-
-                RoleId = dto.RoleId
+                    Street=dto.Street,
+                    BuildingNumber=dto.BuildingNumber
+                },           
             };
             var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
 

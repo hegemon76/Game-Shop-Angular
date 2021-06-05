@@ -13,6 +13,6 @@ namespace API.Entities
         public string Street { get; set; }
         [StringLength(40)]
         public string City { get; set; }
-        public virtual User User { get; set; }
+        public int BuildingNumber { get; set; }
     }
 }

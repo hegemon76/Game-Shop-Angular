@@ -12,6 +12,8 @@ import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductOpinionsComponent } from './product-details/product-opinions/product-opinions.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ContactComponent } from './contact/contact.component';
     ProductDetailsComponent,
     ProductOpinionsComponent,
     ContactComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { ContactComponent } from './contact/contact.component';
     CoreModule,
     ShopModule,
     HomeModule,
-    AdminModule
+    AdminModule,
   ],
   providers: [],
   bootstrap: [

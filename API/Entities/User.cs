@@ -29,8 +29,6 @@ namespace API.Entities
         public DateTime? DateOfBirth { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
-        public int BasketId { get; set; }
-        public virtual Basket Basket { get; set; }
         public List<Order> Orders { get; set; }
         public List<UserQuestion> UserQuestions { get; set; }
     }

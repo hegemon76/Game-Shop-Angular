@@ -1,3 +1,172 @@
-<div class="pt-5">
-    <p>basket works!</p>
-</div>
+<div class="container">
+    <main>
+        <div class="text-center mb-5">
+            <p class="display-4">Stwórz zamówienie</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Twój koszyk</span>
+                    <span class="badge bg-primary rounded-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Product name</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$12</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Second product</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$8</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Third item</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">$5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>$20</strong>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Uzupełnij dane</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">Imię</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="FirstName" value=""
+                                required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Nazwisko</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="LastName" value=""
+                                required>
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="yourEmail@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label for="country" class="form-label">Kraj</label>
+                            <select class="form-select" id="country" required>
+                                <option value="">Choose...</option>
+                                <option>Poland</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="city" class="form-label">Miasto</label>
+                            <input type="text" class="form-control" id="city" placeholder="City" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zipcode" class="form-label">Kod pocztowy</label>
+                            <input type="text" class="form-control" id="zipcode" placeholder="ZipCode" required>
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="street" class="form-label">Ulica</label>
+                            <input type="text" class="form-control" id="street" placeholder="Street" required>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Numer budynku</label>
+                            <input type="number" class="form-control" id="city" placeholder="Building number" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Numer lokalu</label>
+                            <input type="number" class="form-control" id="city" placeholder="Apartment number" >
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="mb-3">Sposób zapłaty</h4>
+
+                            <div class="my-3">
+                                <div class="form-check">
+                                    <input id="banktransfer" name="paymentMethod" type="radio" class="form-check-input"
+                                        checked required>
+                                    <label class="form-check-label" for="banktransfer">Bank transfer</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="cash" name="paymentMethod" type="radio" class="form-check-input"
+                                        required>
+                                    <label class="form-check-label" for="cash">Cash</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="mb-3">Dostawa</h4>
+
+                            <div class="my-3">
+                                <div class="form-check">
+                                    <input id="courier" name="deliveryMethod" type="radio" class="form-check-input"
+                                        checked required>
+                                    <label class="form-check-label" for="courier">Kurier</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="inPerson" name="deliveryMethod" type="radio" class="form-check-input"
+                                        required>
+                                    <label class="form-check-label" for="inPerson">Odbiór osobisty</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="parcelLocker" name="deliveryMethod" type="radio" class="form-check-input"
+                                        required>
+                                    <label class="form-check-label" for="parcelLocker">Paczkomat</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg mb-5" type="submit">Potwierdź zamówienie</button>
+                </form>
+            </div>
+        </div>
+    </main>

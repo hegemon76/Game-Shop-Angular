@@ -145,6 +145,7 @@ namespace API.Data
                 City = "zzz",
                 Country = "ddd",
                 ZipCode = "55-555",
+                BuildingNumber= 15,
                 Street = "iii",
                 DateOfBirth = new DateTime(1998, 06, 02),
             };
@@ -160,6 +161,7 @@ namespace API.Data
                 LastName = "ggg",
                 City = "fff",
                 Country = "kkk",
+                BuildingNumber = 11,
                 ZipCode = "55-555",
                 Street = "yyy",
                 DateOfBirth = new DateTime(1978, 01, 07),
@@ -174,6 +176,7 @@ namespace API.Data
                 FirstName = "xxx",
                 LastName = "zzz",
                 City = "qqq",
+                BuildingNumber = 33,
                 Country = "eee",
                 ZipCode = "99-999",
                 Street = "hhh",

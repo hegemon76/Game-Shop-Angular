@@ -26,6 +26,9 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BuildingNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -45,30 +48,6 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Adresses");
-                });
-
-            modelBuilder.Entity("API.Entities.Basket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ItemCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("API.Entities.Delivery", b =>
@@ -197,9 +176,6 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BasketId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -220,8 +196,6 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.HasIndex("GenreId");
 
@@ -254,12 +228,6 @@ namespace API.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BasketId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BasketId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -286,10 +254,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
-
-                    b.HasIndex("BasketId1");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("RoleId");
 
@@ -380,10 +345,6 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.Product", b =>
                 {
-                    b.HasOne("API.Entities.Basket", null)
-                        .WithMany("Products")
-                        .HasForeignKey("BasketId");
-
                     b.HasOne("API.Entities.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId");
@@ -394,14 +355,10 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.User", b =>
                 {
                     b.HasOne("API.Entities.Address", "Address")
-                        .WithOne("User")
-                        .HasForeignKey("API.Entities.User", "AddressId")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("API.Entities.Basket", "Basket")
-                        .WithMany()
-                        .HasForeignKey("BasketId1");
 
                     b.HasOne("API.Entities.Role", "Role")
                         .WithMany()
@@ -410,8 +367,6 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-
-                    b.Navigation("Basket");
 
                     b.Navigation("Role");
                 });
@@ -425,16 +380,6 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("API.Entities.Address", b =>
-                {
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("API.Entities.Basket", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("API.Entities.Delivery", b =>

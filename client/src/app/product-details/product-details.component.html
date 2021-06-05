@@ -17,8 +17,8 @@
         </div>
         <div class="ml-3 mt-3 mr-3" *ngIf="opinions">
             <div class="bg-light rounded">
-                <h5 class="m-3 mt-2">Opinie klientów:</h5><br>
-                <div class="mt-1 " *ngFor="let opinion of opinions">
+                <h5 class="p-3 mt-2">Opinie klientów:</h5><br>
+                <div class="mt-1 p-2" *ngFor="let opinion of opinions">
                     <app-product-opinions [opinion]="opinion"></app-product-opinions>
                 </div>
             </div>

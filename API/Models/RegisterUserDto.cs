@@ -18,6 +18,7 @@ namespace API.Models
         public string Country { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
+        public int BuildingNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int RoleId { get; set; } = 1;
     }

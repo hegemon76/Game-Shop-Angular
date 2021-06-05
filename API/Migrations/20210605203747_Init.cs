@@ -16,27 +16,12 @@ namespace API.Migrations
                     ZipCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
                     Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     Street = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    BuildingNumber = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adresses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Baskets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ItemCount = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Baskets", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,18 +105,12 @@ namespace API.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GenreId = table.Column<int>(type: "int", nullable: true),
-                    BasketId = table.Column<int>(type: "int", nullable: true)
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenreId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Baskets_BasketId",
-                        column: x => x.BasketId,
-                        principalTable: "Baskets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Genres_GenreId",
                         column: x => x.GenreId,
@@ -153,9 +132,7 @@ namespace API.Migrations
                     LastName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    BasketId = table.Column<int>(type: "int", nullable: false),
-                    BasketId1 = table.Column<int>(type: "int", nullable: true)
+                    AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,12 +143,6 @@ namespace API.Migrations
                         principalTable: "Adresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Users_Baskets_BasketId1",
-                        column: x => x.BasketId1,
-                        principalTable: "Baskets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
@@ -253,11 +224,6 @@ namespace API.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BasketId",
-                table: "Products",
-                column: "BasketId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_GenreId",
                 table: "Products",
                 column: "GenreId");
@@ -270,13 +236,7 @@ namespace API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_AddressId",
                 table: "Users",
-                column: "AddressId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_BasketId1",
-                table: "Users",
-                column: "BasketId1");
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -312,9 +272,6 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Adresses");
-
-            migrationBuilder.DropTable(
-                name: "Baskets");
 
             migrationBuilder.DropTable(
                 name: "Roles");

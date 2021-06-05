@@ -20,6 +20,8 @@ namespace API.Services
         Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
+        Task SetRoleForUser(SetRoleForUser dto);
+        Task<List<UserDto>> GetAllUsers();
     }
 
     public class AdminService : IAdminService
@@ -57,6 +59,26 @@ namespace API.Services
            
             _context.Products.Remove(product);
            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<UserDto>> GetAllUsers()
+        {
+            var users = await _context.Users
+                .Include(x => x.Address)
+                .Include(x => x.Role)
+                .ToListAsync();
+            var userDto = _mapper.Map<List<UserDto>>(users);
+
+            return userDto;
+        }
+
+        public async Task SetRoleForUser(SetRoleForUser dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == dto.UserId);
+            user.RoleId = dto.RoleId;
+            
+            _context.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateProduct(CreateNewProductDto dto, int productId)

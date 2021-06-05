@@ -45,5 +45,20 @@ namespace API.Controllers
             await _service.UpdateProduct(dto, productId);
             return Redirect($"api/videogames/search/product/{productId}");
         }
+        
+        [HttpPut("setrole/user")]
+        public async Task<ActionResult> SetRoleForUser([FromQuery] SetRoleForUser dto)
+        {
+            await _service.SetRoleForUser(dto);
+            return NoContent();
+        }
+
+        [HttpGet("users")]
+        public async Task<ActionResult<List<UserDto>>> GetAllUsers()
+        {
+            var users= await _service.GetAllUsers();
+            return Ok(users);
+        }
+
     }
 }

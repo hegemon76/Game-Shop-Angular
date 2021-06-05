@@ -4,6 +4,7 @@ import { AdminPanelComponent } from './admin-panel.component';
 import { AdminGenreComponent } from './admin-genre/admin-genre.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AdminPanelComponent,
     AdminGenreComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    AdminUsersComponent
   ],
   imports: [
     CommonModule,

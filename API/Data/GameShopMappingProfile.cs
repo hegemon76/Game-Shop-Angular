@@ -14,31 +14,28 @@ namespace API.Data
         {
             CreateMap<Order, OrderDto>()
                 .ForMember(m => m.Delivery, c => c.MapFrom(s => s.Delivery))
-                .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment))
-                .ForMember(m => m.Invoice, c => c.MapFrom(s => s.Payment.Invoice));
+                .ForMember(m => m.Payment, c => c.MapFrom(s => s.Payment));
 
-            CreateMap<Opinion, OpinionDto>()
-                .ForMember(m => m.Description, c => c.MapFrom(s => s.Description))
-                .ForMember(m => m.UserName, c => c.MapFrom(s => s.UserName));
+            CreateMap<Opinion, OpinionDto>();
 
             CreateMap<CreateNewOpinionDto, Opinion>();
-        
-            //CreateMap<OrderDto, Order>()
-            //    .ForMember(m => m.DeliveryId, c => c.MapFrom(s => s.Delivery.Id))
-            //    .ForMember(m => m.PaymentId, c => c.MapFrom(s => s.Payment.Id))
-            //    .ForMember(m => m.TotalPrice, c => c.MapFrom(s => s.TotalPrice));
 
             CreateMap<Genre, GenreDto>();
             CreateMap<GenreDto, Genre>();
-
-            CreateMap<Basket, BasketDto>();
 
             CreateMap<CreateNewProductDto, Product>();
 
             CreateMap<Product, ProductDto>()
                 .ForMember(m => m.Genre, c => c.MapFrom(s => s.Genre.Name));
-        
-        
+
+            CreateMap<User, UserDto>()
+                .ForMember(m => m.Address, c => c.MapFrom(s => s.Address))
+                .ForMember(m => m.Role, c => c.MapFrom(s => s.Role));
+
+            CreateMap<UserDto, User>()
+                .ForMember(m => m.Address, c => c.MapFrom(s => s.Address))
+                .ForMember(m => m.Role, c => c.MapFrom(s => s.Role)); 
+
         }    
     }
 }

@@ -28,7 +28,6 @@ namespace API.Extensions
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IMyHistoryService, MyHistoryService>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IOpinionService, OpinionService>();
             services.AddScoped<IGenreService, GenreService>();
