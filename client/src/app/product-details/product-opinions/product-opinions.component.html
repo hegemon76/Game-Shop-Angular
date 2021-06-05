@@ -1,4 +1,4 @@
-<div class="container" *ngFor="let opinion of opinions">
-    <h1>{{ opinion.description }}</h1>
-    <p>{{ opinion.userName }}</p>
+<div *ngIf="opinion != null">
+    <h4>{{ opinion.userName }}</h4>
+    <p>{{ opinion.description }}</p>
 </div>

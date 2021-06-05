@@ -7,7 +7,7 @@ import { IOpinion } from 'src/app/shared/models/opinion';
   styleUrls: ['./product-opinions.component.scss']
 })
 export class ProductOpinionsComponent implements OnInit {
-  @Input() opinions: IOpinion[];
+  @Input() opinion: IOpinion;
   
   constructor() { }
 

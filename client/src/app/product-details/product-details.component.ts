@@ -33,17 +33,10 @@ export class ProductDetailsComponent implements OnInit {
 
   loadOpinions(){
     this.shopService.getOpinions(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(items => {
-      this.opinions = items.items;
-    }, error => {
-      console.log(error);
-    })
-  }
-
-  loadOpinions2(id:number){
-    this.shopService.getOpinions(id).subscribe(response => {
-      this.opinions = response.items;
-     // console.log(response[].description);
-      console.log(this.opinions);
+      if(items.items != null){
+        this.opinions = items.items;
+      }
+      
     }, error => {
       console.log(error);
     })
