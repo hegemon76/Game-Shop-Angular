@@ -83,6 +83,28 @@ namespace API.Data
                 throw;
             }
         }
+        private void SeedUsers()
+        {
+            try
+            {
+                if (!_dbContext.Users.Any())
+                {
+                    var usersData = File.ReadAllText("./Data/users.json");
+
+                    var users = JsonSerializer.Deserialize<List<RegisterUserDto>>(usersData);
+                    foreach (var item in users)
+                    {
+                        _service.Register(item);
+                    }                  
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void SeedAsync()
         {
             if (_dbContext.Database.CanConnect())
@@ -96,11 +118,8 @@ namespace API.Data
                 SeedGenres();
                 SeedGames();
                 SeedOpinions();
+                SeedUsers();
 
-                if (!_dbContext.Users.Any())
-                {
-                    GetUsers();
-                }
                 if (!_dbContext.UserQuestions.Any())
                 {
                     var userQuestions = GetUserQuestions();
@@ -130,61 +149,6 @@ namespace API.Data
                         }
                     };
             return roles;
-        }
-
-        private void GetUsers()
-        {
-            var newUser = new RegisterUserDto()
-            {
-                UserName = "test",
-                Password = "test123",
-                ConfirmPassword = "test123",
-                Email = "test@gmail.com",
-                FirstName = "xxx",
-                LastName = "yyy",
-                City = "zzz",
-                Country = "ddd",
-                ZipCode = "55-555",
-                BuildingNumber= 15,
-                Street = "iii",
-                DateOfBirth = new DateTime(1998, 06, 02),
-            };
-            _service.Register(newUser);
-
-            var newUser2 = new RegisterUserDto()
-            {
-                UserName = "test2",
-                Password = "test123",
-                ConfirmPassword = "test123",
-                Email = "test2@gmail.com",
-                FirstName = "yyy",
-                LastName = "ggg",
-                City = "fff",
-                Country = "kkk",
-                BuildingNumber = 11,
-                ZipCode = "55-555",
-                Street = "yyy",
-                DateOfBirth = new DateTime(1978, 01, 07),
-            };
-            _service.Register(newUser2);
-            var newUser3 = new RegisterUserDto()
-            {
-                UserName = "admin",
-                Password = "admin123",
-                ConfirmPassword = "admin123",
-                Email = "admin@gmail.com",
-                FirstName = "xxx",
-                LastName = "zzz",
-                City = "qqq",
-                BuildingNumber = 33,
-                Country = "eee",
-                ZipCode = "99-999",
-                Street = "hhh",
-                DateOfBirth = new DateTime(2000, 01, 11),
-                RoleId = 2
-            };
-            _service.Register(newUser3);
-
         }
         private IEnumerable<UserQuestion> GetUserQuestions()
         {

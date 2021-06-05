@@ -1,0 +1,59 @@
+[
+	{
+		"UserName": "zirex",
+		"Password": "1qazxsw2",
+		"ConfirmPassword": "1qazxsw2",
+		"Email": "test@gmail.com",
+		"FirstName": "Karol",
+		"LastName": "Dura",
+		"City": "Kuœlin",
+		"Country": "Poland",
+		"ZipCode": "55-310",
+		"BuildingNumber": 15,
+		"Street": "Parkowa",
+		"DateOfBirth": "1998-06-02"
+	},
+	{
+		"UserName": "paniczek",
+		"Password": "1qazxsw2",
+		"ConfirmPassword": "1qazxsw2",
+		"Email": "test2@gmail.com",
+		"FirstName": "Adam",
+		"LastName": "Mickiewicz",
+		"City": "Poznañ",
+		"Country": "Poland",
+		"ZipCode": "33-510",
+		"BuildingNumber": 35,
+		"Street": "Ogrodowa",
+		"DateOfBirth": "1995-02-09"
+	},
+	{
+		"UserName": "admin",
+		"Password": "1qazxsw2",
+		"ConfirmPassword": "1qazxsw2",
+		"Email": "admin@gmail.com",
+		"FirstName": "Marcin",
+		"LastName": "Ceglarek",
+		"City": "Warszawa",
+		"Country": "Poland",
+		"ZipCode": "22-772",
+		"BuildingNumber": 1,
+		"Street": "Krakowska",
+		"DateOfBirth": "1990-11-22",
+		"RoleId": 2
+	},
+	{
+		"UserName": "Prawakxx",
+		"Password": "1qazxsw2",
+		"ConfirmPassword": "1qazxsw2",
+		"Email": "prawak1337@gmail.com",
+		"FirstName": "Adrian",
+		"LastName": "Dawid",
+		"City": "Murowana Goœlina",
+		"Country": "Poland",
+		"ZipCode": "55-666",
+		"BuildingNumber": 77,
+		"Street": "Poznañska",
+		"DateOfBirth": "1994-10-17"
+	}
+]
