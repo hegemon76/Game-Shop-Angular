@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IGenre } from 'src/app/shared/models/genres';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShopService } from 'src/app/shop/shop.service';
 
 @Component({
@@ -13,9 +13,12 @@ export class AdminGenreComponent implements OnInit {
   newName: any;
   oldName: any;
 
-  genreForm = this.formBuilder.group({
-    name: '',
-    oldName: ''
+  // genreForm = this.formBuilder.group({
+  //   name: '',
+  //   oldName: ''
+  // });
+   genreForm = new FormGroup({
+    name: new FormControl('')
   });
 
   constructor(private formBuilder: FormBuilder, private shopService: ShopService) { }
@@ -24,9 +27,9 @@ export class AdminGenreComponent implements OnInit {
   }
 
   onSubmit() {
-  
- 
     //this.newName = this.genreForm.value.name;
-    console.log(this.genreForm.value.name);
+    console.log(this.genreForm);
   }
+
+  
 }
