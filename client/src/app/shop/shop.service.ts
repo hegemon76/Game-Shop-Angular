@@ -61,5 +61,9 @@ export class ShopService {
     )
   }
 
+  updateGenre(name:string){
+    return this.http.put(this.baseUrl + name, name);
+  }
+
 
 }
