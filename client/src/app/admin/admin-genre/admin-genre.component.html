@@ -1,1 +1,11 @@
-<p>admin-genre works!</p>
+<div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
+    <form>
+        <div class="row">
+            <div class="col">
+                <input type="text" value="{{genre.name}}">
+                <button class="btn btn-primary ml-2">Wyslij</button>
+            </div>
+        </div>
+    </form>
+
+</div>

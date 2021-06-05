@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IGenre } from 'src/app/shared/models/genres';
 
 @Component({
   selector: 'app-admin-genre',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-genre.component.scss']
 })
 export class AdminGenreComponent implements OnInit {
+  @Input() genres: IGenre[];
 
   constructor() { }
 

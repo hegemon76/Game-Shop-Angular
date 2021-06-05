@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IProduct } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-admin-products',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
-
+  @Input() products: IProduct[];
+  showProductInfo: number;
   constructor() { }
 
   ngOnInit(): void {
   }
+
+showProduct(id:number){
+  this.showProductInfo= id;
+}
+
+closeProductInfo(){
+this.showProductInfo = null;
+}
 
 }
