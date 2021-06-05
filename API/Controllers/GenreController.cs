@@ -31,11 +31,20 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         [HttpPost("add")]
-        public async Task<ActionResult<IEnumerable<GenreDto>>> AddNewGenre([FromBody] GenreDto dto)
+        public async Task<ActionResult<GenreDto>> AddNewGenre([FromBody] GenreDto dto)
         {
             await _service.AddGenre(dto);
+
+            return Created("api/genre", null);
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpPut("update")]
+        public async Task<ActionResult<GenreDto>> UpdateGenre([FromBody] GenreDto genre, [FromQuery] int id)
+        {
+            await _service.UpdateGenre(genre, id);
 
             return Created("api/genre", null);
         }
