@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
+import { IUsers } from '../shared/models/user';
 import { IPagination } from '../shared/models/pagination';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
@@ -45,7 +46,6 @@ export class ShopService {
           return response.body;
         })
       );
-
   }
 
   getProduct(id: number) {
@@ -54,6 +54,10 @@ export class ShopService {
 
   getGenres() {
     return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
+  }
+  
+  getUsers() {
+    return this.http.get<IUsers[]>(this.baseUrl + 'admin/users');
   }
 
   getOpinions(id: number) {
@@ -66,8 +70,9 @@ export class ShopService {
   }
 
   updateGenre(name:string){
-    return this.http.put(this.baseUrl + name, name);
+    return this.http.put(this.baseUrl +"genre/update/"+ name, name);
   }
+
 
 
 }

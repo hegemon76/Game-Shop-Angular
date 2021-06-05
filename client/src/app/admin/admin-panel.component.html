@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="toggleGnereMode()">
+                        <a class="nav-link" (click)="toggleGenreMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-users">
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" (click)="toggleClientsMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-bar-chart-2">
@@ -72,7 +72,11 @@
             <div *ngIf="isProductActivated == true">
                 <app-admin-products [products]="products"></app-admin-products>
             </div>
+            <div *ngIf="isClientActivated == true">
+                <app-admin-clients [users]="users"></app-admin-clients>
+            </div>
         </div>
+
 
 
 
