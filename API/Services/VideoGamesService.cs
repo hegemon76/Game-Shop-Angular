@@ -95,7 +95,6 @@ namespace API.Services
             {
                 UserId = (int)_userContextService.GetUserId,
                 Description = dto.Description
-                
             };
 
             _context.UserQuestions.Add(question);
