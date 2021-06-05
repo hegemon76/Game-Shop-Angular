@@ -1,4 +1,13 @@
 <div *ngIf="opinion != null">
-    <h4>{{ opinion.userName }}</h4>
-    <p>{{ opinion.description }}</p>
+
+    <div class="row">
+        <div class="col">
+            <div class="bg-secondary border rounded">
+            <blockquote class="ml-4 font-weight-bold text-justify mt-3">
+                <q class="bgcolor-dark">{{ opinion.description }}</q>
+                 ~<span class="text-dark ml-2 font-italic">{{ opinion.userName }}</span>
+            </blockquote>
+        </div>
+        </div>
+    </div>
 </div>
