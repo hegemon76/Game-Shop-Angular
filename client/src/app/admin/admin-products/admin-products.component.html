@@ -1,6 +1,6 @@
 <form>
     <div class="border border-primary mb-2" *ngFor="let product of products">
-        <div class="row ml-2">
+        <div class="row ml-2 mb-2">
             <div class="col">
                 <label>Id</label>
                 <input type="text" class="form-control mr-2" value="{{product.id}}">
@@ -10,6 +10,7 @@
                 <input type="text" class="form-control mr-2" value="{{product.name}}">
             </div>
             <div class="col">
+                <label></label>
                 <a (click)="showProduct(product.id)" class="btn btn-primary mt-2 mb-2" *ngIf="!showProductInfo">
                     Pokaż
                 </a>
