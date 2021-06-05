@@ -15,7 +15,7 @@ namespace API.Services
     {
         Task<IEnumerable<GenreDto>> GetGenres();
         Task AddGenre(GenreDto dto);
-        Task UpdateGenre(GenreDto genre,int id);
+        Task UpdateGenre(GenreDto genre,string name);
     }
 
     public class GenreService : IGenreService
@@ -42,9 +42,9 @@ namespace API.Services
             await _context.Genres.AddAsync(genres);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateGenre(GenreDto genre, int id)
+        public async Task UpdateGenre(GenreDto genre, string name)
         {
-            var genreToUpdate =await _context.Genres.FirstOrDefaultAsync(x => x.Id == id);
+            var genreToUpdate =await _context.Genres.FirstOrDefaultAsync(x => x.Name == name);
             genreToUpdate.Name = genre.Name;
            
             _context.Update(genreToUpdate);
