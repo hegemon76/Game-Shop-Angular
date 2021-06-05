@@ -15,7 +15,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(genreName?: string, sort?: string) {
+  getProducts(genreName?: string, sort?: string, searchPhrase?:string) {
     let params = new HttpParams();
 
     params = params.append('PageSize', 15);
@@ -33,6 +33,10 @@ export class ShopService {
     if (sort) {
       if (sort == 'Name' || sort == 'PriceAsc') params = params.append('SortDirection', 'Asc');
       else if (sort == 'PriceDesc') params = params.append('SortDirection', 'Desc');
+    }
+
+    if (searchPhrase) {
+      params = params.append('SearchPhrase', searchPhrase);
     }
 
     return this.http.get<IPagination>(this.baseUrl + 'videogames/search', { observe: 'response', params })

@@ -21,13 +21,15 @@
     <section class="col-9 mt-5">
       <div class="d-flex justify-content-between align-items-center pb-2">
         <header>
-          <span>Pokazuje <strong>10</strong> z <strong>{{ totalCount }}</strong> produktów</span>
+          <span>Wyświetla <strong>{{ itemsFrom }}-{{itemsTo}}</strong>  z <strong>{{ totalCount }}</strong> znalezionych produktów</span>
         </header>
+        <form>
         <div class="form-inline mt-2">
           <input class="form-control" style="width: 300px;" placeholder="Wyszukaj" type="text">
-          <button class="btn btn-outline-primary my-2 ml-2">Wyszukaj</button>
-          <button class="btn btn-outline-success my-2 ml-2">Reset</button>
+          <button type="submit" class="btn btn-outline-primary my-2 ml-2" (click)="onSearchPhraseModyfied(searchPhrase)">Wyszukaj</button>
+          <button type="reset" class="btn btn-outline-success my-2 ml-2">Reset</button>
         </div>
+      </form>
       </div>
 
 
