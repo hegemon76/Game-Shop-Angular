@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin/admin-panel.component';
 import { BasketComponent } from './basket/basket.component';
+import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ShopComponent } from './shop/shop.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'sklep/:id', component: ProductDetailsComponent },
   { path: 'koszyk', component: BasketComponent },
   {path: 'admin-panel', component: AdminPanelComponent},
+  {path: 'kontakt', component: ContactComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

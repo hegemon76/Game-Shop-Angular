@@ -11,12 +11,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { HomeModule } from './home/home.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductOpinionsComponent } from './product-details/product-opinions/product-opinions.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
     ProductOpinionsComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

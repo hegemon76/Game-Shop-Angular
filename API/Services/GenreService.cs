@@ -44,9 +44,9 @@ namespace API.Services
         }
         public async Task UpdateGenre(GenreDto genre, string name)
         {
-            var genreToUpdate =await _context.Genres.FirstOrDefaultAsync(x => x.Name == name);
+            var genreToUpdate = await _context.Genres.FirstOrDefaultAsync(x => x.Name == name);
             genreToUpdate.Name = genre.Name;
-           
+
             _context.Update(genreToUpdate);
             await _context.SaveChangesAsync();
         }
