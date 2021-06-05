@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminPanelComponent } from './admin-panel.component';
 import { AdminGenreComponent } from './admin-genre/admin-genre.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,9 @@ import { AdminProductsComponent } from './admin-products/admin-products.componen
     AdminProductsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],exports:[
     AdminPanelComponent
   ]
