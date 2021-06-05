@@ -15,7 +15,7 @@ namespace API.Services
     {
         Task<IEnumerable<GenreDto>> GetGenres();
         Task AddGenre(GenreDto dto);
-        Task UpdateGenre(GenreDto genre,string name);
+        Task UpdateGenre(GenreDto genre, string name);
     }
 
     public class GenreService : IGenreService
