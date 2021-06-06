@@ -10,9 +10,9 @@ import { ShopService } from '../shop/shop.service';
 export class ClientAccountComponent implements OnInit {
   users: IUsers[];
   isMyDataActivated: boolean = false;
-  constructor(private shopService: ShopService) { }
-
   isOrdersActive: boolean = false;
+  constructor(private shopService: ShopService) { }
+  
   
 
   ngOnInit(): void {
@@ -37,6 +37,7 @@ export class ClientAccountComponent implements OnInit {
   
     toggleOrdersActive() {
     this.deactivateAll();
+    this.isOrdersActive = true;
   }
   
 

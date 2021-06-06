@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using API.Models;
 using API.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,180 +14,79 @@ namespace API.Data
 {
     public class GameShopSeeder
     {
-        private readonly GameShopDbContext _dbContext;
-        private readonly IAccountService _service;
 
-        public GameShopSeeder(GameShopDbContext dbContext, IAccountService service)
+        public static async Task SeedGenres(GameShopDbContext _dbContext)
         {
-            _dbContext = dbContext;
-            _service = service;
+            if (!await _dbContext.Genres.AnyAsync())
+            {
+                var genresData = File.ReadAllText("./Data/SeedersJson/genres.json");
+                var genres = JsonSerializer.Deserialize<List<Genre>>(genresData);
+
+                await _dbContext.Genres.AddRangeAsync(genres);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
-        public void SeedGenres()
+        private static async Task SeedGames(GameShopDbContext _dbContext)
         {
-            try
+            if (!await _dbContext.Products.AnyAsync())
             {
-                if (!_dbContext.Genres.Any())
+                var productsData = File.ReadAllText("./Data/SeedersJson/games.json");
+                var products = JsonSerializer.Deserialize<List<Product>>(productsData);
+
+                await _dbContext.Products.AddRangeAsync(products);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedOpinions(GameShopDbContext _dbContext)
+        {
+            if (!await _dbContext.Opinions.AnyAsync())
+            {
+                var opinionsData = File.ReadAllText("./Data/SeedersJson/opinions.json");
+                var opinions = JsonSerializer.Deserialize<List<Opinion>>(opinionsData);
+
+                await _dbContext.Opinions.AddRangeAsync(opinions);
+                await _dbContext.SaveChangesAsync();
+            }
+
+        }
+        private static async Task SeedUsers(GameShopDbContext _dbContext, IAccountService service)
+        {
+            if (!await _dbContext.Users.AnyAsync())
+            {
+                var _service = service;
+                var usersData = File.ReadAllText("./Data/SeedersJson/users.json");
+                var users = JsonSerializer.Deserialize<List<RegisterUserDto>>(usersData);
+                
+                foreach (var item in users)
                 {
-                    var genresData = File.ReadAllText("./Data/genres.json");
-
-                    var genres = JsonSerializer.Deserialize<List<Genre>>(genresData);
-
-                    _dbContext.Genres.AddRange(genres);
-                    _dbContext.SaveChanges();
+                    _service.Register(item);
                 }
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
-
-        private void SeedGames()
+        private static async Task SeedRoles(GameShopDbContext _dbContext)
         {
-            try
+            if (!await _dbContext.Roles.AnyAsync())
             {
-                if (!_dbContext.Products.Any())
-                {
-                    var productsData = File.ReadAllText("./Data/games.json");
-
-                    var products = JsonSerializer.Deserialize<List<Product>>(productsData);
-
-                    _dbContext.Products.AddRange(products);
-                    _dbContext.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        private void SeedOpinions()
-        {
-            try
-            {
-                if (!_dbContext.Opinions.Any())
-                {
-                    var opinionsData = File.ReadAllText("./Data/opinions.json");
-
-                    var opinions = JsonSerializer.Deserialize<List<Opinion>>(opinionsData);
-
-                    _dbContext.Opinions.AddRange(opinions);
-                    _dbContext.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        private void SeedUsers()
-        {
-            try
-            {
-                if (!_dbContext.Users.Any())
-                {
-                    var usersData = File.ReadAllText("./Data/users.json");
-
-                    var users = JsonSerializer.Deserialize<List<RegisterUserDto>>(usersData);
-                    foreach (var item in users)
-                    {
-                        _service.Register(item);
-                    }                  
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
+                var rolesData = File.ReadAllText("./Data/SeedersJson/roles.json");
+                var roles = JsonSerializer.Deserialize<List<Role>>(rolesData);
+                
+                await _dbContext.Roles.AddRangeAsync(roles);
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        public void SeedAsync()
+        public static async Task SeedAsync(GameShopDbContext _dbContext, IAccountService service)
         {
             if (_dbContext.Database.CanConnect())
             {
-                if (!_dbContext.Roles.Any())
-                {
-                    var roles = GetRoles();
-                    _dbContext.Roles.AddRange(roles);
-                    _dbContext.SaveChanges();
-                }
-                SeedGenres();
-                SeedGames();
-                SeedOpinions();
-                SeedUsers();
-
-                if (!_dbContext.UserQuestions.Any())
-                {
-                    var userQuestions = GetUserQuestions();
-                    _dbContext.UserQuestions.AddRange(userQuestions);
-                    _dbContext.SaveChanges();
-                }
-                if (!_dbContext.Orders.Any())
-                {
-                    var orders = GetOrders();
-                    _dbContext.Orders.AddRange(orders);
-                    _dbContext.SaveChanges();
-                }
-
+                await SeedRoles(_dbContext);
+                await SeedGenres(_dbContext);
+                await SeedGames(_dbContext);
+                await SeedOpinions(_dbContext);
+                await SeedUsers(_dbContext, service);
             }
-        }
-        private IEnumerable<Role> GetRoles()
-        {
-            var roles = new List<Role>()
-                    {
-                        new Role()
-                        {
-                            Name="User"
-                        },
-                        new Role()
-                        {
-                            Name = "Admin",
-                        }
-                    };
-            return roles;
-        }
-        private IEnumerable<UserQuestion> GetUserQuestions()
-        {
-            var questions = new List<UserQuestion>()
-            {
-                new UserQuestion()
-                {
-                    UserId=1,
-                    Description="First Question"
-                },
-                new UserQuestion()
-                {
-                    UserId=2,
-                    Description="Second Question"
-                },
-                new UserQuestion()
-                {
-                    UserId=1,
-                    Description="Third Question"
-                },
-            };
-
-            return questions;
-        }
-
-        private IEnumerable<Order> GetOrders()
-        {
-            var orders = new List<Order>()
-            {
-                new Order()
-                {
-                    UserId=1,
-                    Delivery=new InPerson(),
-                    Payment=new Cash(),
-                    DateOfOrder=DateTime.Now
-                },
-            };
-            return orders;
         }
     }
 }
