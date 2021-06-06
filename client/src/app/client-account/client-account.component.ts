@@ -12,8 +12,12 @@ export class ClientAccountComponent implements OnInit {
   isMyDataActivated: boolean = false;
   constructor(private shopService: ShopService) { }
 
+  isOrdersActive: boolean = false;
+  
+
   ngOnInit(): void {
   }
+  
   toggleMyDataMode() {
     this.deactivateAll();
     this.isMyDataActivated = true;
@@ -29,7 +33,15 @@ export class ClientAccountComponent implements OnInit {
       console.log(error);
     });
   }
+
+  
+    toggleOrdersActive() {
+    this.deactivateAll();
+  }
+  
+
   deactivateAll() {
-    this.isMyDataActivated=false;
+    this.isOrdersActive = false;
+    this.isMyDataActivated =false;
   }
 }
