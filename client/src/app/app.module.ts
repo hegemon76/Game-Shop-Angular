@@ -14,6 +14,8 @@ import { ProductOpinionsComponent } from './product-details/product-opinions/pro
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ClientAccountComponent } from './client-account/client-account.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
     ContactComponent,
     LoginComponent,
     RegisterComponent,
+    ClientAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
     ShopModule,
     HomeModule,
     AdminModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [
