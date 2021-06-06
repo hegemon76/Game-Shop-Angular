@@ -12,4 +12,7 @@ export class ClientAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deactivateAll() {
+   
+  }
 }
