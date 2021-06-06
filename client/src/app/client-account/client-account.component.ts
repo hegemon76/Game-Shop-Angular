@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUsers } from '../shared/models/user';
-import { ShopService } from '../shop/shop.service';
+import { ClientAccountService } from './client-account.service';
 
 @Component({
   selector: 'app-client-account',
@@ -11,36 +11,31 @@ export class ClientAccountComponent implements OnInit {
   users: IUsers[];
   isMyDataActivated: boolean = false;
   isOrdersActive: boolean = false;
-  constructor(private shopService: ShopService) { }
   
+  constructor(private clientAccountService: ClientAccountService) { }
   
-
   ngOnInit(): void {
   }
   
   toggleMyDataMode() {
     this.deactivateAll();
     this.isMyDataActivated = true;
-    this.getUsers();
+    this.getUser(1);
   }
 
-  
-
-  getUsers() {
-    this.shopService.getUsers().subscribe(response => {
+  getUser(id:number) {
+    this.clientAccountService.getUser(id).subscribe(response => {
       this.users = response;
     }, error => {
       console.log(error);
     });
   }
-
   
     toggleOrdersActive() {
     this.deactivateAll();
     this.isOrdersActive = true;
   }
   
-
   deactivateAll() {
     this.isOrdersActive = false;
     this.isMyDataActivated =false;

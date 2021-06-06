@@ -1,39 +1,31 @@
-<p>client-data works!</p>
-
-
-
 <form>
-    <div class="border border-primary mb-2 p-1" *ngFor="let user of users">
-        <div class="row ml-2 mt-2 ">
-            <div class="col-1">
-                <label>Id</label>
-                <input type="text" class="form-control mr-2" value="{{user.id}}" readonly>
-            </div>
-            <div class="col-2">
-                <label>UserName</label>
-                <input type="text" class="form-control mr-2" value="{{user.userName}}">
-            </div>
-            <div class="col-2">
-                <label>Rola użytkownika</label>
-                <input type="text" class="form-control mr-2" value="{{user.role.name}}">
-            </div>
-            <div class="col-2">
-                <label>Imię</label>
-                <input type="text" class="form-control mr-2" value="{{user.firstName}}">
-            </div>
-            <div class="col-2">
-                <label>Nazwisko</label>
-                <input type="text" class="form-control mr-2" value="{{user.lastName}}">
-            </div>
-            <div class="col">
-                <br>
-                <a (click)="showMyData(user.id)" class="btn btn-primary mt-2 mb-2" *ngIf="!showMyDataInfo">
-                    Więcej
-                </a>
-            </div>
-        </div>
+    <div class="border border-primary mb-2 p-1">
+        <div *ngFor="let user of users">
+            <div class="row ml-2 mt-2">
+                <div class="col-1">
+                    <label>Id</label>
+                    <input type="text" class="form-control mr-2" value="{{user.id}}" readonly>
+                </div>
+                <div class="col-2">
+                    <label>UserName</label>
+                    <input type="text" class="form-control mr-2" value="{{user.userName}}">
+                </div>
+                <div class="col-2">
+                    <label>Rola użytkownika</label>
+                    <input type="text" class="form-control mr-2" value="{{user.role.name}}">
+                </div>
+                <div class="col-2">
+                    <label>Imię</label>
+                    <input type="text" class="form-control mr-2" value="{{user.firstName}}">
+                </div>
+                <div class="col">
+                    <label>Nazwisko</label>
+                    <input type="text" class="form-control mr-2" value="{{user.lastName}}">
+                </div>
 
-        <div *ngIf="showMyDataInfo == user.id">
+            </div>
+
+
             <div class="row ml-2 mt-2">
                 <div class="col-3">
                     <label>Kraj</label>
@@ -72,7 +64,6 @@
             </div>
             <div class="ml-4 g-2">
                 <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
-                <a class="btn btn-primary ml-2" (click)="closeMyDataInfo()">Zamknij</a>
             </div>
 
         </div>

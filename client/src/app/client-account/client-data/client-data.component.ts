@@ -14,12 +14,4 @@ export class ClientDataComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showMyData(id: number) {
-    this.showMyDataInfo = id;
-  }
-
-  closeMyDataInfo() {
-    this.showMyDataInfo = null;
-  }
-
 }

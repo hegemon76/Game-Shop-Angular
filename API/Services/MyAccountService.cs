@@ -12,23 +12,35 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public interface IMyHistoryService
+    public interface IMyAccountService
     {
         Task<List<OrderDto>> MyOrders();
+        Task<UserDto> GetUser(int id);
     }
 
-    public class MyHistoryService : IMyHistoryService
+    public class MyAccountService : IMyAccountService
     {
         private readonly GameShopDbContext _context;
         private readonly IMapper _mapper;
         private readonly IUserContextService _userContextService;
 
-        public MyHistoryService(GameShopDbContext context, IMapper mapper, IUserContextService userContextService)
+        public MyAccountService(GameShopDbContext context, IMapper mapper, IUserContextService userContextService)
         {
             _context = context;
             _mapper = mapper;
             _userContextService = userContextService;
         }
+
+        public async Task<UserDto> GetUser(int id)
+        {
+            var user =await _context.Users
+                 .Include(x => x.Address)
+                 .Include(x => x.Role)
+                 .FirstOrDefaultAsync(x => x.Id == id);
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
         public async Task<List<OrderDto>> MyOrders()
         {
             var myOrders =await _context.Orders

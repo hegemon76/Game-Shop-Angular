@@ -81,6 +81,9 @@ namespace API.Data
         {
             if (_dbContext.Database.CanConnect())
             {
+                if (await _dbContext.Users.AnyAsync())
+                    return;
+                
                 await SeedRoles(_dbContext);
                 await SeedGenres(_dbContext);
                 await SeedGames(_dbContext);
