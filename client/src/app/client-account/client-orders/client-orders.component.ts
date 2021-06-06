@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-orders.component.scss']
 })
 export class ClientOrdersComponent implements OnInit {
-
+  isShowOrder:boolean=false;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleShowOrder(){
+    this.isShowOrder = !this.isShowOrder;
+  }
+  deactivateAll() {
+    this.isShowOrder = false;
   }
 
 }

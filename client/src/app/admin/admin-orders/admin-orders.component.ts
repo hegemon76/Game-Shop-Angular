@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-orders.component.scss']
 })
 export class AdminOrdersComponent implements OnInit {
-  isShowOrder:boolean=false;
+  isShowOrder: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleShowOrder(){
+  toggleShowOrder() {
     this.isShowOrder = !this.isShowOrder;
   }
 }
