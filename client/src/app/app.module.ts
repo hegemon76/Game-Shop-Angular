@@ -16,6 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ClientAccountComponent } from './client-account/client-account.component';
+import { ClientDataComponent } from './client-account/client-data/client-data.component';
+import { ClientOrdersComponent } from './client-account/client-orders/client-orders.component';
+import { ClientOpinionsComponent } from './client-account/client-opinions/client-opinions.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { ClientAccountComponent } from './client-account/client-account.componen
     LoginComponent,
     RegisterComponent,
     ClientAccountComponent,
+    ClientDataComponent,
+    ClientOrdersComponent,
+    ClientOpinionsComponent,
   ],
   imports: [
     BrowserModule,
