@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IUsers } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-client-data',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-data.component.scss']
 })
 export class ClientDataComponent implements OnInit {
-
+  @Input() users: IUsers[];
+  showMyDataInfo: number;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showMyData(id: number) {
+    this.showMyDataInfo = id;
+  }
+
+  closeMyDataInfo() {
+    this.showMyDataInfo = null;
   }
 
 }
