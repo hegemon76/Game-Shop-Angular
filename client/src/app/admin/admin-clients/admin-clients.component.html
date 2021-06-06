@@ -1,11 +1,24 @@
-<form>
+<div class="mb-2" *ngIf="isAddClient == false">
+    <a class="btn btn-primary" (click)="toggleAddClient()">Dodaj nowego klienta</a>
+</div>
+<div class="mb-2" *ngIf="isAddClient == true">
+    <a class="btn btn-primary" (click)="toggleAddClient()">Wróć</a>
+</div>
+
+<div *ngIf="isAddClient == true">
+    <app-add-client>
+    </app-add-client>
+</div>
+
+
+<form *ngIf="!isAddClient">
     <div class="border border-primary mb-2 p-1" *ngFor="let user of users">
         <div class="row ml-2 mt-2 ">
             <div class="col-1">
                 <label>Id</label>
                 <input type="text" class="form-control mr-2" value="{{user.id}}" readonly>
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <label>UserName</label>
                 <input type="text" class="form-control mr-2" value="{{user.userName}}">
             </div>
@@ -24,7 +37,7 @@
             <div class="col">
                 <br>
                 <a (click)="showClient(user.id)" class="btn btn-primary mt-2 mb-2" *ngIf="!showClientsInfo">
-                    Details
+                    Więcej
                 </a>
             </div>
         </div>
@@ -36,7 +49,7 @@
                     <input type="text" class="form-control mr-2" value="{{user.address.country}}">
                 </div>
                 <div class="col-2">
-                    <label>ZipCode</label>
+                    <label>Kod pocztowy</label>
                     <input type="text" class="form-control mr-2" value="{{user.address.zipCode}}">
                 </div>
                 <div class="col-2">
@@ -58,17 +71,17 @@
                     <input type="text" class="form-control mr-2" value="{{user.email}}">
                 </div>
                 <div class="col-4">
-                    <label>PasswordHashed</label>
+                    <label>Hash hasła</label>
                     <input type="text" class="form-control mr-2" value="{{user.passwordHash}}">
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label>Dzień urodzin</label>
                     <input type="text" class="form-control mr-2" value="{{user.dateOfBirth}}">
                 </div>
             </div>
             <div class="ml-4 g-2">
-                <button type="submit" class="btn btn-primary mt-2 mb-2">Submit</button>
-                <a class="btn btn-primary ml-2" (click)="closeClientInfo()">Close</a>
+                <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
+                <a class="btn btn-primary ml-2" (click)="closeClientInfo()">Zamknij</a>
             </div>
 
         </div>

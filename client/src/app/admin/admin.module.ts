@@ -5,6 +5,10 @@ import { AdminGenreComponent } from './admin-genre/admin-genre.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminClientsComponent } from './admin-clients/admin-clients.component';
+import { AddProductComponent } from './admin-products/add-product/add-product.component';
+import { AddGenreComponent } from './admin-genre/add-genre/add-genre.component';
+import { AddClientComponent } from './admin-clients/add-client/add-client.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 
 
 
@@ -13,7 +17,11 @@ import { AdminClientsComponent } from './admin-clients/admin-clients.component';
     AdminPanelComponent,
     AdminGenreComponent,
     AdminProductsComponent,
-    AdminClientsComponent
+    AdminClientsComponent,
+    AddProductComponent,
+    AddGenreComponent,
+    AddClientComponent,
+    AdminOrdersComponent
   ],
   imports: [
     CommonModule,

@@ -9,17 +9,22 @@ import { IUsers } from 'src/app/shared/models/user';
 export class AdminClientsComponent implements OnInit {
   @Input() users: IUsers[];
   showClientsInfo: number;
+  isAddClient: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-showClient(id:number){
-  this.showClientsInfo= id;
-}
+  showClient(id: number) {
+    this.showClientsInfo = id;
+  }
 
-closeClientInfo(){
-this.showClientsInfo = null;
-}
+  closeClientInfo() {
+    this.showClientsInfo = null;
+  }
+
+  toggleAddClient() {
+    this.isAddClient = !this.isAddClient;
+  }
 
 }

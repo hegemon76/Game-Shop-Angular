@@ -1,0 +1,182 @@
+<div class="mb-2 mt-2 ml-2">
+    <form>
+        <div class="row d-flex border border-primary mb-2 p-1">
+            <div class="col-3">
+                <label>Id zamówienia
+                    <input class="form-control" type="text" placeholder="123">
+                </label>
+            </div>
+            <div class="col-3">
+                <label>Imie
+                    <input class="form-control" type="text" placeholder="Janusz">
+                </label>
+            </div>
+            <div class="col-3">
+                <label>Nazwisko
+                    <input class="form-control" type="text" placeholder="Testowy">
+                </label>
+            </div>
+            <div class="col-2" *ngIf="!isShowOrder">
+                <button class="button btn btn-primary mt-4" (click)="toggleShowOrder()">Szczegóły</button>
+            </div>
+            <!-----Szczegóły zamówienia-->
+            <div *ngIf="isShowOrder">
+                <div>
+                    <div *ngIf="isShowOrder">
+                        <div class="row mt-2">
+                            <div class="col-3">
+                                <label>Kraj</label>
+                                <input type="text" class="form-control mr-2" value="Polska">
+                            </div>
+                            <div class="col-2">
+                                <label>Kod pocztowy</label>
+                                <input type="text" class="form-control mr-2" value="12-345">
+                            </div>
+                            <div class="col-2">
+                                <label>Miasto</label>
+                                <input type="text" class="form-control mr-2" value="Poznań">
+                            </div>
+                            <div class="col-2">
+                                <label>Ulica</label>
+                                <input type="text" class="form-control mr-2" value="Uliczna">
+                            </div>
+                            <div class="col-2">
+                                <label>Nr. domu</label>
+                                <input type="text" class="form-control mr-2" value="2">
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <label>Email</label>
+                                <input type="text" class="form-control mr-2" value="janusz.testowy@tester.pl">
+                            </div>
+
+                            <div class="col-3">
+                                <label>Dzień urodzin</label>
+                                <input type="text" class="form-control mr-2" value="1982-03-11">
+                            </div>
+                            <div class="col-4">
+                                <label>Status</label>
+                                <input type="text" class="form-control mr-2" value="Wysłane">
+                            </div>
+                        </div>
+                        <!------tabelka-->
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nazwa</th>
+                                <th scope="col">Ilość</th>
+                                <th scope="col">Cena</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Assasins creed</td>
+                                <td>1</td>
+                                <td>250 zł</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Mario Kart</td>
+                                <td>1</td>
+                                <td>220 zł</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Fifa 27</td>
+                                <td>1</td>
+                                <td>12 zł</td>
+                              </tr>
+                              <tr>
+                                  <th colspan="3"> Suma</th>
+                                  <td><strong>482 zł</strong></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class=" g-2">
+                            <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
+                            <a class="btn btn-primary ml-2" (click)="toggleShowOrder()">Zamknij</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-----Po zamówienia-->
+        </div>
+    </form>
+</div>
+<div *ngIf="!isShowOrder">
+    <div class="mb-2 mt-2 ml-2">
+        <form>
+            <div class="border border-primary row d-flex">
+                <div class="col-3">
+                    <label>Id zamówienia
+                        <input class="form-control" type="text" placeholder="123">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Imie
+                        <input class="form-control" type="text" placeholder="Janusz">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Nazwisko
+                        <input class="form-control" type="text" placeholder="Testowy">
+                    </label>
+                </div>
+                <div class="col-2">
+                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class=" mb-2 mt-2 ml-2">
+        <form>
+            <div class="border border-primary row d-flex">
+                <div class="col-3">
+                    <label>Id zamówienia
+                        <input class="form-control" type="text" placeholder="123">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Imie
+                        <input class="form-control" type="text" placeholder="Janusz">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Nazwisko
+                        <input class="form-control" type="text" placeholder="Testowy">
+                    </label>
+                </div>
+                <div class="col-2">
+                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mb-2 mt-2 ml-2">
+        <form>
+            <div class="border border-primary row d-flex">
+                <div class="col-3">
+                    <label>Id zamówienia
+                        <input class="form-control" type="text" placeholder="123">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Imie
+                        <input class="form-control" type="text" placeholder="Janusz">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>Nazwisko
+                        <input class="form-control" type="text" placeholder="Testowy">
+                    </label>
+                </div>
+                <div class="col-2">
+                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

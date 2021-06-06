@@ -1,17 +1,31 @@
-<div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
-    <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-            <div class="col-3">
-                    <p>Kategoria:<strong> {{genre.name}}</strong></p>
-            </div>
-           
-            <div class="col-3">
-                    <input id="name" formControlName="name" placeholder='Rename "{{genre.name}}"' class="form-control-md" type="text">
-            </div>
-            <div class="col justify-content-left">
-                <button class="button btn btn-outline-primary btn-sm ml-2" type="submit">Aktualizuj nazwę kategorii</button>
-            </div>
-        </div>
-    </form>
+<div class="mb-2" *ngIf="isAddGenre == false">
+    <a class="btn btn-primary" (click)="toggleAddGenre()">Dodaj nową kategorie</a>
+</div>
+<div class="mb-2" *ngIf="isAddGenre == true">
+    <a class="btn btn-primary" (click)="toggleAddGenre()">Wróć</a>
+</div>
 
+<div *ngIf="isAddGenre == true">
+    <app-add-genre></app-add-genre>
+</div>
+
+
+<div *ngIf="isAddGenre == false">
+    <div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
+        <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-3">
+                    <p>Kategoria:<strong> {{genre.name}}</strong></p>
+                </div>
+
+                <div class="col-3">
+                    <input class="form-control" id="name" formControlName="name"
+                        placeholder='Zmień nazwe "{{genre.name}}"' class="form-control-md" type="text">
+                </div>
+                <div class="col-3 justify-content-left ml-2">
+                    <button class="button btn btn-primary btn-sm ml-2" type="submit">Aktualizuj nazwę kategorii</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

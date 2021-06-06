@@ -16,6 +16,7 @@ export class AdminPanelComponent implements OnInit {
   products: IProduct[];
   isProductActivated: boolean = false;
   isClientActivated: boolean = false;
+  isOrderActivated: boolean = false;
 
   constructor(private shopService: ShopService) { }
 
@@ -57,6 +58,12 @@ export class AdminPanelComponent implements OnInit {
     this.getProducts();
   }
 
+  toggleOrderMode() {
+    this.deactivateAll();
+    this.isOrderActivated=true;
+    this.getProducts();
+  }
+
   getProducts() {
     this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
       this.products = response.items;
@@ -69,6 +76,7 @@ export class AdminPanelComponent implements OnInit {
     this.isGenreActivated = false;
     this.isProductActivated = false;
     this.isClientActivated = false;
+    this.isOrderActivated = false;
   }
 
 }

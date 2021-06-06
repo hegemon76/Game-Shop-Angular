@@ -9,17 +9,24 @@ import { IProduct } from 'src/app/shared/models/product';
 export class AdminProductsComponent implements OnInit {
   @Input() products: IProduct[];
   showProductInfo: number;
+  isAddMode: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.isAddMode = false;
   }
 
-showProduct(id:number){
-  this.showProductInfo= id;
-}
+  showProduct(id: number) {
+    this.showProductInfo = id;
+  }
 
-closeProductInfo(){
-this.showProductInfo = null;
-}
+  closeProductInfo() {
+    this.showProductInfo = null;
+  }
+
+  toggleAddMode() {
+    this.isAddMode = !this.isAddMode;
+  }
 
 }

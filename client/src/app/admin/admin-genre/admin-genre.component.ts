@@ -12,12 +12,13 @@ export class AdminGenreComponent implements OnInit {
   @Input() genres: IGenre[];
   newName: any;
   oldName: any;
+  isAddGenre: boolean = false;
 
   // genreForm = this.formBuilder.group({
   //   name: '',
   //   oldName: ''
   // });
-   genreForm = new FormGroup({
+  genreForm = new FormGroup({
     name: new FormControl('')
   });
 
@@ -31,5 +32,8 @@ export class AdminGenreComponent implements OnInit {
     console.log(this.genreForm);
   }
 
-  
+  toggleAddGenre() {
+    this.isAddGenre = !this.isAddGenre;
+  }
+
 }
