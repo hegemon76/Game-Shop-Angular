@@ -97,9 +97,19 @@
                         <input class="form-control" type="text" placeholder="Testowy">
                     </label>
                 </div>
-                <div class="col-2">
-                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                <div class="col-4">
+                    <label>Status</label>
+                    <input type="text" class="form-control mr-2" value="Wysłane">
                 </div>
+                <div class="col-3">
+                    <label>Data zamówienia</label>
+                    <input type="text" class="form-control mr-2" value="05.06.2021">
+                </div>
+
+                <div class="col-2" *ngIf="!isShowOrder">
+                    <button class="button btn btn-primary mt-4" (click)="toggleShowOrder()">Szczegóły</button>
+                </div>
+
             </div>
         </form>
     </div>
@@ -121,9 +131,19 @@
                         <input class="form-control" type="text" placeholder="Testowy">
                     </label>
                 </div>
-                <div class="col-2">
-                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                <div class="col-4">
+                    <label>Status</label>
+                    <input type="text" class="form-control mr-2" value="Wysłane">
                 </div>
+                <div class="col-3">
+                    <label>Data zamówienia</label>
+                    <input type="text" class="form-control mr-2" value="05.06.2021">
+                </div>
+
+                <div class="col-2" *ngIf="!isShowOrder">
+                    <button class="button btn btn-primary mt-4" (click)="toggleShowOrder()">Szczegóły</button>
+                </div>
+
             </div>
         </form>
     </div>
@@ -145,9 +165,19 @@
                         <input class="form-control" type="text" placeholder="Testowy">
                     </label>
                 </div>
-                <div class="col-2">
-                    <button class="button btn btn-primary mt-4" type="submit">Szczegóły</button>
+                <div class="col-4">
+                    <label>Status</label>
+                    <input type="text" class="form-control mr-2" value="Wysłane">
                 </div>
+                <div class="col-3">
+                    <label>Data zamówienia</label>
+                    <input type="text" class="form-control mr-2" value="05.06.2021">
+                </div>
+
+                <div class="col-2" *ngIf="!isShowOrder">
+                    <button class="button btn btn-primary mt-4" (click)="toggleShowOrder()">Szczegóły</button>
+                </div>
+
             </div>
         </form>
     </div>
