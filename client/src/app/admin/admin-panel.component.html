@@ -3,8 +3,8 @@
         <nav id="sidebarMenu" class="col-2 d-md-block bg-light sidebar collapse">
             <div class="sidebar-sticky pt-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/admin-panel">
+                    <li class="nav-item normalCursor">
+                        <a class="nav-link text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-home">
@@ -13,9 +13,10 @@
                             </svg>
                             Panel Administratora <span class="sr-only">(current)</span>
                         </a>
+                        <hr>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="toggleOrderMode()">
+                        <a class="nav-link pointer" (click)="toggleOrderMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-file">
@@ -26,7 +27,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="toggleProductMode()">
+                        <a class="nav-link pointer" (click)="toggleProductMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-shopping-cart">
@@ -38,7 +39,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="toggleGenreMode()">
+                        <a class="nav-link pointer" (click)="toggleGenreMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-users">
@@ -51,7 +52,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="toggleClientsMode()">
+                        <a class="nav-link pointer" (click)="toggleClientsMode()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-bar-chart-2">
@@ -73,7 +74,7 @@
                 <app-admin-products [products]="products"></app-admin-products>
             </div>
             <div *ngIf="isClientActivated == true">
-                <app-admin-clients [users]="users"></app-admin-clients>
+                <app-admin-clients [clients]="clients"></app-admin-clients>
             </div>
             <div *ngIf="isOrderActivated == true">
                 <app-admin-orders></app-admin-orders>

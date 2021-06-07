@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IGenre } from 'src/app/shared/models/genres';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ShopService } from 'src/app/shop/shop.service';
+import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
   selector: 'app-admin-genre',

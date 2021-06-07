@@ -53,10 +53,9 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GameShopSeeder seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
-            seeder.SeedAsync();
 
             if (env.IsDevelopment())
             {

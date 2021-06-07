@@ -3,19 +3,20 @@
         <nav id="sidebarMenu" class="col-2 d-md-block bg-light sidebar collapse">
             <div class="sidebar-sticky pt-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/moje-konto">
+                    <li class="nav-item normalCursor">
+                        <a class="nav-link text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-home">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
                             </svg>
-                            Twoje konto <span class="sr-only">(current)</span>
+                            Twoje konto 
                         </a>
+                        <hr>
                     </li>
                     <li class="nav-item" (click)="toggleOrdersActive()">
-                        <a class="nav-link">
+                        <a class="nav-link pointer" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-file">
@@ -26,7 +27,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-shopping-cart">
@@ -37,8 +38,8 @@
                             Moje opinie
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">
+                    <li class="nav-item" (click)="toggleMyDataMode()">
+                        <a class="nav-link pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-users">
@@ -55,6 +56,9 @@
         <div class="col-9">
             <div *ngIf="isOrdersActive">
                 <app-client-orders></app-client-orders>
+            </div>
+            <div *ngIf="isMyDataActivated">
+                <app-client-data [client]="client"></app-client-data>
             </div>
         </div>
 

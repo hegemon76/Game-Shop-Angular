@@ -7,18 +7,18 @@
     <div class="col-md-2 col-lg-2"></div>
     <div class="col-md-8 col-lg-8">
         <h4 class="mb-3">Uzupełnij dane</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" [formGroup]="form" (submit)="register()">
             <div class="row g-3">
                 <div class="col-sm-4">
                     <label for="userName" class="form-label">Nazwa użytkownika</label>
-                    <input type="text" class="form-control" id="userName" placeholder="UserName" value="" required>
+                    <input formControlName="userName" type="text" class="form-control" id="userName" placeholder="UserName" value="" required>
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <label for="firstName" class="form-label">Hasło</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" value="" required>
+                    <label for="password" class="form-label">Hasło</label>
+                    <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" value="" required>
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
@@ -26,7 +26,7 @@
 
                 <div class="col-sm-4">
                     <label for="confirmPassword" class="form-label">Potwierdź hasło</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
+                    <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
                         value="" required>
                     <div class="invalid-feedback">
                         Valid last name is required.
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="firstName" class="form-label">Imię</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="FirstName" value="" required>
+                    <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="FirstName" value="" required>
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
@@ -42,7 +42,7 @@
 
                 <div class="col-sm-4">
                     <label for="lastName" class="form-label">Nazwisko</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="LastName" value="" required>
+                    <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="LastName" value="" required>
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -51,7 +51,7 @@
                 <div class="col-sm-4">
                     <label for="dateOfBirth" class="form-label">Data urodzenia</label>
                         <div class='input-group date' id="dateOfBirth">
-                            <input type="date" class="form-control" />
+                            <input type="date" formControlName="dateOfBirth" class="form-control" />
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -60,7 +60,7 @@
 
                 <div class="col-12">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="yourEmail@example.com">
+                    <input formControlName="email" type="email" class="form-control" id="email" placeholder="yourEmail@example.com">
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
@@ -69,7 +69,7 @@
 
                 <div class="col-md-3">
                     <label for="country" class="form-label">Kraj</label>
-                    <select class="form-select" id="country" required>
+                    <select formControlName="country" class="form-select" id="country" required>
                         <option value="">Choose...</option>
                         <option>Poland</option>
                     </select>
@@ -80,15 +80,15 @@
 
                 <div class="col-md-6">
                     <label for="city" class="form-label">Miasto</label>
-                    <input type="text" class="form-control" id="city" placeholder="City" required>
+                    <input formControlName="city" type="text" class="form-control" id="city" placeholder="City" required>
                     <div class="invalid-feedback">
                         Please provide a valid state.
                     </div>
                 </div>
 
                 <div class="col-md-3">
-                    <label for="zipcode" class="form-label">Kod pocztowy</label>
-                    <input type="text" class="form-control" id="zipcode" placeholder="ZipCode" required>
+                    <label for="zipCode" class="form-label">Kod pocztowy</label>
+                    <input formControlName="zipCode" type="text" class="form-control" id="zipCode" placeholder="ZipCode" required>
                     <div class="invalid-feedback">
                         Zip code required.
                     </div>
@@ -96,15 +96,15 @@
 
                 <div class="col-md-8">
                     <label for="street" class="form-label">Ulica</label>
-                    <input type="text" class="form-control" id="street" placeholder="Street" required>
+                    <input formControlName="street" type="text" class="form-control" id="street" placeholder="Street" required>
                     <div class="invalid-feedback">
                         Please select a valid country.
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <label for="city" class="form-label">Numer budynku</label>
-                    <input type="number" class="form-control" id="city" placeholder="Building number" required>
+                    <label for="buildingNumber" class="form-label">Numer budynku</label>
+                    <input formControlName="buildingNumber" type="number" class="form-control" id="buildingNumber" placeholder="Building number" required>
                     <div class="invalid-feedback">
                         Please provide a valid state.
                     </div>

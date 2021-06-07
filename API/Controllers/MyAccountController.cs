@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [ApiController]
-    [Route("api/myhistory")]
-    public class MyHistoryController : ControllerBase
+    [Route("api/myaccount")]
+    public class MyAccountController : ControllerBase
     {
-        private readonly IMyHistoryService _service;
+        private readonly IMyAccountService _service;
 
-        public MyHistoryController(IMyHistoryService service)
+        public MyAccountController(IMyAccountService service)
         {
             _service = service;
         }
@@ -29,5 +29,11 @@ namespace API.Controllers
             return Ok(myOrders);
         }
 
+        [HttpGet("user")]
+        public async Task<ActionResult<UserDto>> GetUser([FromQuery] int id)
+        {
+            var user = await _service.GetUser(id);
+            return Ok(user);
+        }
     }
 }

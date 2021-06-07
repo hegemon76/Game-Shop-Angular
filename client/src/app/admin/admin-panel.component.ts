@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IGenre } from 'src/app/shared/models/genres';
-import { ShopService } from 'src/app/shop/shop.service';
+import { ShopService } from 'src/app/_services/shop.service';
 import { IProduct } from '../shared/models/product';
-import { IUsers } from '../shared/models/user';
+import { IClient } from '../shared/models/client';
 
 @Component({
   selector: 'app-admin-panel',
@@ -11,7 +11,7 @@ import { IUsers } from '../shared/models/user';
 })
 export class AdminPanelComponent implements OnInit {
   genres: IGenre[];
-  users: IUsers[];
+  clients: IClient[];
   isGenreActivated: boolean = false;
   products: IProduct[];
   isProductActivated: boolean = false;
@@ -46,7 +46,7 @@ export class AdminPanelComponent implements OnInit {
 
   getUsers() {
     this.shopService.getUsers().subscribe(response => {
-      this.users = response;
+      this.clients = response;
     }, error => {
       console.log(error);
     });

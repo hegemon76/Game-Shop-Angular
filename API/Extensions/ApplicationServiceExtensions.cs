@@ -26,7 +26,7 @@ namespace API.Extensions
 
             services.AddScoped<IVideoGamesService, VideoGamesService>();
             services.AddScoped<IAdminService, AdminService>();
-            services.AddScoped<IMyHistoryService, MyHistoryService>();
+            services.AddScoped<IMyAccountService, MyAccountService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IOpinionService, OpinionService>();

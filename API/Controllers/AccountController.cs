@@ -23,7 +23,7 @@ namespace API.Controllers
        public ActionResult<RegisterUserDto> CreateNewUser ([FromBody] RegisterUserDto dto)
         {
              _service.Register(dto);
-            return Ok("User created");
+            return Ok();
         }
         
         [HttpPost("login")]
