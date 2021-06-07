@@ -46,7 +46,7 @@ namespace API.Controllers
         {
             await _service.UpdateGenre(genre, name);
 
-            return Created("api/genre", null);
+            return Created("api/genre", genre);
         }
     }
 }

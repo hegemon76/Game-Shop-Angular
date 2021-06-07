@@ -12,20 +12,7 @@
 
 <div *ngIf="isAddGenre == false">
     <div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
-        <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-3">
-                    <p>Kategoria:<strong> {{genre.name}}</strong></p>
-                </div>
-
-                <div class="col-3">
-                    <input class="form-control" id="name" formControlName="name"
-                        placeholder='Zmień nazwe "{{genre.name}}"' class="form-control-md" type="text">
-                </div>
-                <div class="col-3 justify-content-left ml-2">
-                    <button class="button btn btn-primary btn-sm ml-2" type="submit">Aktualizuj nazwę kategorii</button>
-                </div>
-            </div>
-        </form>
+        <app-single-genre [genre]="genre" (newValueEvent)="updateGenre($event)">
+        </app-single-genre>
     </div>
 </div>

@@ -1,0 +1,15 @@
+<form [formGroup]="genreForm" (ngSubmit)="onSubmit(genre.name, genreForm.value.name)">
+    <div class="row">
+        <div class="col-3">
+            <p>Kategoria:<strong> {{genre.name}}</strong></p>
+        </div>
+
+        <div class="col-3">
+            <input class="form-control"  formControlName="name"
+                placeholder='Zmień nazwe "{{genre.name}}"' type="text">
+        </div>
+        <div class="col-3 justify-content-left ml-2">
+            <button class="button btn btn-primary btn-sm ml-2" >Aktualizuj nazwę kategorii</button>
+        </div>
+    </div>
+</form>

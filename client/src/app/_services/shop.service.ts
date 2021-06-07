@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
 import { IClient } from '../shared/models/client';
@@ -17,7 +17,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(genreName?: string, sort?: string, searchPhrase?:string) {
+  getProducts(genreName?: string, sort?: string, searchPhrase?: string) {
     let params = new HttpParams();
 
     params = params.append('PageSize', 15);
@@ -56,24 +56,24 @@ export class ShopService {
   getGenres() {
     return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
   }
-  
+
   getUsers() {
     return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
   }
 
   getOpinions(id: number) {
-    return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', {observe: 'response'})
-    .pipe(
-      map(response => {
-        return response.body;
-      })
-    )
+    return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', { observe: 'response' })
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      )
   }
 
-  updateGenre(name:string){
-    return this.http.put(this.baseUrl +"genre/update/"+ name, name);
+  updateGenre(oldName: string, newName: string) {
+    const body = {'Name': newName};
+    const endpoint = this.baseUrl + "genre/update?name=" + oldName;
+    return this.http.put(endpoint, body);
   }
-
-
 
 }

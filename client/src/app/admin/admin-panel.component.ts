@@ -26,22 +26,13 @@ export class AdminPanelComponent implements OnInit {
   toggleGenreMode() {
     this.deactivateAll();
     this.isGenreActivated = true;
-    this.getGenres();
+   // this.getGenres();
   }
   
   toggleClientsMode() {
     this.deactivateAll();
     this.isClientActivated = true;
     this.getUsers();
-  }
-
-  
-  getGenres() {
-    this.shopService.getGenres().subscribe(response => {
-      this.genres = response;
-    }, error => {
-      console.log(error);
-    });
   }
 
   getUsers() {
