@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUsers } from '../shared/models/user';
-import { ClientAccountService } from './client-account.service';
+import { IClient } from '../shared/models/client';
+import { ClientAccountService } from '../_services/client-account.service';
 
 @Component({
   selector: 'app-client-account',
@@ -8,7 +8,7 @@ import { ClientAccountService } from './client-account.service';
   styleUrls: ['./client-account.component.scss']
 })
 export class ClientAccountComponent implements OnInit {
-  users: IUsers[];
+  client: IClient;
   isMyDataActivated: boolean = false;
   isOrdersActive: boolean = false;
   
@@ -25,7 +25,7 @@ export class ClientAccountComponent implements OnInit {
 
   getUser(id:number) {
     this.clientAccountService.getUser(id).subscribe(response => {
-      this.users = response;
+      this.client = response;
     }, error => {
       console.log(error);
     });

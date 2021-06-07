@@ -1,26 +1,26 @@
 <form>
     <div class="border border-primary mb-2 p-1">
-        <div *ngFor="let user of users">
+        <div >
             <div class="row ml-2 mt-2">
                 <div class="col-1">
                     <label>Id</label>
-                    <input type="text" class="form-control mr-2" value="{{user.id}}" readonly>
+                    <input type="text" class="form-control mr-2" value="{{client.id}}" readonly>
                 </div>
                 <div class="col-2">
                     <label>UserName</label>
-                    <input type="text" class="form-control mr-2" value="{{user.userName}}">
+                    <input type="text" class="form-control mr-2" value="{{client.userName}}">
                 </div>
                 <div class="col-2">
                     <label>Rola użytkownika</label>
-                    <input type="text" class="form-control mr-2" value="{{user.role.name}}">
+                    <input type="text" class="form-control mr-2" value="{{client.role.name}}" readonly>
                 </div>
                 <div class="col-2">
                     <label>Imię</label>
-                    <input type="text" class="form-control mr-2" value="{{user.firstName}}">
+                    <input type="text" class="form-control mr-2" value="{{client.firstName}}">
                 </div>
                 <div class="col">
                     <label>Nazwisko</label>
-                    <input type="text" class="form-control mr-2" value="{{user.lastName}}">
+                    <input type="text" class="form-control mr-2" value="{{client.lastName}}">
                 </div>
 
             </div>
@@ -29,41 +29,41 @@
             <div class="row ml-2 mt-2">
                 <div class="col-3">
                     <label>Kraj</label>
-                    <input type="text" class="form-control mr-2" value="{{user.address.country}}">
+                    <input type="text" class="form-control mr-2" value="{{client.address.country}}">
                 </div>
                 <div class="col-2">
                     <label>Kod pocztowy</label>
-                    <input type="text" class="form-control mr-2" value="{{user.address.zipCode}}">
+                    <input type="text" class="form-control mr-2" value="{{client.address.zipCode}}">
                 </div>
                 <div class="col-2">
                     <label>Miasto</label>
-                    <input type="text" class="form-control mr-2" value="{{user.address.city}}">
+                    <input type="text" class="form-control mr-2" value="{{client.address.city}}">
                 </div>
                 <div class="col-2">
                     <label>Ulica</label>
-                    <input type="text" class="form-control mr-2" value="{{user.address.street}}">
+                    <input type="text" class="form-control mr-2" value="{{client.address.street}}">
                 </div>
                 <div class="col-2">
                     <label>Nr. domu</label>
-                    <input type="text" class="form-control mr-2" value="{{user.address.buildingNumber}}">
+                    <input type="text" class="form-control mr-2" value="{{client.address.buildingNumber}}">
                 </div>
             </div>
             <div class="row ml-2 mt-2">
                 <div class="col-4">
                     <label>Email</label>
-                    <input type="text" class="form-control mr-2" value="{{user.email}}">
+                    <input type="text" class="form-control mr-2" value="{{client.email}}">
                 </div>
                 <div class="col-4">
-                    <label>Hash hasła</label>
-                    <input type="text" class="form-control mr-2" value="{{user.passwordHash}}">
+                    <label>Hasło</label>
+                    <input type="password" class="form-control mr-2" value="xxxxxx">
                 </div>
                 <div class="col-3">
                     <label>Dzień urodzin</label>
-                    <input type="text" class="form-control mr-2" value="{{user.dateOfBirth}}">
+                    <input type="text" class="form-control mr-2" value="{{client.dateOfBirth}}">
                 </div>
             </div>
             <div class="ml-4 g-2">
-                <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
+                <button type="submit" class="btn btn-primary mt-2 mb-2">Zmień</button>
             </div>
 
         </div>

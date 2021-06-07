@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUsers } from '../shared/models/user';
+import { environment } from 'src/environments/environment';
+import { IClient} from '../shared/models/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientAccountService {
-baseUrl="https://localhost:5001/api/";
+baseUrl=environment.apiUrl;
   constructor(private http: HttpClient) { }
 
 
@@ -14,7 +15,7 @@ getUser(userId:number) {
   const params = new HttpParams()
   .set('id', userId)
   
-  return this.http.get<IUsers[]>(this.baseUrl + 'myaccount/user',{params});
+  return this.http.get<IClient>(this.baseUrl + 'myaccount/user',{params});
 }
 
 }

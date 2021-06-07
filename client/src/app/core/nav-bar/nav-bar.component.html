@@ -18,8 +18,13 @@
             <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
             <div class="cart-no">5</div>
         </a>
+        <div>
         <a class="btn btn-outline-secondary mr-3" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</a>
         <a class="btn btn-outline-secondary mr-2" [routerLink]="['/register']" routerLinkActive="active">Rejestracja</a>
+        </div>
+        <div >
+            <button class="btn btn-outline-secondary mr-3" (click)="logout()" >wyloguj</button>
+            </div>
     </div>
 
 </div>

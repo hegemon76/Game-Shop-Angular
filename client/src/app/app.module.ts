@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { ClientAccountComponent } from './client-account/client-account.componen
 import { ClientDataComponent } from './client-account/client-data/client-data.component';
 import { ClientOrdersComponent } from './client-account/client-orders/client-orders.component';
 import { ClientOpinionsComponent } from './client-account/client-opinions/client-opinions.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ClientOpinionsComponent } from './client-account/client-opinions/client
     ShopModule,
     HomeModule,
     AdminModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [

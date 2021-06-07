@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IUsers } from 'src/app/shared/models/user';
+import { IClient } from 'src/app/shared/models/client';
 
 @Component({
   selector: 'app-client-data',
@@ -7,8 +7,7 @@ import { IUsers } from 'src/app/shared/models/user';
   styleUrls: ['./client-data.component.scss']
 })
 export class ClientDataComponent implements OnInit {
-  @Input() users: IUsers[];
-  showMyDataInfo: number;
+  @Input() client: IClient;
   constructor() { }
 
   ngOnInit(): void {

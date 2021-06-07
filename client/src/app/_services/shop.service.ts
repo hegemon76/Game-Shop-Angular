@@ -1,18 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
-import { IUsers } from '../shared/models/user';
+import { IClient } from '../shared/models/client';
 import { IPagination } from '../shared/models/pagination';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
 import { IOpinion } from '../shared/models/opinion';
 import { IOpinionsAPI } from '../shared/models/itemsOpinion';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +58,7 @@ export class ShopService {
   }
   
   getUsers() {
-    return this.http.get<IUsers[]>(this.baseUrl + 'admin/users');
+    return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
   }
 
   getOpinions(id: number) {

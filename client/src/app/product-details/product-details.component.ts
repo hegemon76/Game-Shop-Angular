@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '../shared/models/genres';
 import { IOpinion } from '../shared/models/opinion';
 import { IProduct } from '../shared/models/product';
-import { ShopService } from '../shop/shop.service';
+import { ShopService } from '../_services/shop.service';
 
 @Component({
   selector: 'app-product-details',
