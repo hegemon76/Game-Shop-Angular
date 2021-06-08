@@ -16,6 +16,7 @@ namespace API.Services
         Task<IEnumerable<GenreDto>> GetGenres();
         Task AddGenre(GenreDto dto);
         Task UpdateGenre(GenreDto genre, string name);
+        Task DeleteGenre(int id);
     }
 
     public class GenreService : IGenreService
@@ -49,6 +50,15 @@ namespace API.Services
 
             _context.Update(genreToUpdate);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteGenre(int id)
+        {
+            var genreToDelete = await _context.Genres.FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Genres.Remove(genreToDelete);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

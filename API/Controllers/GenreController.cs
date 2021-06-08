@@ -37,7 +37,7 @@ namespace API.Controllers
         {
             await _service.AddGenre(dto);
 
-            return Created("api/genre", null);
+            return Created("api/genre", dto);
         }
 
         //[Authorize(Roles = "Admin")]
@@ -47,6 +47,13 @@ namespace API.Controllers
             await _service.UpdateGenre(genre, name);
 
             return Created("api/genre", genre);
+        }
+
+       [HttpDelete("delete")]
+       public async Task<ActionResult<GenreDto>> DeleteGenre([FromQuery] int id)
+        {
+            await _service.DeleteGenre(id);
+            return Ok();
         }
     }
 }
