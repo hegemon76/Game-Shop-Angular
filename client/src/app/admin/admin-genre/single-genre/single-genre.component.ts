@@ -17,6 +17,7 @@ export class SingleGenreComponent implements OnInit {
   constructor() { }
 
   @Output() newValueEvent = new EventEmitter<any>();
+  @Output() deleteGenreEvent = new EventEmitter<any>();
   ngOnInit(): void {
   }
 
@@ -26,6 +27,11 @@ export class SingleGenreComponent implements OnInit {
 
   updateGenre(oldValue:string,newValue:string){
     this.newValueEvent.emit({newValue, oldValue});
+  }
+
+  deleteGenre(genreId: any){
+    console.log(genreId);
+    this.deleteGenreEvent.emit(genreId);
   }
 
 }

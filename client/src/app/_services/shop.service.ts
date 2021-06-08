@@ -76,4 +76,18 @@ export class ShopService {
     return this.http.put(endpoint, body);
   }
 
+  addGenre(newGenre:string){
+    const endpoin = this.baseUrl + 'genre/add';
+    const body = {
+      'Name': newGenre
+    };
+    console.log(body.Name + ' ' + endpoin);
+    return this.http.post(endpoin, body);
+  }
+
+  deleteGenre(genreId: number){
+    const endpoint = this.baseUrl + 'genre/delete?id=' + genreId;
+    return this.http.delete(endpoint);
+  }
+
 }

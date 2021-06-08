@@ -1,18 +1,21 @@
-<div class="mb-2" *ngIf="isAddGenre == false">
+<div class="mb-2" *ngIf="!isAddGenre">
     <a class="btn btn-primary" (click)="toggleAddGenre()">Dodaj nową kategorie</a>
 </div>
-<div class="mb-2" *ngIf="isAddGenre == true">
+<div class="mb-2" *ngIf="isAddGenre">
     <a class="btn btn-primary" (click)="toggleAddGenre()">Wróć</a>
 </div>
 
 <div *ngIf="isAddGenre == true">
-    <app-add-genre></app-add-genre>
+    <app-add-genre (newGenreEvent)="addGenre($event)"></app-add-genre>
 </div>
 
 
-<div *ngIf="isAddGenre == false">
+<div *ngIf="!isAddGenre">
     <div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
-        <app-single-genre [genre]="genre" (newValueEvent)="updateGenre($event)">
+        <app-single-genre 
+        [genre]="genre" 
+        (newValueEvent)="updateGenre($event)"
+        (deleteGenreEvent)="deleteGenre($event)">
         </app-single-genre>
     </div>
 </div>

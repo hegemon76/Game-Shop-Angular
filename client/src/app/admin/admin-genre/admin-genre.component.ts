@@ -20,7 +20,10 @@ export class AdminGenreComponent implements OnInit {
 
   getGenres() {
     this.shopService.getGenres().subscribe(response => {
-      this.genres = response;
+      if (response) {
+        this.genres = response;
+      }
+
     }, error => {
       console.log(error);
     });
@@ -37,6 +40,22 @@ export class AdminGenreComponent implements OnInit {
       }
     }
     );
+  }
+
+  addGenre(value: any) {
+    this.shopService.addGenre(value).subscribe(response => {
+      if (response) {
+        this.toggleAddGenre();
+      }
+    })
+  }
+
+  deleteGenre(value: any) {
+    this.shopService.deleteGenre(value).subscribe(response => {
+      if (response) {
+        this.ngOnInit();
+      }
+    })
   }
 
 }

@@ -1,16 +1,16 @@
-    
- <div class="mb-2 mt-2 ml-2">
-    <form >
-        <div class="row">
-            <div class="col-3">
-                    <p>Kategoria:</p>
+<div class="mt-2 ml-2">
+    <form [formGroup]="genreForm" (ngSubmit)="onSubmit(genreForm.value.name)">
+        <div class="row justify-content-left">
+            <div class="col-1">
+                <p>Kategoria:</p>
             </div>
-           
+
             <div class="col-3">
-                    <input class="form-control-md" type="text">
+                <input class="form-control" formControlName="name" type="text">
             </div>
-            <div class="col-3 justify-content-left ml-2">
-                <button class="button btn btn-primary btn-sm ml-2" type="submit">Dodaj</button>
+            <div class="col-3">
+                <button class="button btn btn-primary ml-2" type="submit">Dodaj</button>
+                <button class="button btn btn-primary ml-2" type="submit">Usuń</button>
             </div>
         </div>
     </form>
