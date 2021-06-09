@@ -42,9 +42,9 @@ namespace API.Controllers
 
         //[Authorize(Roles = "Admin")]
         [HttpPut("update")]
-        public async Task<ActionResult<GenreDto>> UpdateGenre([FromBody] GenreDto genre, [FromQuery] string name)
+        public async Task<ActionResult<GenreDto>> UpdateGenre([FromBody] GenreDto genre, [FromQuery] int id)
         {
-            await _service.UpdateGenre(genre, name);
+            await _service.UpdateGenre(genre, id);
 
             return Created("api/genre", genre);
         }

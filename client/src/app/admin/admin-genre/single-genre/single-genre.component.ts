@@ -16,17 +16,17 @@ export class SingleGenreComponent implements OnInit {
 
   constructor() { }
 
-  @Output() newValueEvent = new EventEmitter<any>();
+  @Output() updateGenreEvent = new EventEmitter<any>();
   @Output() deleteGenreEvent = new EventEmitter<any>();
   ngOnInit(): void {
   }
 
-  onSubmit(oldValue:string, newValue:string) {
-    this.updateGenre(oldValue ,newValue);
+  onSubmit(id:number, newValue:string) {
+    this.updateGenre(id ,newValue);
   }
 
-  updateGenre(oldValue:string,newValue:string){
-    this.newValueEvent.emit({newValue, oldValue});
+  updateGenre(id:number,newValue:string){
+    this.updateGenreEvent.emit({newValue, id});
   }
 
   deleteGenre(genreId: any){

@@ -14,7 +14,7 @@
     <div class="mb-2 mt-2 ml-2" *ngFor="let genre of genres">
         <app-single-genre 
         [genre]="genre" 
-        (newValueEvent)="updateGenre($event)"
+        (updateGenreEvent)="updateGenre($event)"
         (deleteGenreEvent)="deleteGenre($event)">
         </app-single-genre>
     </div>

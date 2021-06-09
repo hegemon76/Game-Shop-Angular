@@ -34,7 +34,7 @@ export class AdminGenreComponent implements OnInit {
   }
 
   updateGenre(values: any) {
-    this.shopService.updateGenre(values.oldValue, values.newValue).subscribe(response => {
+    this.shopService.updateGenre(values.id, values.newValue).subscribe(response => {
       if (response) {
         this.ngOnInit();
       }

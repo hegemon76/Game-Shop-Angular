@@ -70,9 +70,10 @@ export class ShopService {
       )
   }
 
-  updateGenre(oldName: string, newName: string) {
+  updateGenre(id: number, newName: string) {
     const body = {'Name': newName};
-    const endpoint = this.baseUrl + "genre/update?name=" + oldName;
+    console.log(id);
+    const endpoint = this.baseUrl + "genre/update?id=" + id;
     return this.http.put(endpoint, body);
   }
 
