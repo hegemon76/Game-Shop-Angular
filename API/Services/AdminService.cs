@@ -103,9 +103,11 @@ namespace API.Services
             {
                 product.Price = dto.Price.Value;
             }
-            if (dto.GenreId.HasValue)
+            
+            if(dto.Genre != null)
             {
-                product.GenreId = dto.GenreId;
+                var genreId = _context.Genres.FirstOrDefault(x => x.Name == dto.Genre);
+                product.GenreId = genreId.Id;
             }
 
 

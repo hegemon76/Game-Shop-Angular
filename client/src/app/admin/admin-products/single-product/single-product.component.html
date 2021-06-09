@@ -1,5 +1,6 @@
-<form [formGroup]="productForm"
-    (ngSubmit)="onSubmit(product.id, productForm.value.name,productForm.value.price,productForm.value.description,productForm.value.quantity)">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit(product.id, productForm.value.name,productForm.value.price,
+    productForm.value.description,productForm.value.quantity,
+    productForm.value.genre)">
     <div class="border border-primary mb-2 p-2">
         <div class="row ml-2 mb-2">
             <div class="col-3">
@@ -10,9 +11,12 @@
                 <label>Nazwa</label>
                 <input type="text" formControlName="name" class="form-control mr-2" [value]="product.name">
             </div>
+
             <div class="col-3">
                 <label>Gatunek</label>
-                <input type="text" class="form-control mr-2" [value]="product.genre">
+                <select formControlName="genre">
+                    <option *ngFor="let genre of genres" [value]="genre.name"> {{genre.name}}</option>
+                </select>
             </div>
             <div class="col">
                 <br>

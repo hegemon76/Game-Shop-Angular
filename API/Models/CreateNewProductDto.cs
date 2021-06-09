@@ -12,6 +12,7 @@ namespace API.Models
         public decimal? Price { get; set; }
         public int? Quantity { get; set; }
         public int? GenreId { get; set; }
+        public string Genre { get; set; }
         public string Description { get; set; }
     }
 }

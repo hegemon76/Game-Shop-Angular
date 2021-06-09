@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IGenre } from 'src/app/shared/models/genres';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from 'src/app/_services/shop.service';
 
@@ -8,15 +9,17 @@ import { ShopService } from 'src/app/_services/shop.service';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
- // @Input() products: IProduct[];
- products: IProduct[];
+
+  products: IProduct[];
   showProductInfo: number;
+  genres: IGenre[];
   isAddMode: boolean = false;
 
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.getGenres();
   }
 
   getProducts() {
@@ -39,11 +42,22 @@ export class AdminProductsComponent implements OnInit {
     this.isAddMode = !this.isAddMode;
   }
 
-  updateProduct(event : any){
+  updateProduct(event: any) {
     this.shopService.updateProduct(event.id, event.body).subscribe(response => {
-      if(response){
+      if (response) {
         this.ngOnInit();
       }
+    });
+  }
+
+  getGenres() {
+    this.shopService.getGenres().subscribe(response => {
+      if (response) {
+        this.genres = response;
+      }
+
+    }, error => {
+      console.log(error);
     });
   }
 

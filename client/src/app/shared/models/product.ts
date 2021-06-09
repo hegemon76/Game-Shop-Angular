@@ -8,4 +8,5 @@ export interface IProduct {
     description: string;
     imageURL: string;
     genre: string;
+    genreId: number;
 }
