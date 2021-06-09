@@ -46,22 +46,13 @@ export class AdminPanelComponent implements OnInit {
   toggleProductMode() {
     this.deactivateAll();
     this.isProductActivated=true;
-    this.getProducts();
   }
 
   toggleOrderMode() {
     this.deactivateAll();
     this.isOrderActivated=true;
-    this.getProducts();
   }
-
-  getProducts() {
-    this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
-      this.products = response.items;
-    }, error => {
-      console.log(error);
-    });
-  }
+ 
 
   deactivateAll() {
     this.isGenreActivated = false;

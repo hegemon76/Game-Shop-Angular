@@ -10,6 +10,7 @@ import { AddGenreComponent } from './admin-genre/add-genre/add-genre.component';
 import { AddClientComponent } from './admin-clients/add-client/add-client.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { SingleGenreComponent } from './admin-genre/single-genre/single-genre.component';
+import { SingleProductComponent } from './admin-products/single-product/single-product.component';
 
 
 
@@ -23,7 +24,8 @@ import { SingleGenreComponent } from './admin-genre/single-genre/single-genre.co
     AddGenreComponent,
     AddClientComponent,
     AdminOrdersComponent,
-    SingleGenreComponent
+    SingleGenreComponent,
+    SingleProductComponent
   ],
   imports: [
     CommonModule,

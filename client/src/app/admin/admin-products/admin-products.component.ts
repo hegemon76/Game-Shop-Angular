@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IProduct } from 'src/app/shared/models/product';
+import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -7,14 +8,23 @@ import { IProduct } from 'src/app/shared/models/product';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
-  @Input() products: IProduct[];
+ // @Input() products: IProduct[];
+ products: IProduct[];
   showProductInfo: number;
   isAddMode: boolean = false;
 
-  constructor() { }
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
-    this.isAddMode = false;
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
+      this.products = response.items;
+    }, error => {
+      console.log(error);
+    });
   }
 
   showProduct(id: number) {
@@ -27,6 +37,14 @@ export class AdminProductsComponent implements OnInit {
 
   toggleAddMode() {
     this.isAddMode = !this.isAddMode;
+  }
+
+  updateProduct(event : any){
+    this.shopService.updateProduct(event.id, event.body).subscribe(response => {
+      if(response){
+        this.ngOnInit();
+      }
+    });
   }
 
 }

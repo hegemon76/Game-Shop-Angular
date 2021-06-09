@@ -49,13 +49,7 @@ export class ShopService {
       );
   }
 
-  getProduct(id: number) {
-    return this.http.get<IProduct>(this.baseUrl + 'videogames/search/product/' + id);
-  }
 
-  getGenres() {
-    return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
-  }
 
   getUsers() {
     return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
@@ -69,15 +63,19 @@ export class ShopService {
         })
       )
   }
+  //#region ---------GENRE SECTION
+  getGenres() {
+    return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
+  }
 
   updateGenre(id: number, newName: string) {
-    const body = {'Name': newName};
+    const body = { 'Name': newName };
     console.log(id);
     const endpoint = this.baseUrl + "genre/update?id=" + id;
     return this.http.put(endpoint, body);
   }
 
-  addGenre(newGenre:string){
+  addGenre(newGenre: string) {
     const endpoin = this.baseUrl + 'genre/add';
     const body = {
       'Name': newGenre
@@ -86,9 +84,21 @@ export class ShopService {
     return this.http.post(endpoin, body);
   }
 
-  deleteGenre(genreId: number){
+  deleteGenre(genreId: number) {
     const endpoint = this.baseUrl + 'genre/delete?id=' + genreId;
     return this.http.delete(endpoint);
   }
+  //#endregion ---------GENRE SECTION
+
+  //#region PRODUCT SECTION
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'videogames/search/product/' + id);
+  }
+
+  updateProduct(id: number, body: any) {
+    const endpoint = this.baseUrl + "admin/product/" + id + "/update";
+    return this.http.put(endpoint, body);
+  }
+  //#endregion
 
 }
