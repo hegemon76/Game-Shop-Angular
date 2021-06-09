@@ -53,12 +53,12 @@ namespace API.Services
         }
         public async Task DeleteProduct(int productId)
         {
-            var product =await getProduct(productId);
+            var product = await getProduct(productId);
 
             _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
-           
+
             _context.Products.Remove(product);
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<UserDto>> GetAllUsers()
@@ -76,25 +76,41 @@ namespace API.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == dto.UserId);
             user.RoleId = dto.RoleId;
-            
+
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateProduct(CreateNewProductDto dto, int productId)
         {
-            var product =await getProduct(productId);
-            
-            _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
-           
-            product.Description = dto.Description;
-            product.Name = dto.Name;
-            product.Quantity = dto.Quantity;
-            product.Price = dto.Quantity;
-            product.GenreId = dto.GenreId;
-            
+            var product = await getProduct(productId);
+
+            // _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
+            if (dto.Description != null)
+            {
+                product.Description = dto.Description;
+            }
+            if (dto.Name != null)
+            {
+                product.Name = dto.Name;
+            }
+
+            if (dto.Quantity.HasValue)
+            {
+                product.Quantity = dto.Quantity.Value;
+            }
+            if (dto.Price.HasValue)
+            {
+                product.Price = dto.Price.Value;
+            }
+            if (dto.GenreId.HasValue)
+            {
+                product.GenreId = dto.GenreId;
+            }
+
+
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
+            //  _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
         }
 
         //privates
@@ -104,15 +120,15 @@ namespace API.Services
                            .FirstOrDefaultAsync(x => x.Id == productId);
             if (product is null)
                 throw new NotFoundException("Nie znaleziono produktu");
-            
+
             return product;
         }
 
         private string uploadImage(IFormFile image)
         {
             const string defaultName = "Default.png";
-            
-            if (image != null && image.Length>0)
+
+            if (image != null && image.Length > 0)
             {
                 var imageName = image.FileName;
                 var rootPath = Directory.GetCurrentDirectory();

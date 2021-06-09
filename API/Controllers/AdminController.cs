@@ -43,7 +43,8 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateProduct([FromBody] CreateNewProductDto dto, int productId)
         {
             await _service.UpdateProduct(dto, productId);
-            return Redirect($"api/videogames/search/product/{productId}");
+            // return Redirect($"api/videogames/search/product/{productId}");
+            return Ok(dto);
         }
         
         [HttpPut("setrole/user")]
