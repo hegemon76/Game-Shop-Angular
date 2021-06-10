@@ -18,6 +18,7 @@ export class AdminClientsComponent implements OnInit {
   toggleAddClient() {
     this.isAddClient = !this.isAddClient;
   }
+  
   updateClient(event: any) {
     this.shopService.updateClient(event.id, event.body).subscribe(response => {
       if (response) {
@@ -25,6 +26,7 @@ export class AdminClientsComponent implements OnInit {
       }
     });
   }
+
   getClients() {
     this.shopService.getClients().subscribe(response => {
       this.clients = response;
