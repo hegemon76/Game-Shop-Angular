@@ -50,6 +50,8 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
+  
+
   getGenres() {
     this.shopService.getGenres().subscribe(response => {
       if (response) {

@@ -1,5 +1,5 @@
 <div class="mb-2" *ngIf="!isAddMode">
-    <a class="btn btn-primary" (click)="toggleAddMode()">Dodaj nowy produkt</a>
+    <a class="btn btn-primary"  (click)="toggleAddMode()">Dodaj nowy produkt</a>
 </div>
 
 <div class="mb-2" *ngIf="isAddMode">
@@ -9,7 +9,6 @@
 
 
 <div *ngFor="let product of products">
-    <app-single-product [product]="product"
-    (updateEvent)="updateProduct($event)"
-    [genres]="genres"></app-single-product>
+    <app-single-product [product]="product" (updateEvent)="updateProduct($event)" [genres]="genres">       
+    </app-single-product>
 </div>

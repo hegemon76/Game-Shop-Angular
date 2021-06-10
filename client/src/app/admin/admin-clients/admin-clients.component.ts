@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IClient } from 'src/app/shared/models/client';
+import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
   selector: 'app-admin-clients',
@@ -8,23 +9,28 @@ import { IClient } from 'src/app/shared/models/client';
 })
 export class AdminClientsComponent implements OnInit {
   @Input() clients: IClient[];
-  showClientsInfo: number;
   isAddClient: boolean = false;
-  constructor() { }
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
   }
 
-  showClient(id: number) {
-    this.showClientsInfo = id;
-  }
-
-  closeClientInfo() {
-    this.showClientsInfo = null;
-  }
-
   toggleAddClient() {
     this.isAddClient = !this.isAddClient;
+  }
+  updateClient(event: any) {
+    this.shopService.updateClient(event.id, event.body).subscribe(response => {
+      if (response) {
+        this.ngOnInit();
+      }
+    });
+  }
+  getClients() {
+    this.shopService.getClients().subscribe(response => {
+      this.clients = response;
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

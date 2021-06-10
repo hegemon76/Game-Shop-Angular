@@ -11,6 +11,7 @@ import { AddClientComponent } from './admin-clients/add-client/add-client.compon
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { SingleGenreComponent } from './admin-genre/single-genre/single-genre.component';
 import { SingleProductComponent } from './admin-products/single-product/single-product.component';
+import { SingleClientComponent } from './admin-clients/single-client/single-client.component';
 
 
 
@@ -25,7 +26,8 @@ import { SingleProductComponent } from './admin-products/single-product/single-p
     AddClientComponent,
     AdminOrdersComponent,
     SingleGenreComponent,
-    SingleProductComponent
+    SingleProductComponent,
+    SingleClientComponent
   ],
   imports: [
     CommonModule,
