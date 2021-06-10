@@ -21,7 +21,7 @@ clientForm.value.email)">
             <input type="text" class="form-control mr-2" [value]="client.userName">
         </div>
         <div class="col-2">
-            <label>Rola użytkownika</label>
+            <label for="role" class="form-label">Rola użytkownika</label>
             <input type="text" class="form-control mr-2" [value]="client.role.name">
         </div>
         <div class="col-2">
@@ -74,7 +74,7 @@ clientForm.value.email)">
             </div>
             <div class="col-3">
                 <label>Dzień urodzin</label>
-                <input type="text" class="form-control mr-2" [value]="client.dateOfBirth">
+                <input type="text" class="form-control mr-2" [value]="client.dateOfBirth | date">
             </div>
         </div>
         <div class="ml-4 g-2">

@@ -1,14 +1,17 @@
 <form>
-    <div class="border border-primary mb-2 p-1">
-        <div class="row ml-2 mt-2 ">
-
+    <div class="border border-primary p-4">
+        <div class="row ">
             <div class="col-3">
                 <label>UserName</label>
                 <input type="text" class="form-control mr-2">
             </div>
             <div class="col-3">
-                <label>Rola użytkownika</label>
-                <input type="text" class="form-control mr-2">
+                <label for="role" class="form-label">Rola użytkownika</label>
+                <select formControlName="role" class="form-select" id="role" required>
+                    <option value="">Choose...</option>
+                    <option>User</option>
+                    <option>Admin</option>
+                </select>
             </div>
             <div class="col-3">
                 <label>Imię</label>
@@ -18,14 +21,15 @@
                 <label>Nazwisko</label>
                 <input type="text" class="form-control mr-2">
             </div>
-
         </div>
 
-
-        <div class="row ml-2 mt-2">
+        <div class="row">
             <div class="col-3">
-                <label>Kraj</label>
-                <input type="text" class="form-control mr-2">
+                <label for="country" class="form-label">Kraj</label>
+                <select formControlName="country" class="form-select" id="country" required>
+                    <option value="">Choose...</option>
+                    <option>Poland</option>
+                </select>
             </div>
             <div class="col-2">
                 <label>Kod pocztowy</label>
@@ -41,10 +45,11 @@
             </div>
             <div class="col-2">
                 <label>Nr. domu</label>
-                <input type="text" class="form-control mr-2">
+                <input type="number" class="form-control mr-2">
             </div>
         </div>
-        <div class="row ml-2 mt-2">
+        
+        <div class="row">
             <div class="col-4">
                 <label>Email</label>
                 <input type="text" class="form-control mr-2">
@@ -54,8 +59,13 @@
                 <input type="text" class="form-control mr-2">
             </div>
             <div class="col-3">
-                <label>Dzień urodzin</label>
-                <input type="text" class="form-control mr-2">
+                <label for="dateOfBirth" class="form-label">Data urodzenia</label>
+                <div class='input-group date' id="dateOfBirth">
+                    <input type="date" formControlName="dateOfBirth" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="ml-4 g-2">
