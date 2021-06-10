@@ -36,7 +36,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   getUsers() {
-    this.shopService.getUsers().subscribe(response => {
+    this.shopService.getClients().subscribe(response => {
       this.clients = response;
     }, error => {
       console.log(error);

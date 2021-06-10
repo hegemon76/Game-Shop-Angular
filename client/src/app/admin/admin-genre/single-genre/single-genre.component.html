@@ -1,22 +1,24 @@
 <div class="border border-primary">
-    <form class="ml-4" [formGroup]="genreForm" (ngSubmit)="onSubmit(genre.id, genreForm.value.name)">
-        <div class="row justify-content-center">
-            <div class="col-3 mr-2">
+    <form [formGroup]="genreForm" (ngSubmit)="onSubmit(genre.id, genreForm.value.name)">
+        <div class="row justify-content-center p-2">
+            <div class="col-12 text-center ">
                 <p>Kategoria:<strong> {{genre.name}}</strong></p>
             </div>
-            <div class="row justify-content-center mb-2">
-                <div class="col-3">
-                    <input class="form-control" formControlName="name" placeholder='Zmień nazwe "{{genre.name}}"'
-                        type="text">
-                </div>
-                <div class="col-3">
-                    <button class="button btn-primary btn-sm">Aktualizuj nazwę kategorii</button>
-                </div>
-                <div class="col-2">
-                    <form (ngSubmit)="deleteGenre(genre.id)">
-                        <button class="button btn-sm btn-primary mt-2">Usuń</button>
-                    </form>
-                </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4 mb-3">
+                <input class="form-control" formControlName="name" placeholder='Zmień nazwe "{{genre.name}}"'
+                    type="text">
+            </div>
+            <div class="col-1 ">
+                <button class="button btn-primary btn-md mt-1">Zmień</button>
+            </div>
+            <div class=" col-3">
+                <form (ngSubmit)="deleteGenre(genre.id)">
+                    <button class="button btn-md btn-primary mt-1">Usuń</button>
+                </form>
+
             </div>
         </div>
     </form>

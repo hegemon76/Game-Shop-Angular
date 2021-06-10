@@ -13,8 +13,8 @@
             </div>
 
             <div class="col-3">
-                <label>Gatunek</label>
-                <select formControlName="genre">
+                <label>Gatunek</label><br>
+                <select formControlName="genre" class="form-select" aria-label="Default select example">
                     <option *ngFor="let genre of genres" [value]="genre.name"> {{genre.name}}</option>
                 </select>
             </div>

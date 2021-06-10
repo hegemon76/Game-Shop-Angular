@@ -51,9 +51,7 @@ export class ShopService {
 
 
 
-  getUsers() {
-    return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
-  }
+
 
   getOpinions(id: number) {
     return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', { observe: 'response' })
@@ -101,4 +99,14 @@ export class ShopService {
   }
   //#endregion
 
+
+  //#client section
+  getClients() {
+    return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
+  }
+
+  updateClient(id: number, body: any) {
+    const endpoint = this.baseUrl + "admin/user/" + id + "/update";
+    return this.http.put(endpoint, body);
+  }
 }
