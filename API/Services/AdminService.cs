@@ -4,20 +4,19 @@ using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Services
 {
     public interface IAdminService
     {
-        Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
+        Task<ActionResult<Product>> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
         Task SetRoleForUser(SetRoleForUser dto);
@@ -39,7 +38,7 @@ namespace API.Services
             _userContextService = userContextService;
         }
 
-        public async Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
+        public async Task<ActionResult<Product>> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
         {
             var newProduct = _mapper.Map<Product>(dto);
             newProduct.ImageURL = uploadImage(image);
@@ -47,9 +46,9 @@ namespace API.Services
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
-
-            return newProduct.Id;
+            // _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
+            
+            return newProduct;
         }
         public async Task DeleteProduct(int productId)
         {
