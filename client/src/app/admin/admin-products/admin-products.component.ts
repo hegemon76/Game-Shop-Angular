@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
 import { IGenre } from 'src/app/shared/models/genres';
 import { IProduct } from 'src/app/shared/models/product';
@@ -50,7 +51,16 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  
+  addProduct(event: any) {
+    this.shopService.addProduct(event).subscribe(response => {
+      if (response) {
+        console.log(response);
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.toggleAddMode();
+  }
 
   getGenres() {
     this.shopService.getGenres().subscribe(response => {

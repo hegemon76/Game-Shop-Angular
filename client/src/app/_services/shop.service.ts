@@ -97,6 +97,11 @@ export class ShopService {
     const endpoint = this.baseUrl + "admin/product/" + id + "/update";
     return this.http.put(endpoint, body);
   }
+
+  addProduct(body: any){
+    const endpoint = this.baseUrl + "admin/newproduct";
+    return this.http.post(endpoint, body);
+  }
   //#endregion
 
 
