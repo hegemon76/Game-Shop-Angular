@@ -4,6 +4,7 @@ using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -17,9 +18,10 @@ namespace API.Services
 {
     public interface IAdminService
     {
-        Task<ActionResult<Product>> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
+        Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
+        Task UpdateUser(User user, int userId);
         Task SetRoleForUser(SetRoleForUser dto);
         Task<List<UserDto>> GetAllUsers();
     }
@@ -30,16 +32,18 @@ namespace API.Services
         private readonly IMapper _mapper;
         private readonly ILogger<AdminService> _logger;
         private readonly IUserContextService _userContextService;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public AdminService(GameShopDbContext context, IMapper mapper, ILogger<AdminService> logger, IUserContextService userContextService)
+        public AdminService(GameShopDbContext context, IMapper mapper, ILogger<AdminService> logger, IUserContextService userContextService, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
             _userContextService = userContextService;
+            _passwordHasher = passwordHasher;
         }
 
-        public async Task<ActionResult<Product>> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
+        public async Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
         {
             var newProduct = _mapper.Map<Product>(dto);
             newProduct.ImageURL = uploadImage(image);
@@ -113,6 +117,17 @@ namespace API.Services
 
             await _context.SaveChangesAsync();
             //  _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
+        }
+
+        public async Task UpdateUser(User user, int userId)
+        {
+            var hashedPassword = _passwordHasher.HashPassword(user, user.PasswordHash);
+            
+            user.Id = userId;
+            user.PasswordHash = hashedPassword;
+            
+            _context.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         //privates

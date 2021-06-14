@@ -38,10 +38,9 @@ export class RegisterComponent implements OnInit {
 
 
   
- register():void{
+ register(){
    console.log(this.form.getRawValue())
   this.accountService.register(this.form.getRawValue());
-
 
   this.registerSuccessed=true;
  }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,11 +13,8 @@ baseUrl=environment.apiUrl;
     ) { }
 
 
-register(form: any): void {
-  this.http.post(this.baseUrl + "account/register", form)
-  .subscribe(res=> {
-    console.log(res)
-  });
+register(form: any): any {
+  this.http.post(this.baseUrl + "account/register", form);
 }
 
 login(form:any): void {

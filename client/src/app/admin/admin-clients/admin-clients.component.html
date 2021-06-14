@@ -1,18 +1,17 @@
-<div class="mb-2" *ngIf="isAddClient == false">
+<div class="mb-2" *ngIf="!isAddClient">
     <a class="btn btn-primary" (click)="toggleAddClient()">Dodaj nowego klienta</a>
 </div>
-<div class="mb-2" *ngIf="isAddClient == true">
+<div class="mb-2" *ngIf="isAddClient">
     <a class="btn btn-primary" (click)="toggleAddClient()">Wróć</a>
 </div>
 
-<div *ngIf="isAddClient == true">
+<div *ngIf="isAddClient">
     <app-add-client>
     </app-add-client>
 </div>
 
 
 <form *ngIf="!isAddClient">
-    <form *ngIf="!isAddClient">
         <div  *ngFor="let client of clients">
             <app-single-client [client]="client">       
             </app-single-client>
