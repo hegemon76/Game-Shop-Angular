@@ -3,7 +3,7 @@
     productForm.value.genre)">
     <div class="border border-primary mb-2 p-2">
         <div class="row ml-2 mb-2">
-            <div class="col-3">
+            <div class="col-2">
                 <label>Id</label>
                 <input type="text" class="form-control mr-2" [value]="product.id" readonly>
             </div>
@@ -18,10 +18,16 @@
                     <option *ngFor="let genre of genres" [value]="genre.name"> {{genre.name}}</option>
                 </select>
             </div>
-            <div class="col">
+            <div class="col-2">
                 <br>
                 <a (click)="toggleShowProduct()" class="btn btn-primary mt-2 mb-2" *ngIf="!showProduct">
                     Więcej
+                </a>
+            </div>
+            <div class="col-2">
+                <br>
+                <a (click)="deleteProduct(product.id)" class="btn btn-primary mt-2 mb-2">
+                    Usuń
                 </a>
             </div>
         </div>
