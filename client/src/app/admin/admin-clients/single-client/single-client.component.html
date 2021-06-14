@@ -1,6 +1,4 @@
-<form [formGroup]="clientForm" 
-(ngSubmit)="onSubmit(
-client.id, 
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit(clientForm.value.id, 
 clientForm.value.userName,
 clientForm.value.roleName,
 clientForm.value.firstName,
@@ -8,6 +6,7 @@ clientForm.value.lastName,
 clientForm.value.addressCountry,
 clientForm.value.addressZipCode,
 clientForm.value.addressCity,
+clientForm.value.addressStreet,
 clientForm.value.addressBuildingNumber,
 clientForm.value.passwordHash,
 clientForm.value.dateOfBirth,
@@ -16,23 +15,23 @@ clientForm.value.email)">
     <div class="row ml-2 mt-2 ">
         <div class="col-1">
             <label>Id</label>
-            <input type="text"  class="form-control mr-2" [value]="client.id" readonly>
+            <input type="text" class="form-control mr-2" formControlName="id" [value]="client.id" readonly>
         </div>
         <div class="col-2">
             <label>UserName</label>
-            <input type="text" formControlName="userName" class="form-control mr-2" [value]="client.userName">
+            <input type="text" class="form-control mr-2" formControlName="userName" [value]="client.userName">
         </div>
         <div class="col-2">
             <label for="role" class="form-label">Rola użytkownika</label>
-            <input type="text" formControlName="roleName" class="form-control mr-2" [value]="client.role.name">
+            <input type="text" class="form-control mr-2" formControlName="roleName" [value]="client.role">
         </div>
         <div class="col-2">
             <label>Imię</label>
-            <input type="text" formControlName="firstName" class="form-control mr-2" [value]="client.firstName">
+            <input type="text" class="form-control mr-2" formControlName="firstName" [value]="client.firstName">
         </div>
         <div class="col-2">
             <label>Nazwisko</label>
-            <input type="text" formControlName="lastName" class="form-control mr-2" [value]="client.lastName">
+            <input type="text" class="form-control mr-2" formControlName="lastName" [value]="client.lastName">
         </div>
         <div class="col">
             <br>
@@ -46,37 +45,37 @@ clientForm.value.email)">
         <div class="row ml-2 mt-2">
             <div class="col-3">
                 <label>Kraj</label>
-                <input type="text" formControlName="addressCountry" class="form-control mr-2" [value]="client.address.country">
+                <input type="text" class="form-control mr-2" formControlName="addressCountry" [value]="client.address.country">
             </div>
             <div class="col-2">
                 <label>Kod pocztowy</label>
-                <input type="text" formControlName="addressZipCode" class="form-control mr-2" [value]="client.address.zipCode">
+                <input type="text" class="form-control mr-2" formControlName="addressZipCode" [value]="client.address.zipCode">
             </div>
             <div class="col-2">
                 <label>Miasto</label>
-                <input type="text" formControlName="addressCity" class="form-control mr-2" [value]="client.address.city">
+                <input type="text" class="form-control mr-2" formControlName="addressCity" [value]="client.address.city">
             </div>
             <div class="col-2">
                 <label>Ulica</label>
-                <input type="text" formControlName="addressStreet" class="form-control mr-2" [value]="client.address.street">
+                <input type="text" class="form-control mr-2" formControlName="addressStreet" [value]="client.address.street">
             </div>
             <div class="col-2">
                 <label>Nr. domu</label>
-                <input type="text" formControlName="addressBuildingNumber" class="form-control mr-2" [value]="client.address.buildingNumber">
+                <input type="text" class="form-control mr-2" formControlName="addressBuildingNumber" [value]="client.address.buildingNumber">
             </div>
         </div>
         <div class="row ml-2 mt-2">
             <div class="col-4">
                 <label>Email</label>
-                <input type="text" formControlName="email" class="form-control mr-2" [value]="client.email">
+                <input type="text" class="form-control mr-2" formControlName="email" [value]="client.email">
             </div>
             <div class="col-4">
                 <label>Hash hasła</label>
-                <input type="text" formControlName="passwordHash" class="form-control mr-2" [value]="client.passwordHash">
+                <input type="text" class="form-control mr-2" formControlName="passwordHash" [value]="client.passwordHash">
             </div>
             <div class="col-3">
                 <label>Dzień urodzin</label>
-                <input type="text" formControlName="dateOfBirth" class="form-control mr-2" [value]="client.dateOfBirth | date">
+                <input type="text" class="form-control mr-2" formControlName="dateOfBirth" [value]="client.dateOfBirth | date">
             </div>
         </div>
         <div class="ml-4 g-2">

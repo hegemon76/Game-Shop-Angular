@@ -10,6 +10,10 @@
 
 
 <div *ngFor="let product of products">
-    <app-single-product [product]="product" (updateEvent)="updateProduct($event)" [genres]="genres">
+    <app-single-product 
+    [product]="product" 
+    (updateEvent)="updateProduct($event)"
+    (deleteEvent)="deleteProduct($event)" 
+    [genres]="genres">
     </app-single-product>
 </div>

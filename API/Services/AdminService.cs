@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace API.Services
 {
     public interface IAdminService
@@ -58,7 +59,7 @@ namespace API.Services
         {
             var product = await getProduct(productId);
 
-            _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
+          //  _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

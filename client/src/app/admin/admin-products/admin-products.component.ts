@@ -23,13 +23,10 @@ export class AdminProductsComponent implements OnInit {
     this.getGenres();
   }
 
-  getProducts() {
-    this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
-      this.products = response.items;
-    }, error => {
-      console.log(error);
-    });
+  toggleAddMode() {
+    this.isAddMode = !this.isAddMode;
   }
+  //#region Product 
 
   showProduct(id: number) {
     this.showProductInfo = id;
@@ -39,8 +36,12 @@ export class AdminProductsComponent implements OnInit {
     this.showProductInfo = null;
   }
 
-  toggleAddMode() {
-    this.isAddMode = !this.isAddMode;
+  getProducts() {
+    this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
+      this.products = response.items;
+    }, error => {
+      console.log(error);
+    });
   }
 
   updateProduct(event: any) {
@@ -62,6 +63,18 @@ export class AdminProductsComponent implements OnInit {
     this.toggleAddMode();
   }
 
+  deleteProduct(event: number) {
+    this.shopService.deleteProduct(event).subscribe(response => {
+      this.ngOnInit();
+    }, error => {
+      console.log(error);
+    });
+
+    this.ngOnInit();
+  }
+  //#endregion
+
+  //#region Genres
   getGenres() {
     this.shopService.getGenres().subscribe(response => {
       if (response) {
@@ -72,5 +85,5 @@ export class AdminProductsComponent implements OnInit {
       console.log(error);
     });
   }
-
+  //#endregion
 }

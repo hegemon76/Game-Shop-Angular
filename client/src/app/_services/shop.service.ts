@@ -102,6 +102,11 @@ export class ShopService {
     const endpoint = this.baseUrl + "admin/newproduct";
     return this.http.post(endpoint, body);
   }
+
+  deleteProduct(productId: number){
+    const endpoint = this.baseUrl + 'admin/delete/product/' + productId;
+    return this.http.delete(endpoint);
+  }
   //#endregion
 
 

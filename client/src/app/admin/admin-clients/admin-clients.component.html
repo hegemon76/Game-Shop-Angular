@@ -13,7 +13,7 @@
 
 <form *ngIf="!isAddClient">
         <div  *ngFor="let client of clients">
-            <app-single-client [client]="client" (updateEvent)="updateClient($event)">       
+            <app-single-client [client]="client">       
             </app-single-client>
     </div>
 </form>

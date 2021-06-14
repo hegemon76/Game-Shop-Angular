@@ -12,6 +12,7 @@ export class SingleProductComponent implements OnInit {
   @Input() product: IProduct;
   @Input() genres: IGenre[];
   @Output() updateEvent = new EventEmitter<any>();
+  @Output() deleteEvent = new EventEmitter<any>();
   showProduct: boolean = false;
   selected: any;
 
@@ -53,5 +54,9 @@ export class SingleProductComponent implements OnInit {
 
   toggleShowProduct() {
     this.showProduct = !this.showProduct;
+  }
+
+  deleteProduct(productId:number){
+    this.deleteEvent.emit(productId);
   }
 }
