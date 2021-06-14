@@ -114,4 +114,8 @@ export class ShopService {
     const endpoint = this.baseUrl + "admin/user/" + id + "/update";
     return this.http.put(endpoint, body);
   }
+  addClient(body: any){
+    const endpoint = this.baseUrl + "api/account/register";
+    return this.http.post(endpoint, body);
+  }
 }

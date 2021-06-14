@@ -1,62 +1,69 @@
-<form>
-    <div class="border border-primary p-4">
-        <div class="row ">
-            <div class="col-3">
-                <label>UserName</label>
-                <input type="text" class="form-control mr-2">
-            </div>
-            <div class="col-3">
-                <label for="role" class="form-label">Rola użytkownika</label>
-                <select formControlName="role" class="form-select" id="role" required>
-                    <option value="">Choose...</option>
-                    <option>User</option>
-                    <option>Admin</option>
-                </select>
-            </div>
-            <div class="col-3">
-                <label>Imię</label>
-                <input type="text" class="form-control mr-2">
-            </div>
-            <div class="col-3">
-                <label>Nazwisko</label>
-                <input type="text" class="form-control mr-2">
-            </div>
+<form [formGroup]="clientForm" 
+(ngSubmit)="onSubmit(
+clientForm.value.userName,
+clientForm.value.roleName,
+clientForm.value.firstName,
+clientForm.value.lastName,
+clientForm.value.addressCountry,
+clientForm.value.addressZipCode,
+clientForm.value.addressCity,
+clientForm.value.addressBuildingNumber,
+clientForm.value.password,
+clientForm.value.confirmPassword,
+clientForm.value.dateOfBirth,
+clientForm.value.email)">
+<div class="border border-primary mb-2 p-1">
+    <div class="row p-3 ">
+        <div class="col-3">
+            <label>UserName</label>
+            <input type="text" formControlName="userName" class="form-control mr-2" >
         </div>
+        <div class="col-3">
+            <label for="password" class="form-label">Hasło</label>
+            <input type="password" formControlName="password" class="form-control mr-2">
+        </div>
+        <div class="col-3">
+            <label for="confirmPassword" class="form-label">Potwierdź hasło</label>
+            <input type="password" formControlName="confirmPassword" class="form-control mr-2">
+        </div>
+        <div class="col-3">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control mr-2" >
+        </div>
+    </div>
 
-        <div class="row">
+
+        <div class="row p-3">
             <div class="col-3">
-                <label for="country" class="form-label">Kraj</label>
-                <select formControlName="country" class="form-select" id="country" required>
-                    <option value="">Choose...</option>
-                    <option>Poland</option>
-                </select>
+                <label>Kraj</label>
+                <input type="text" formControlName="addressCountry" class="form-control mr-2" >
             </div>
             <div class="col-2">
                 <label>Kod pocztowy</label>
-                <input type="text" class="form-control mr-2">
+                <input type="text" formControlName="addressZipCode" class="form-control mr-2" >
             </div>
             <div class="col-2">
                 <label>Miasto</label>
-                <input type="text" class="form-control mr-2">
+                <input type="text" formControlName="addressCity" class="form-control mr-2">
             </div>
             <div class="col-3">
                 <label>Ulica</label>
-                <input type="text" class="form-control mr-2">
+                <input type="text" formControlName="addressStreet" class="form-control mr-2">
             </div>
             <div class="col-2">
                 <label>Nr. domu</label>
-                <input type="number" class="form-control mr-2">
+                <input type="text" formControlName="addressBuildingNumber" class="form-control mr-2">
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-4">
-                <label>Email</label>
-                <input type="text" class="form-control mr-2">
+        <div class="row p-3">
+
+            <div class="col-3">
+                <label>Imię</label>
+                <input type="text" formControlName="firstName" class="form-control mr-2" >
             </div>
-            <div class="col-5">
-                <label>Hasło</label>
-                <input type="text" class="form-control mr-2">
+            <div class="col-3">
+                <label>Nazwisko</label>
+                <input type="text" formControlName="lastName" class="form-control mr-2" >
             </div>
             <div class="col-3">
                 <label for="dateOfBirth" class="form-label">Data urodzenia</label>
@@ -67,10 +74,16 @@
                     </span>
                 </div>
             </div>
+            <div class="col-3">
+                <label>Rola</label>
+                <input type="text" formControlName="roleName" class="form-control mr-2" >
+            </div>
         </div>
         <div class="ml-4 g-2">
             <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
+            
         </div>
+
     </div>
 
 </form>

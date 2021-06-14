@@ -18,7 +18,15 @@ export class AdminClientsComponent implements OnInit {
   toggleAddClient() {
     this.isAddClient = !this.isAddClient;
   }
-  
+  addClient(event: any) {
+    this.shopService.addClient(event).subscribe(response => {
+      if (response) {
+        console.log(response);
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
   updateClient(event: any) {
     this.shopService.updateClient(event.id, event.body).subscribe(response => {
       if (response) {
