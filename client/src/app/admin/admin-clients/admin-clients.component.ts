@@ -23,6 +23,7 @@ export class AdminClientsComponent implements OnInit {
     this.shopService.updateClient(event.id, event.body).subscribe(response => {
       if (response) {
         this.ngOnInit();
+        console.log(response);
       }
     });
   }
