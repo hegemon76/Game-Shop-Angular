@@ -66,7 +66,7 @@ export class SingleClientComponent implements OnInit {
         'name': roleName
       }
     };
-    
+    console.log(body);
     this.updateClientEvent.emit({body, userId});
   }
 
