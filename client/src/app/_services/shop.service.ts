@@ -17,42 +17,6 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(genreName?: string, sort?: string, searchPhrase?: string) {
-    let params = new HttpParams();
-
-    params = params.append('PageSize', 15);
-    params = params.append('PageNumber', 1);
-
-    if (sort) {
-      if (sort == 'Name') params = params.append('SortBy', 'Name');
-      else if (sort == 'PriceAsc' || sort == 'PriceDesc') params = params.append('SortBy', 'Price');
-    }
-
-    if (genreName != 'Wszystkie' || !genreName) {
-      params = params.append('GenreFiltr', genreName);
-    }
-
-    if (sort) {
-      if (sort == 'Name' || sort == 'PriceAsc') params = params.append('SortDirection', 'Asc');
-      else if (sort == 'PriceDesc') params = params.append('SortDirection', 'Desc');
-    }
-
-    if (searchPhrase) {
-      params = params.append('SearchPhrase', searchPhrase);
-    }
-
-    return this.http.get<IPagination>(this.baseUrl + 'videogames/search', { observe: 'response', params })
-      .pipe(
-        map(response => {
-          return response.body;
-        })
-      );
-  }
-
-
-
-
-
   getOpinions(id: number) {
     return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', { observe: 'response' })
       .pipe(
@@ -89,6 +53,39 @@ export class ShopService {
   //#endregion ---------GENRE SECTION
 
   //#region PRODUCT SECTION
+
+  getProducts(genreName?: string, sort?: string, searchPhrase?: string) {
+    let params = new HttpParams();
+
+    params = params.append('PageSize', 15);
+    params = params.append('PageNumber', 1);
+
+    if (sort) {
+      if (sort == 'Name') params = params.append('SortBy', 'Name');
+      else if (sort == 'PriceAsc' || sort == 'PriceDesc') params = params.append('SortBy', 'Price');
+    }
+
+    if (genreName != 'Wszystkie' || !genreName) {
+      params = params.append('GenreFiltr', genreName);
+    }
+
+    if (sort) {
+      if (sort == 'Name' || sort == 'PriceAsc') params = params.append('SortDirection', 'Asc');
+      else if (sort == 'PriceDesc') params = params.append('SortDirection', 'Desc');
+    }
+
+    if (searchPhrase) {
+      params = params.append('SearchPhrase', searchPhrase);
+    }
+
+    return this.http.get<IPagination>(this.baseUrl + 'videogames/search', { observe: 'response', params })
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+  }
+
   getProduct(id: number) {
     return this.http.get<IProduct>(this.baseUrl + 'videogames/search/product/' + id);
   }
@@ -98,19 +95,18 @@ export class ShopService {
     return this.http.put(endpoint, body);
   }
 
-  addProduct(body: any){
+  addProduct(body: any) {
     const endpoint = this.baseUrl + "admin/newproduct";
     return this.http.post(endpoint, body);
   }
 
-  deleteProduct(productId: number){
+  deleteProduct(productId: number) {
     const endpoint = this.baseUrl + 'admin/delete/product/' + productId;
     return this.http.delete(endpoint);
   }
   //#endregion
 
-
-  //#client section
+  //#region client section
   getClients() {
     return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
   }
@@ -119,9 +115,11 @@ export class ShopService {
     const endpoint = this.baseUrl + "admin/user/" + id + "/update";
     return this.http.put(endpoint, body);
   }
-  
-  addClient(body: any):any{
+
+  addClient(body: any): any {
     const endpoint = this.baseUrl + "account/register";
     return this.http.post(endpoint, body);
   }
+
+  //#endregion
 }
