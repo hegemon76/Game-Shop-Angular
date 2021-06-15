@@ -53,19 +53,21 @@ export class SingleClientComponent implements OnInit {
     const body = {
       'Id': id,
       'UserName': userName,
-      'RoleName': roleName,
+      'Role': { Name: roleName },
       'FirstName': firstName,
       'lastName': lastName,
-      'addressCountry': addressCountry,
-      'AddressZipCode': addressZipCode,
-      'AddressCity': addressCity,
-      'AddressStreet': addressStreet,
-      'AddressBuildingNumber': addressBuildingNumber,
+      'Address':  { 
+        'City': addressCity,
+        'Street': addressStreet,
+        'BuildingNumber': addressBuildingNumber,
+        'ZipCode': addressZipCode,
+        'Country': addressCountry,
+      },
       'PasswordHash': passwordHash,
       'DateOfBirth': dateOfBirth,
       'Email': email,
     };
-
+console.log(body);
     this.updateClientEvent.emit({body, id});
   }
 
