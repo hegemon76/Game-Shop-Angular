@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EventTarget } from 'ngx-bootstrap/utils/facade/browser';
 import { IClient } from 'src/app/shared/models/client';
 
 @Component({
@@ -65,9 +66,7 @@ export class SingleClientComponent implements OnInit {
       'Email': email,
     };
 
-    console.log(body);
-    console.log(id);
-    //this.updateClientEvent.emit({ body, id });
+    this.updateClientEvent.emit({body, id});
   }
 
   setDefaults() {

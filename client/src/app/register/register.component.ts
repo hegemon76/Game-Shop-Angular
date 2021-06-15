@@ -38,12 +38,16 @@ export class RegisterComponent implements OnInit {
 
 
   
- register(){
-   console.log(this.form.getRawValue())
-  this.accountService.register(this.form.getRawValue());
-
-  this.registerSuccessed=true;
- }
+ register():any{
+    this.accountService.register(this.form.getRawValue()).subscribe(()=>{
+        this.registerSuccessed=true;
+  },
+  error=>{
+    console.log(error);
+  });
+  }
+    
+ 
  
  redirectToLogin(){
 this.route.navigate(['/login']);

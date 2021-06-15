@@ -17,7 +17,7 @@ export class AddClientComponent implements OnInit {
     confirmPassword: new FormControl(''),
     email: new FormControl(''),
     dateOfBirth: new FormControl(''),
-    roleName: new FormControl(1),
+    roleId: new FormControl(1),
     addressBuildingNumber: new FormControl(0),
     addressStreet: new FormControl(''),
     addressCountry: new FormControl(''),
@@ -31,24 +31,23 @@ export class AddClientComponent implements OnInit {
   }
 
   onSubmit(
-    id: number, 
     userName?: string,
-    roleName?: string, 
-    firstName?: string, 
-    lastName?: string, 
-    addressCountry?: string,
-    addressZipCode?: string, 
-    addressStreet?: string, 
-    addressCity?: string, 
-    addressBuildingNumber?: number, 
     password?: string, 
     confirmPassword?: string,
-    dateOfBirth?: Date, 
     email?: string, 
+    addressCountry?: string,
+    addressZipCode?: string, 
+    addressCity?: string,
+    addressStreet?: string, 
+    addressBuildingNumber?: number, 
+    firstName?: string, 
+    lastName?: string, 
+    dateOfBirth?: Date, 
+    roleId?: number, 
 ) {
     const body = {
       'UserName': userName,
-      'Role': {Name: roleName},
+      'RoleId': roleId,
       'FirstName': firstName,
       'LastName': lastName,
       'Country': addressCountry, 
@@ -62,8 +61,7 @@ export class AddClientComponent implements OnInit {
       'Email': email,
     };
     
-    
-    this.addUserEvent.emit({ body, id });
+    this.addUserEvent.emit(body);
   }
 
 
