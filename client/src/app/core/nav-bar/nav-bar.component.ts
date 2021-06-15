@@ -7,14 +7,27 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  isLogged:boolean=false;
+  isLogged: boolean = false;
+  currentUser: any = null;
 
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.getLoggedUser();
   }
 
- logout():void{
-   this.accountService.logout();
- }
+  getLoggedUser() {
+    this.currentUser = this.accountService.getUser();
+    if(this.currentUser != null){
+      this.isLogged = true;
+      console.log(this.currentUser.userName);
+    }
+  }
+  logout(): void {
+    this.accountService.logout();
+    window.location.reload();
+  }
+
+
 }
+

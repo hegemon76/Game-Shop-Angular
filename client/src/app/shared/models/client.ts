@@ -13,4 +13,5 @@ export interface IClient {
     address: IAddresses;
     roleId:number;
     role:IRoles;
+    token:string;
 }
