@@ -14,6 +14,17 @@ export class SingleClientComponent implements OnInit {
 
   showClientsInfo: number;
 
+  roles = [
+    {
+      'id': 1,
+      'name': 'User'
+    },
+    {
+      'id': 2,
+      'name': 'Admin'
+    }
+  ];
+
 
   clientForm = new FormGroup({
     userId: new FormControl(0),
@@ -35,16 +46,21 @@ export class SingleClientComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.client.id);
     this.setDefaults();
   }
 
-  onSubmit( userId?: number, userName?: string, passwordHash?: string, email?: string,
-    firstName?: string, lastName?: string, addressId?:number, addressZipCode?: string,
+  onSubmit(userId?: number, userName?: string, passwordHash?: string, email?: string,
+    firstName?: string, lastName?: string, addressId?: number, addressZipCode?: string,
     addressCountry?: string, addressStreet?: number, addressCity?: string,
-    addressBuildingNumber?: number, dateOfBirth?: Date, roleId?:number,
-    roleName?: string
-    ) {
+    addressBuildingNumber?: number, dateOfBirth?: Date, roleId?: number,
+    roleName?: string) {
+      
+    if (roleName == 'User') {
+      roleId = 1;
+    }
+    if (roleName == 'Admin') {
+      roleId = 2;
+    }
     const body = {
       'Id': userId,
       'userName': userName,
@@ -66,10 +82,14 @@ export class SingleClientComponent implements OnInit {
         'name': roleName
       }
     };
-    
-    this.updateClientEvent.emit({body, userId});
+
+    console.log(body);
+    this.updateClientEvent.emit({ body, userId });
   }
 
+  onRoleChange(event: any) {
+    console.log(event);
+  }
   setDefaults() {
     this.clientForm.controls.userId.setValue(this.client.id);
     this.clientForm.controls.userName.setValue(this.client.userName);
