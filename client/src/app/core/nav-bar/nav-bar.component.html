@@ -20,11 +20,14 @@
         </a>
         <div>
         <a class="mr-3" *ngIf="isLogged">Witaj {{currentUser.userName}}</a>
-        <a class="btn btn-outline-secondary mr-3" *ngIf="!isLogged" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</a>
-        <a class="btn btn-outline-secondary mr-2" [routerLink]="['/register']" routerLinkActive="active">Rejestracja</a>
+        <div *ngIf="!isLogged">
+            <a class="btn btn-outline-secondary mr-3" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</a>
+            <a class="btn btn-outline-secondary mr-2" [routerLink]="['/register']" routerLinkActive="active">Rejestracja</a>
+        </div>
+        
         </div>
         <div >
-            <button class="btn btn-outline-secondary mr-3" (click)="logout()" >wyloguj</button>
+            <button class="btn btn-outline-secondary mr-3" *ngIf="isLogged" (click)="logout()" >wyloguj</button>
             </div>
     </div>
 </div>
