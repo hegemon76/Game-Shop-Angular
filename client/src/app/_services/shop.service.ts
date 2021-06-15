@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IGenre } from '../shared/models/genres';
 import { IClient } from '../shared/models/client';
@@ -17,7 +17,44 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(genreName?: string, sort?: string, searchPhrase?:string) {
+  getOpinions(id: number) {
+    return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', { observe: 'response' })
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      )
+  }
+  //#region ---------GENRE SECTION
+  getGenres() {
+    return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
+  }
+
+  updateGenre(id: number, newName: string) {
+    const body = { 'Name': newName };
+    console.log(id);
+    const endpoint = this.baseUrl + "genre/update?id=" + id;
+    return this.http.put(endpoint, body);
+  }
+
+  addGenre(newGenre: string) {
+    const endpoin = this.baseUrl + 'genre/add';
+    const body = {
+      'Name': newGenre
+    };
+    console.log(body.Name + ' ' + endpoin);
+    return this.http.post(endpoin, body);
+  }
+
+  deleteGenre(genreId: number) {
+    const endpoint = this.baseUrl + 'genre/delete?id=' + genreId;
+    return this.http.delete(endpoint);
+  }
+  //#endregion ---------GENRE SECTION
+
+  //#region PRODUCT SECTION
+
+  getProducts(genreName?: string, sort?: string, searchPhrase?: string) {
     let params = new HttpParams();
 
     params = params.append('PageSize', 15);
@@ -53,27 +90,36 @@ export class ShopService {
     return this.http.get<IProduct>(this.baseUrl + 'videogames/search/product/' + id);
   }
 
-  getGenres() {
-    return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');
+  updateProduct(id: number, body: any) {
+    const endpoint = this.baseUrl + "admin/product/" + id + "/update";
+    return this.http.put(endpoint, body);
   }
-  
-  getUsers() {
+
+  addProduct(body: any) {
+    const endpoint = this.baseUrl + "admin/newproduct";
+    return this.http.post(endpoint, body);
+  }
+
+  deleteProduct(productId: number) {
+    const endpoint = this.baseUrl + 'admin/delete/product/' + productId;
+    return this.http.delete(endpoint);
+  }
+  //#endregion
+
+  //#region client section
+  getClients() {
     return this.http.get<IClient[]>(this.baseUrl + 'admin/users');
   }
 
-  getOpinions(id: number) {
-    return this.http.get<IOpinionsAPI>(this.baseUrl + 'videogames/product/' + id + '/opinions', {observe: 'response'})
-    .pipe(
-      map(response => {
-        return response.body;
-      })
-    )
+  updateClient(id: number, body: any) {
+    const endpoint = this.baseUrl + "admin/user/" + id + "/update";
+    return this.http.put(endpoint, body);
   }
 
-  updateGenre(name:string){
-    return this.http.put(this.baseUrl +"genre/update/"+ name, name);
+  addClient(body: any): any {
+    const endpoint = this.baseUrl + "account/register";
+    return this.http.post(endpoint, body);
   }
 
-
-
+  //#endregion
 }

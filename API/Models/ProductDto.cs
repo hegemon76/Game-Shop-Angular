@@ -14,6 +14,7 @@ namespace API.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string Genre { get; set; }
+        public string GenreId { get; set; }
         public string Description { get; set; }
         public string ImageURL { get; set; }
     }

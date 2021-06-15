@@ -1,37 +1,48 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
+import { IClient } from '../shared/models/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-baseUrl=environment.apiUrl;
-  constructor(
-    private http:HttpClient,
-    private router:Router
-    ) { }
 
+  private currentUserSource = new ReplaySubject<IClient>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
-register(form: any): void {
-  this.http.post(this.baseUrl + "account/register", form)
-  .subscribe(res=> {
-    console.log(res)
-    this.router.navigate(['/login'])
-  });
+  baseUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient) { }
+
+getUser(){
+  var user = JSON.parse(localStorage.getItem('user'));
+  return user;
 }
 
-login(form:any): void {
-  this.http.post(this.baseUrl + "account/login", form, {withCredentials: true})
-  .subscribe(
-    //res=> {
-    //console.log(res)
-    //this.router.navigate(['/login'])}
-  );
-}
 
-logout():void{
- 
-}
+  register(form: any): any {
+    return this.http.post(this.baseUrl + "account/register", form);
+  }
+
+  login(form: any): any {
+    return this.http.post(this.baseUrl + "account/login", form, { withCredentials: false }).pipe(
+      map((response: any) => {
+        const user = response;
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+          return user;
+        }
+      })
+    )
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
+  }
 }

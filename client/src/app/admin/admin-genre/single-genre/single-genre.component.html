@@ -1,0 +1,25 @@
+<div class="border border-primary">
+    <form [formGroup]="genreForm" (ngSubmit)="onSubmit(genre.id, genreForm.value.name)">
+        <div class="row justify-content-center p-2">
+            <div class="col-12 text-center ">
+                <p>Kategoria:<strong> {{genre.name}}</strong></p>
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4 mb-3">
+                <input class="form-control" formControlName="name" placeholder='Zmień nazwe "{{genre.name}}"'
+                    type="text">
+            </div>
+            <div class="col-1 ">
+                <button class="button btn-primary btn-md mt-1">Zmień</button>
+            </div>
+            <div class=" col-3">
+                <form (ngSubmit)="deleteGenre(genre.id)">
+                    <button class="button btn-md btn-primary mt-1">Usuń</button>
+                </form>
+
+            </div>
+        </div>
+    </form>
+</div>

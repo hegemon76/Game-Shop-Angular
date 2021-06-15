@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IClient } from 'src/app/shared/models/client';
+import { IRoles } from 'src/app/shared/models/role';
+import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
   selector: 'app-admin-clients',
@@ -7,24 +9,52 @@ import { IClient } from 'src/app/shared/models/client';
   styleUrls: ['./admin-clients.component.scss']
 })
 export class AdminClientsComponent implements OnInit {
-  @Input() clients: IClient[];
-  showClientsInfo: number;
+  clients: IClient[];
+  roles: IRoles[];
   isAddClient: boolean = false;
-  constructor() { }
+  
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
+    this.getClients();
   }
 
-  showClient(id: number) {
-    this.showClientsInfo = id;
-  }
 
-  closeClientInfo() {
-    this.showClientsInfo = null;
-  }
+  //#region CLIENT section
 
   toggleAddClient() {
     this.isAddClient = !this.isAddClient;
   }
 
+  addClient(event: any) {
+    this.shopService.addClient(event).subscribe((response: any) => {
+      this.toggleAddClient();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  updateClient(event: any) {
+    console.log(event.userId);
+    this.shopService.updateClient(event.userId, event.body).subscribe((response: any) => {
+      if (response) {
+        this.ngOnInit();
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getClients() {
+    this.shopService.getClients().subscribe(response => {
+      if (response) {
+        this.clients = response;
+      }
+
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  //#endregion
 }

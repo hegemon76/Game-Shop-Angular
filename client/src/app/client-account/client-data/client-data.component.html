@@ -1,7 +1,7 @@
 <form>
     <div class="border border-primary mb-2 p-1">
-        <div >
-            <div class="row ml-2 mt-2">
+        <div *ngIf="client">
+            <div class="row ml-2 mt-2" >
                 <div class="col-1">
                     <label>Id</label>
                     <input type="text" class="form-control mr-2" value="{{client.id}}" readonly>
@@ -22,7 +22,6 @@
                     <label>Nazwisko</label>
                     <input type="text" class="form-control mr-2" value="{{client.lastName}}">
                 </div>
-
             </div>
 
 
@@ -59,7 +58,7 @@
                 </div>
                 <div class="col-3">
                     <label>Dzień urodzin</label>
-                    <input type="text" class="form-control mr-2" value="{{client.dateOfBirth}}">
+                    <input type="text" class="form-control mr-2" value="{{client.dateOfBirth | date}}">
                 </div>
             </div>
             <div class="ml-4 g-2">

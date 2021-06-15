@@ -68,21 +68,17 @@
         </nav>
         <div class="col-9">
             <div *ngIf="isGenreActivated == true">
-                <app-admin-genre [genres]="genres"></app-admin-genre>
+                <app-admin-genre></app-admin-genre>
             </div>
             <div *ngIf="isProductActivated == true">
-                <app-admin-products [products]="products"></app-admin-products>
+                <app-admin-products></app-admin-products>
             </div>
             <div *ngIf="isClientActivated == true">
-                <app-admin-clients [clients]="clients"></app-admin-clients>
+                <app-admin-clients></app-admin-clients>
             </div>
             <div *ngIf="isOrderActivated == true">
                 <app-admin-orders></app-admin-orders>
             </div>
         </div>
-
-
-
-
     </div>
 </div>

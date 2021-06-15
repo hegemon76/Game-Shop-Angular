@@ -19,18 +19,19 @@ namespace API.Controllers
             _service = service;
         }
 
-       [HttpPost("register")]
-       public ActionResult<RegisterUserDto> CreateNewUser ([FromBody] RegisterUserDto dto)
+        [HttpPost("register")]
+        public ActionResult<RegisterUserDto> CreateNewUser([FromBody] RegisterUserDto dto)
         {
-             _service.Register(dto);
+            _service.Register(dto);
             return Ok();
         }
-        
+
         [HttpPost("login")]
-        public async Task<ActionResult<LoginDto>> Login ([FromBody] LoginDto dto)
+        public async Task<ActionResult<TokenDto>> Login([FromBody] LoginDto dto)
         {
-            var token =await _service.GenerateJwt(dto);
-            return Ok(token);
+            var user = await _service.GenerateJwt(dto);
+
+            return user;
         }
 
     }

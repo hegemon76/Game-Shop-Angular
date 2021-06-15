@@ -19,7 +19,7 @@ namespace API.Services
 {
     public interface IAccountService
     {
-        Task<string> GenerateJwt(LoginDto dto);
+        Task<TokenDto> GenerateJwt(LoginDto dto);
         void Register(RegisterUserDto dto);
     }
 
@@ -61,7 +61,7 @@ namespace API.Services
             _context.Users.Add(newUser);
             _context.SaveChanges();
         }
-        public async Task<string> GenerateJwt(LoginDto dto)
+        public async Task<TokenDto> GenerateJwt(LoginDto dto)
         {
             var user =await _context.Users
                 .Include(u => u.Role)
@@ -100,7 +100,13 @@ namespace API.Services
                 signingCredentials: cred);
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            return tokenHandler.WriteToken(token);
+            //return tokenHandler.WriteToken(token);
+            return new TokenDto
+            {
+                UserName = user.UserName,
+                Token = tokenHandler.WriteToken(token),
+                Role = user.Role.Name
+            };
 
         }
     }

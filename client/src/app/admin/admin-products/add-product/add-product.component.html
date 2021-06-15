@@ -1,34 +1,38 @@
-<form>
+<form [formGroup]="newProductForm" (ngSubmit)="onSubmit(newProductForm.value.name,newProductForm.value.price,
+newProductForm.value.description,newProductForm.value.quantity,
+newProductForm.value.genreId)">
     <div class="border border-primary mb-2 p-2">
         <div class="row ml-2 mb-2">
 
             <div class="col-3">
                 <label>Nazwa</label>
-                <input type="text" class="form-control mr-2">
+                <input type="text" class="form-control mr-2" formControlName="name">
             </div>
             <div class="col-3">
-                <label>Gatunek</label>
-                <input type="text" class="form-control mr-2">
+                <label>Gatunek</label><br>
+                <select class="form-select" aria-label="Default select example" formControlName="genreId">
+                    <option *ngFor="let genre of genres" [value]="genre.id" > {{genre.name}}</option>
+                </select>
             </div>
         </div>
         <div class="row ml-2">
             <div class="col-3">
                 <label>Cena</label>
-                <input type="text" class="form-control mr-2">
+                <input type="number" class="form-control mr-2" formControlName="price">
             </div>
             <div class="col-3">
                 <label>Ilość</label>
-                <input type="text" class="form-control mr-2">
+                <input type="number" class="form-control mr-2" formControlName="quantity">
             </div>
             <div class="col-3">
                 <label>Logo</label>
-                <input type="text" class="form-control mr-2">
+                <input type="text" class="form-control mr-2" >
             </div>
         </div>
         <div class="row ml-2">
             <div class="col-9">
                 <label>Opis:</label>
-                <textarea class="form-control mr-2" rows="3"></textarea>
+                <textarea class="form-control mr-2" rows="3" formControlName="description"></textarea>
             </div>
         </div>
         <div class="row">

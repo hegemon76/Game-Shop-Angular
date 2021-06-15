@@ -1,0 +1,66 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit(product.id, productForm.value.name,productForm.value.price,
+    productForm.value.description,productForm.value.quantity,
+    productForm.value.genre)">
+    <div class="border border-primary mb-2 p-2">
+        <div class="row ml-2 mb-2">
+            <div class="col-2">
+                <label>Id</label>
+                <input type="text" class="form-control mr-2" [value]="product.id" readonly>
+            </div>
+            <div class="col-3">
+                <label>Nazwa</label>
+                <input type="text" formControlName="name" class="form-control mr-2" [value]="product.name">
+            </div>
+
+            <div class="col-3">
+                <label>Gatunek</label><br>
+                <select formControlName="genre" class="form-select" aria-label="Default select example">
+                    <option *ngFor="let genre of genres" [value]="genre.name"> {{genre.name}}</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <br>
+                <a (click)="toggleShowProduct()" class="btn btn-primary mt-2 mb-2" *ngIf="!showProduct">
+                    Więcej
+                </a>
+            </div>
+            <div class="col-2">
+                <br>
+                <a (click)="deleteProduct(product.id)" class="btn btn-primary mt-2 mb-2">
+                    Usuń
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="showProduct">
+            <div class="row ml-2">
+                <div class="col-3">
+                    <label>Cena</label>
+                    <input type="number" formControlName="price" class="form-control mr-2" [value]="product.price">
+                </div>
+                <div class="col-3">
+                    <label>Ilość</label>
+                    <input type="number" formControlName="quantity" class="form-control mr-2"
+                        value="{{product.quantity}}">
+                </div>
+                <div class="col-3">
+                    <label>Logo</label>
+                    <input type="text" class="form-control mr-2" [value]="product.imageURL">
+                </div>
+            </div>
+            <div class="row ml-2">
+                <div class="col-9">
+                    <label>Opis:</label>
+                    <textarea formControlName="description" class="form-control mr-2" rows="3"
+                        [value]="product.description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col- 3 ml-4">
+                    <button type="submit" class="btn btn-primary mt-2 mb-2">Wyślij</button>
+                    <a class="btn btn-primary ml-2" (click)="toggleShowProduct()">Zamknij</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

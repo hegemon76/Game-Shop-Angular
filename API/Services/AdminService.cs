@@ -4,22 +4,24 @@ using API.Middleware.Exceptions;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
 
 namespace API.Services
 {
     public interface IAdminService
     {
-        Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
+        Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
+        Task UpdateUser(User user, int userId);
         Task SetRoleForUser(SetRoleForUser dto);
         Task<List<UserDto>> GetAllUsers();
     }
@@ -30,16 +32,18 @@ namespace API.Services
         private readonly IMapper _mapper;
         private readonly ILogger<AdminService> _logger;
         private readonly IUserContextService _userContextService;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public AdminService(GameShopDbContext context, IMapper mapper, ILogger<AdminService> logger, IUserContextService userContextService)
+        public AdminService(GameShopDbContext context, IMapper mapper, ILogger<AdminService> logger, IUserContextService userContextService, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
             _userContextService = userContextService;
+            _passwordHasher = passwordHasher;
         }
 
-        public async Task<int> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
+        public async Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image)
         {
             var newProduct = _mapper.Map<Product>(dto);
             newProduct.ImageURL = uploadImage(image);
@@ -47,18 +51,18 @@ namespace API.Services
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
-
-            return newProduct.Id;
+            // _logger.LogInformation($"Product {newProduct.Name} has been added by AdminId= {_userContextService.GetUserId}");
+            
+            return newProduct;
         }
         public async Task DeleteProduct(int productId)
         {
-            var product =await getProduct(productId);
+            var product = await getProduct(productId);
 
-            _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
-           
+          //  _logger.LogInformation($"Product {product.Name} has been deleted by AdminId= {_userContextService.GetUserId}");
+
             _context.Products.Remove(product);
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<UserDto>> GetAllUsers()
@@ -76,25 +80,54 @@ namespace API.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == dto.UserId);
             user.RoleId = dto.RoleId;
-            
+
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateProduct(CreateNewProductDto dto, int productId)
         {
-            var product =await getProduct(productId);
+            var product = await getProduct(productId);
+
+            // _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
+            if (dto.Description != null)
+            {
+                product.Description = dto.Description;
+            }
+            if (dto.Name != null)
+            {
+                product.Name = dto.Name;
+            }
+
+            if (dto.Quantity.HasValue)
+            {
+                product.Quantity = dto.Quantity.Value;
+            }
+            if (dto.Price.HasValue)
+            {
+                product.Price = dto.Price.Value;
+            }
             
-            _logger.LogInformation($"Product {product.Name} is going to be updated by AdminId= {_userContextService.GetUserId}");
-           
-            product.Description = dto.Description;
-            product.Name = dto.Name;
-            product.Quantity = dto.Quantity;
-            product.Price = dto.Quantity;
-            product.GenreId = dto.GenreId;
-            
+            if(dto.Genre != null)
+            {
+                var genreId = _context.Genres.FirstOrDefault(x => x.Name == dto.Genre);
+                product.GenreId = genreId.Id;
+            }
+
+
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
+            //  _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
+        }
+
+        public async Task UpdateUser(User user, int userId)
+        {
+            var hashedPassword = _passwordHasher.HashPassword(user, user.PasswordHash);
+            
+            user.Id = userId;
+            user.PasswordHash = hashedPassword;
+            
+            _context.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         //privates
@@ -104,15 +137,15 @@ namespace API.Services
                            .FirstOrDefaultAsync(x => x.Id == productId);
             if (product is null)
                 throw new NotFoundException("Nie znaleziono produktu");
-            
+
             return product;
         }
 
         private string uploadImage(IFormFile image)
         {
             const string defaultName = "Default.png";
-            
-            if (image != null && image.Length>0)
+
+            if (image != null && image.Length > 0)
             {
                 var imageName = image.FileName;
                 var rootPath = Directory.GetCurrentDirectory();

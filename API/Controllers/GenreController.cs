@@ -37,16 +37,23 @@ namespace API.Controllers
         {
             await _service.AddGenre(dto);
 
-            return Created("api/genre", null);
+            return Created("api/genre", dto);
         }
 
         //[Authorize(Roles = "Admin")]
         [HttpPut("update")]
-        public async Task<ActionResult<GenreDto>> UpdateGenre([FromBody] GenreDto genre, [FromQuery] string name)
+        public async Task<ActionResult<GenreDto>> UpdateGenre([FromBody] GenreDto genre, [FromQuery] int id)
         {
-            await _service.UpdateGenre(genre, name);
+            await _service.UpdateGenre(genre, id);
 
-            return Created("api/genre", null);
+            return Created("api/genre", genre);
+        }
+
+       [HttpDelete("delete")]
+       public async Task<ActionResult<GenreDto>> DeleteGenre([FromQuery] int id)
+        {
+            await _service.DeleteGenre(id);
+            return Ok();
         }
     }
 }

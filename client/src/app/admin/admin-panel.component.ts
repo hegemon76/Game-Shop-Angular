@@ -26,7 +26,7 @@ export class AdminPanelComponent implements OnInit {
   toggleGenreMode() {
     this.deactivateAll();
     this.isGenreActivated = true;
-    this.getGenres();
+   // this.getGenres();
   }
   
   toggleClientsMode() {
@@ -35,17 +35,8 @@ export class AdminPanelComponent implements OnInit {
     this.getUsers();
   }
 
-  
-  getGenres() {
-    this.shopService.getGenres().subscribe(response => {
-      this.genres = response;
-    }, error => {
-      console.log(error);
-    });
-  }
-
   getUsers() {
-    this.shopService.getUsers().subscribe(response => {
+    this.shopService.getClients().subscribe(response => {
       this.clients = response;
     }, error => {
       console.log(error);
@@ -55,22 +46,13 @@ export class AdminPanelComponent implements OnInit {
   toggleProductMode() {
     this.deactivateAll();
     this.isProductActivated=true;
-    this.getProducts();
   }
 
   toggleOrderMode() {
     this.deactivateAll();
     this.isOrderActivated=true;
-    this.getProducts();
   }
-
-  getProducts() {
-    this.shopService.getProducts('Wszystkie', 'name').subscribe(response => {
-      this.products = response.items;
-    }, error => {
-      console.log(error);
-    });
-  }
+ 
 
   deactivateAll() {
     this.isGenreActivated = false;

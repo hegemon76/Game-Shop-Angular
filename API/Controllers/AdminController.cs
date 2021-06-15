@@ -1,4 +1,5 @@
-﻿using API.Models;
+﻿using API.Entities;
+using API.Models;
 using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -43,7 +44,7 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateProduct([FromBody] CreateNewProductDto dto, int productId)
         {
             await _service.UpdateProduct(dto, productId);
-            return Redirect($"api/videogames/search/product/{productId}");
+            return Ok(dto);
         }
         
         [HttpPut("setrole/user")]
@@ -60,5 +61,11 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        [HttpPut("user/{userId}/update")]
+        public async Task<ActionResult> UpdateUser([FromRoute] int userId, [FromBody] User user)
+        {
+            await _service.UpdateUser(user, userId);
+            return Ok(user);
+        }
     }
 }
