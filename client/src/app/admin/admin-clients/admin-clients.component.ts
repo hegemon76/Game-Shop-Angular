@@ -13,19 +13,29 @@ export class AdminClientsComponent implements OnInit {
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
+    this.getClients();
   }
 
   toggleAddClient() {
     this.isAddClient = !this.isAddClient;
   }
   
-  updateClient(event: any) {
-    this.shopService.updateClient(event.id, event.body).subscribe(response => {
-      if (response) {
-        this.ngOnInit();
+  addClient(event: any) {
+    this.shopService.addClient(event).subscribe( (response: any )=> {
         console.log(response);
-      }
+        this.toggleAddClient();
+    }, error => {
+      console.log(error);
     });
+  }
+
+  updateClient(event:any) {
+    this.shopService.updateClient(event.id, event.body).subscribe((response: any )=> {
+      console.log(response);
+      this.ngOnInit();
+  }, error => {
+    console.log(error);
+  });
   }
 
   getClients() {
