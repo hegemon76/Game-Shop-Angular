@@ -1,21 +1,14 @@
-<form [formGroup]="clientForm" (ngSubmit)="onSubmit(clientForm.value.id, 
-clientForm.value.userName,
-clientForm.value.roleName,
-clientForm.value.firstName,
-clientForm.value.lastName,
-clientForm.value.addressCountry,
-clientForm.value.addressZipCode,
-clientForm.value.addressCity,
-clientForm.value.addressStreet,
-clientForm.value.addressBuildingNumber,
-clientForm.value.passwordHash,
-clientForm.value.dateOfBirth,
-clientForm.value.email)">
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit(client.id, clientForm.value.userName, clientForm.value.passwordHash,
+clientForm.value.email, clientForm.value.firstName, clientForm.value.lastName,
+client.addressId, clientForm.value.addressZipCode, clientForm.value.addressCountry,
+clientForm.value.addressStreet, clientForm.value.addressCity,
+clientForm.value.addressBuildingNumber, clientForm.value.dateOfBirth,
+client.roleId, clientForm.value.roleName)">
 <div class="border border-primary mb-2 p-1">
     <div class="row ml-2 mt-2 ">
         <div class="col-1">
             <label>Id</label>
-            <input type="text" class="form-control mr-2" formControlName="id" [value]="client.id" readonly>
+            <input type="text" class="form-control mr-2" formControlName="userId" [value]="client.id" readonly>
         </div>
         <div class="col-2">
             <label>UserName</label>
@@ -24,7 +17,6 @@ clientForm.value.email)">
         <div class="col-2">
             <label for="role" class="form-label">Rola użytkownika</label>
             <input type="text" class="form-control mr-2" formControlName="roleName" [value]="client.role">
-
         </div>
         <div class="col-2">
             <label>Imię</label>
@@ -76,7 +68,8 @@ clientForm.value.email)">
             </div>
             <div class="col-3">
                 <label>Dzień urodzin</label>
-                <input type="text" class="form-control mr-2" formControlName="dateOfBirth" [value]="client.dateOfBirth | date">
+                <input type="text" class="form-control mr-2" 
+                formControlName="dateOfBirth" [value]="client.dateOfBirth">
             </div>
         </div>
         <div class="ml-4 g-2">

@@ -16,75 +16,77 @@ export class SingleClientComponent implements OnInit {
 
 
   clientForm = new FormGroup({
-    id: new FormControl(0),
+    userId: new FormControl(0),
     userName: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
     passwordHash: new FormControl(''),
     email: new FormControl(''),
-    dateOfBirth: new FormControl(''),
-    roleName: new FormControl(''),
-    addressBuildingNumber: new FormControl(0),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    addressId: new FormControl(0),
+    addressZipCode: new FormControl(''),
     addressCountry: new FormControl(''),
     addressStreet: new FormControl(''),
-    addressZipCode: new FormControl(''),
     addressCity: new FormControl(''),
+    addressBuildingNumber: new FormControl(0),
+    dateOfBirth: new FormControl(''),
+    roleId: new FormControl(0),
+    roleName: new FormControl(''),
   });
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.client.id);
     this.setDefaults();
   }
 
-  onSubmit(
-    id: number,
-    userName?: string,
-    roleName?: string,
-    firstName?: string,
-    lastName?: string,
-    addressCountry?: string,
-    addressZipCode?: string,
-    addressCity?: string,
-    addressBuildingNumber?: number,
-    addressStreet?: number,
-    passwordHash?: string,
-    dateOfBirth?: Date,
-    email?: string,) {
+  onSubmit( userId?: number, userName?: string, passwordHash?: string, email?: string,
+    firstName?: string, lastName?: string, addressId?:number, addressZipCode?: string,
+    addressCountry?: string, addressStreet?: number, addressCity?: string,
+    addressBuildingNumber?: number, dateOfBirth?: Date, roleId?:number,
+    roleName?: string
+    ) {
     const body = {
-      'Id': id,
-      'UserName': userName,
-      'Role': { Name: roleName },
-      'FirstName': firstName,
+      'Id': userId,
+      'userName': userName,
+      'passwordHash': passwordHash,
+      'email': email,
+      'firstName': firstName,
       'lastName': lastName,
-      'Address':  { 
-        'City': addressCity,
-        'Street': addressStreet,
-        'BuildingNumber': addressBuildingNumber,
-        'ZipCode': addressZipCode,
-        'Country': addressCountry,
+      'address': {
+        'id': addressId,
+        'zipCode': addressZipCode,
+        'country': addressCountry,
+        'street': addressStreet,
+        'city': addressCity,
+        'buildingNumber': addressBuildingNumber,
       },
-      'PasswordHash': passwordHash,
-      'DateOfBirth': dateOfBirth,
-      'Email': email,
+      'dateOfBirth': dateOfBirth,
+      'role': {
+        'id': roleId,
+        'name': roleName
+      }
     };
-console.log(body);
-    this.updateClientEvent.emit({body, id});
+    
+    this.updateClientEvent.emit({body, userId});
   }
 
   setDefaults() {
-    this.clientForm.controls.id.setValue(this.client.id);
+    this.clientForm.controls.userId.setValue(this.client.id);
     this.clientForm.controls.userName.setValue(this.client.userName);
+    this.clientForm.controls.passwordHash.setValue(this.client.passwordHash);
+    this.clientForm.controls.email.setValue(this.client.email);
+    this.clientForm.controls.firstName.setValue(this.client.firstName);
     this.clientForm.controls.lastName.setValue(this.client.lastName);
     this.clientForm.controls.roleName.setValue(this.client.role.name);
-    this.clientForm.controls.firstName.setValue(this.client.firstName);
-    this.clientForm.controls.addressCountry.setValue(this.client.address.country);
+    this.clientForm.controls.addressId.setValue(this.client.addressId);
     this.clientForm.controls.addressZipCode.setValue(this.client.address.zipCode);
+    this.clientForm.controls.addressCountry.setValue(this.client.address.country);
+    this.clientForm.controls.addressStreet.setValue(this.client.address.street);
     this.clientForm.controls.addressCity.setValue(this.client.address.city);
     this.clientForm.controls.addressBuildingNumber.setValue(this.client.address.buildingNumber);
-    this.clientForm.controls.addressStreet.setValue(this.client.address.street);
-    this.clientForm.controls.passwordHash.setValue(this.client.passwordHash);
     this.clientForm.controls.dateOfBirth.setValue(this.client.dateOfBirth);
-    this.clientForm.controls.email.setValue(this.client.email);
+    this.clientForm.controls.roleId.setValue(this.client.roleId);
+    this.clientForm.controls.roleName.setValue(this.client.role.name);
   }
 
   showClient(id: number) {

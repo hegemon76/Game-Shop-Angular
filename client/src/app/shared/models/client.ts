@@ -9,6 +9,8 @@ export interface IClient {
     passwordHash: string;
     email: string;
     dateOfBirth:Date;
+    addressId:number;
     address: IAddresses;
+    roleId:number;
     role:IRoles;
 }
