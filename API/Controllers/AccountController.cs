@@ -27,10 +27,14 @@ namespace API.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<ActionResult<LoginDto>> Login ([FromBody] LoginDto dto)
+        public async Task<ActionResult<TokenDto>> Login ([FromBody] LoginDto dto)
         {
             var token =await _service.GenerateJwt(dto);
-            return Ok(token);
+            return new TokenDto
+            {
+                UserName = dto.UserName,
+                Token = token
+            };
         }
 
     }
