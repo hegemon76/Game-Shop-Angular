@@ -121,16 +121,34 @@ namespace API.Services
 
         public async Task UpdateUser(User user, int userId)
         {
-            var hashedPassword = _passwordHasher.HashPassword(user, user.PasswordHash);
+            var findUser = _context.Users.FirstOrDefault(x => x.Id == userId);
             
+            var result = _passwordHasher.VerifyHashedPassword(user, findUser.PasswordHash, user.PasswordHash);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                throw new BadRequestException("Invalid username or password");
+            }
             user.Id = userId;
-            user.PasswordHash = hashedPassword;
-            
+           // user.PasswordHash = password;
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
 
+
         //privates
+
+        //private string checkForChangingPassword(string password, int userId) 
+        //{
+            
+
+        //    if (findUser.PasswordHash != password)
+        //    {
+        //        var hashedPassword = _passwordHasher.HashPassword(findUser, password);
+        //        password = hashedPassword;
+        //    }
+        //    return password;
+        //}
+
         private async Task<Product> getProduct(int productId)
         {
             var product = await _context.Products

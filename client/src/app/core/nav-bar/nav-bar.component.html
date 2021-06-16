@@ -6,12 +6,12 @@
     </div>
    
     <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger;">
-        <a class="p-2" [routerLink]="['/moje-konto']" routerLinkActive="active">Moje Konto</a>
+        <a class="p-2" [routerLink]="['/moje-konto']" routerLinkActive="active" *ngIf="isLogged">Moje Konto</a>
         <a class="p-2" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Strona
             Domowa</a>
         <a class="p-2" [routerLink]="['/sklep']" routerLinkActive="active">Sklep</a>
         <a class="p-2" [routerLink]="['/kontakt']" routerLinkActive="active">Kontakt</a>
-        <a class="p-2" [routerLink]="['/admin-panel']" routerLinkActive="active">Panel Administratora</a>
+        <a class="p-2" [routerLink]="['/admin-panel']" routerLinkActive="active" *ngIf="isAdmin">Panel Administratora</a>
     </nav>
     <div class="d-flex align-items-center">
         <a routerLink="/koszyk" class="position-relative">
@@ -19,7 +19,7 @@
             <div class="cart-no">5</div>
         </a>
         <div>
-        <a class="mr-3" *ngIf="isLogged">Witaj {{currentUser.userName}}</a>
+        <a class="mr-3" *ngIf="isLogged">Witaj <strong>{{currentUser.userName | titlecase}}</strong></a>
         <div *ngIf="!isLogged">
             <a class="btn btn-outline-secondary mr-3" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</a>
             <a class="btn btn-outline-secondary mr-2" [routerLink]="['/register']" routerLinkActive="active">Rejestracja</a>

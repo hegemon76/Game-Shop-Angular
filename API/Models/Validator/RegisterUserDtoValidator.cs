@@ -28,6 +28,7 @@ namespace API.Models.Validator
                         context.AddFailure("Email", "That email is taken");
                     }
                 });
+
             RuleFor(x => x.UserName)
                .Custom((value, context) =>
                {
