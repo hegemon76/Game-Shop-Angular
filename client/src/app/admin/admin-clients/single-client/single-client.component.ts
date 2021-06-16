@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EventTarget } from 'ngx-bootstrap/utils/facade/browser';
@@ -108,7 +109,10 @@ export class SingleClientComponent implements OnInit {
     this.clientForm.controls.addressStreet.setValue(this.client.address.street);
     this.clientForm.controls.addressCity.setValue(this.client.address.city);
     this.clientForm.controls.addressBuildingNumber.setValue(this.client.address.buildingNumber);
-    this.clientForm.controls.dateOfBirth.setValue(this.client.dateOfBirth);
+    const format = 'dd/MM/yyyy';
+    const locale = 'en-US';
+    let formattedDate = formatDate(this.client.dateOfBirth, format, locale)
+    this.clientForm.controls.dateOfBirth.setValue(formattedDate);
     this.clientForm.controls.roleId.setValue(this.client.role.id);
     this.clientForm.controls.roleName.setValue(this.client.role.name);
   }
@@ -120,8 +124,5 @@ export class SingleClientComponent implements OnInit {
   closeClientInfo() {
     this.showClientsInfo = null;
   }
-
-
-
 
 }
