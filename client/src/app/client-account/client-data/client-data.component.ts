@@ -54,7 +54,6 @@ export class ClientDataComponent implements OnInit {
       'dateOfBirth': dateOfBirth,
     }
 
-    console.log(body);
   }
 
   setDefaults() {

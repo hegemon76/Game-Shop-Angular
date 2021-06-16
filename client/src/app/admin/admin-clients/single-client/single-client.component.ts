@@ -84,7 +84,6 @@ export class SingleClientComponent implements OnInit {
       }
     };
 
-    console.log(body);
     this.updateClientEvent.emit({ body, userId });
   }
 
