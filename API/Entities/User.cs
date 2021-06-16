@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace API.Entities
         
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
+        
+        [Column(TypeName ="date")]
         public DateTime? DateOfBirth { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }

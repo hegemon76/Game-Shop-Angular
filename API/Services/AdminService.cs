@@ -127,26 +127,47 @@ namespace API.Services
 
             if(address != null)
             {
-                address.City = user.Address.City;
-                address.Country = user.Address.Country;
-                address.BuildingNumber = user.Address.BuildingNumber;
-                address.Street = user.Address.Street;
-                address.ZipCode = user.Address.ZipCode;
+                address.City = user.Address.City != address.City && address.City != null 
+                    ? user.Address.City : address.City;
+
+                address.Country = user.Address.Country != address.Country && user.Address.Country != null 
+                    ? user.Address.Country : address.Country;
+
+                address.BuildingNumber = user.Address.BuildingNumber != address.BuildingNumber && user.Address.BuildingNumber > 0 
+                    ? user.Address.BuildingNumber : address.BuildingNumber;
+
+                address.Street = user.Address.Street != address.Street && user.Address.Street != null 
+                    ? user.Address.Street : address.Street;
+
+                address.ZipCode = user.Address.ZipCode != address.ZipCode && user.Address.ZipCode != null
+                    ? user.Address.ZipCode : address.ZipCode;
             }
 
             if(role != null)
             {
-                role.Name = user.Role.Name;
+                role.Name = user.Role.Name != role.Name && user.Role.Name != null
+                    ? user.Role.Name : role.Name;
             }
 
             if(findUser != null)
             {
-                findUser.LastName = user.LastName;
-                findUser.FirstName = user.FirstName;
-                findUser.UserName = user.UserName;
-                findUser.Email = user.Email;
-                findUser.LastName = user.LastName;
-                findUser.DateOfBirth = user.DateOfBirth;
+                findUser.LastName = user.LastName != findUser.LastName && user.LastName != null
+                    ? user.LastName : findUser.LastName;
+
+                findUser.FirstName = user.FirstName != findUser.FirstName && user.FirstName != null
+                    ? user.FirstName : findUser.FirstName;
+
+                findUser.UserName = user.UserName != findUser.UserName && user.UserName != null
+                    ? user.UserName : findUser.UserName;
+
+                findUser.Email = user.Email != findUser.Email && user.Email != null
+                    ? user.Email : findUser.Email;
+
+                findUser.LastName = user.LastName != findUser.LastName && user.LastName != null
+                    ? user.LastName : findUser.LastName;
+
+                findUser.DateOfBirth = user.DateOfBirth != findUser.DateOfBirth && user.DateOfBirth != null
+                    ? user.DateOfBirth : findUser.DateOfBirth;
             }
 
             //var result = _passwordHasher.VerifyHashedPassword(user, findUser.PasswordHash, user.PasswordHash);

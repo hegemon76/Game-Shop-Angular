@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IClient } from 'src/app/shared/models/client';
 import { FormControl, FormGroup } from '@angular/forms';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-client-data',
@@ -33,7 +32,7 @@ export class ClientDataComponent implements OnInit {
   onSubmit(userId?: number, userName?: string, password?: string, email?: string,
     firstName?: string, lastName?: string, addressId?: number, addressZipCode?: string,
     addressCountry?: string, addressStreet?: number, addressCity?: string,
-    addressBuildingNumber?: number, dateOfBirth?: Date) {
+    addressBuildingNumber?: number, dateOfBirth?: any) {
 
 
     const body = {
@@ -72,15 +71,11 @@ export class ClientDataComponent implements OnInit {
     this.clientForm.controls.addressStreet.setValue(this.client.address.street);
     this.clientForm.controls.addressCity.setValue(this.client.address.city);
     this.clientForm.controls.addressBuildingNumber.setValue(this.client.address.buildingNumber);
-    const format = 'dd/MM/yyyy';
-    const locale = 'en-US';
-    let formattedDate = formatDate(this.client.dateOfBirth, format, locale)
-    this.clientForm.controls.dateOfBirth.setValue(formattedDate);
+    this.clientForm.controls.dateOfBirth.setValue(this.client.dateOfBirth);
   }
 
   ngOnInit(): void {
     this.setDefaults();
-
   }
 
 }
