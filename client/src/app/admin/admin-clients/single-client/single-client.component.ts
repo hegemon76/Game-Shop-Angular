@@ -47,6 +47,7 @@ export class SingleClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.setDefaults();
+    console.log(this.client.address.id);
   }
 
   onSubmit(userId?: number, userName?: string, passwordHash?: string, email?: string,
@@ -68,6 +69,7 @@ export class SingleClientComponent implements OnInit {
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
+      'addressId': addressId,
       'address': {
         'id': addressId,
         'zipCode': addressZipCode,
@@ -77,6 +79,7 @@ export class SingleClientComponent implements OnInit {
         'buildingNumber': addressBuildingNumber,
       },
       'dateOfBirth': dateOfBirth,
+      'roleId': roleId,
       'role': {
         'id': roleId,
         'name': roleName
@@ -90,6 +93,7 @@ export class SingleClientComponent implements OnInit {
   onRoleChange(event: any) {
     console.log(event);
   }
+
   setDefaults() {
     this.clientForm.controls.userId.setValue(this.client.id);
     this.clientForm.controls.userName.setValue(this.client.userName);
@@ -98,14 +102,14 @@ export class SingleClientComponent implements OnInit {
     this.clientForm.controls.firstName.setValue(this.client.firstName);
     this.clientForm.controls.lastName.setValue(this.client.lastName);
     this.clientForm.controls.roleName.setValue(this.client.role.name);
-    this.clientForm.controls.addressId.setValue(this.client.addressId);
+    this.clientForm.controls.addressId.setValue(this.client.address.id);
     this.clientForm.controls.addressZipCode.setValue(this.client.address.zipCode);
     this.clientForm.controls.addressCountry.setValue(this.client.address.country);
     this.clientForm.controls.addressStreet.setValue(this.client.address.street);
     this.clientForm.controls.addressCity.setValue(this.client.address.city);
     this.clientForm.controls.addressBuildingNumber.setValue(this.client.address.buildingNumber);
     this.clientForm.controls.dateOfBirth.setValue(this.client.dateOfBirth);
-    this.clientForm.controls.roleId.setValue(this.client.roleId);
+    this.clientForm.controls.roleId.setValue(this.client.role.id);
     this.clientForm.controls.roleName.setValue(this.client.role.name);
   }
 

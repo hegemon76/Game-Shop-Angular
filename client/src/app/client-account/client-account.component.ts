@@ -20,7 +20,8 @@ export class ClientAccountComponent implements OnInit {
   toggleMyDataMode() {
     this.deactivateAll();
     this.isMyDataActivated = true;
-    this.getUser(1);
+    let client = JSON.parse(localStorage.getItem('user'));
+    this.getUser(client.id);
   }
 
   getUser(id:number) {

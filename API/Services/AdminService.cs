@@ -122,15 +122,41 @@ namespace API.Services
         public async Task UpdateUser(User user, int userId)
         {
             var findUser = _context.Users.FirstOrDefault(x => x.Id == userId);
-            
-            var result = _passwordHasher.VerifyHashedPassword(user, findUser.PasswordHash, user.PasswordHash);
-            if (result == PasswordVerificationResult.Failed)
+            var address = _context.Adresses.FirstOrDefault(a => a.Id == user.AddressId);
+            var role = _context.Roles.FirstOrDefault(r => r.Id == user.RoleId);
+
+            if(address != null)
             {
-                throw new BadRequestException("Invalid username or password");
+                address.City = user.Address.City;
+                address.Country = user.Address.Country;
+                address.BuildingNumber = user.Address.BuildingNumber;
+                address.Street = user.Address.Street;
+                address.ZipCode = user.Address.ZipCode;
             }
-            user.Id = userId;
-           // user.PasswordHash = password;
-            _context.Update(user);
+
+            if(role != null)
+            {
+                role.Name = user.Role.Name;
+            }
+
+            if(findUser != null)
+            {
+                findUser.LastName = user.LastName;
+                findUser.FirstName = user.FirstName;
+                findUser.UserName = user.UserName;
+                findUser.Email = user.Email;
+                findUser.LastName = user.LastName;
+                findUser.DateOfBirth = user.DateOfBirth;
+            }
+
+            //var result = _passwordHasher.VerifyHashedPassword(user, findUser.PasswordHash, user.PasswordHash);
+            //if (result == PasswordVerificationResult.Failed)
+            //{
+            //    throw new BadRequestException("Invalid username or password");
+            //}
+
+            //user.Id = userId;
+            // user.PasswordHash = password;
             await _context.SaveChangesAsync();
         }
 

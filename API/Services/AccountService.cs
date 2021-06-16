@@ -103,6 +103,7 @@ namespace API.Services
             //return tokenHandler.WriteToken(token);
             return new TokenDto
             {
+                Id = user.Id,
                 UserName = user.UserName,
                 Token = tokenHandler.WriteToken(token),
                 Role = user.Role.Name
