@@ -21,7 +21,7 @@ namespace API.Services
         Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
-        Task UpdateUser(User user, int userId);
+        Task UpdateUser(UserDto user, int userId);
         Task SetRoleForUser(SetRoleForUser dto);
         Task<List<UserDto>> GetAllUsers();
     }
@@ -119,82 +119,43 @@ namespace API.Services
             //  _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
         }
 
-        public async Task UpdateUser(User user, int userId)
+        public async Task UpdateUser(UserDto user, int userId)
         {
-            var findUser = _context.Users.FirstOrDefault(x => x.Id == userId);
-            var address = _context.Adresses.FirstOrDefault(a => a.Id == user.AddressId);
-            var role = _context.Roles.FirstOrDefault(r => r.Id == user.RoleId);
+            var findUser =await _context.Users
+                .Include(x=>x.Address)
+                .Include(x=>x.Role)
+                .FirstOrDefaultAsync(x => x.Id == userId);
 
-            if(address != null)
+            if (findUser is null)
             {
-                address.City = user.Address.City != address.City && address.City != null 
-                    ? user.Address.City : address.City;
-
-                address.Country = user.Address.Country != address.Country && user.Address.Country != null 
-                    ? user.Address.Country : address.Country;
-
-                address.BuildingNumber = user.Address.BuildingNumber != address.BuildingNumber && user.Address.BuildingNumber > 0 
-                    ? user.Address.BuildingNumber : address.BuildingNumber;
-
-                address.Street = user.Address.Street != address.Street && user.Address.Street != null 
-                    ? user.Address.Street : address.Street;
-
-                address.ZipCode = user.Address.ZipCode != address.ZipCode && user.Address.ZipCode != null
-                    ? user.Address.ZipCode : address.ZipCode;
+                throw new NotFoundException("did not find user");
             }
 
-            if(role != null)
+            string newHashedPassword;
+
+            if (findUser.PasswordHash != user.PasswordHash)
             {
-                role.Name = user.Role.Name != role.Name && user.Role.Name != null
-                    ? user.Role.Name : role.Name;
+                newHashedPassword = _passwordHasher.HashPassword(findUser, user.PasswordHash);
+                findUser.PasswordHash = newHashedPassword;
             }
 
-            if(findUser != null)
-            {
-                findUser.LastName = user.LastName != findUser.LastName && user.LastName != null
-                    ? user.LastName : findUser.LastName;
+            findUser.Address.City = user.Address.City;
+            findUser.Address.Country = user.Address.Country;
+            findUser.Address.BuildingNumber = user.Address.BuildingNumber;
+            findUser.Address.Street = user.Address.Street;
+            findUser.Address.ZipCode = user.Address.ZipCode;
+            findUser.RoleId = user.Role.Id;
+            findUser.LastName = user.LastName;
+            findUser.FirstName = user.FirstName;
+            findUser.UserName = user.UserName;
+            findUser.Email = user.Email;
+            findUser.LastName = user.LastName;
+            findUser.DateOfBirth = user.DateOfBirth;
 
-                findUser.FirstName = user.FirstName != findUser.FirstName && user.FirstName != null
-                    ? user.FirstName : findUser.FirstName;
-
-                findUser.UserName = user.UserName != findUser.UserName && user.UserName != null
-                    ? user.UserName : findUser.UserName;
-
-                findUser.Email = user.Email != findUser.Email && user.Email != null
-                    ? user.Email : findUser.Email;
-
-                findUser.LastName = user.LastName != findUser.LastName && user.LastName != null
-                    ? user.LastName : findUser.LastName;
-
-                findUser.DateOfBirth = user.DateOfBirth != findUser.DateOfBirth && user.DateOfBirth != null
-                    ? user.DateOfBirth : findUser.DateOfBirth;
-            }
-
-            //var result = _passwordHasher.VerifyHashedPassword(user, findUser.PasswordHash, user.PasswordHash);
-            //if (result == PasswordVerificationResult.Failed)
-            //{
-            //    throw new BadRequestException("Invalid username or password");
-            //}
-
-            //user.Id = userId;
-            // user.PasswordHash = password;
             await _context.SaveChangesAsync();
         }
 
 
-        //privates
-
-        //private string checkForChangingPassword(string password, int userId) 
-        //{
-            
-
-        //    if (findUser.PasswordHash != password)
-        //    {
-        //        var hashedPassword = _passwordHasher.HashPassword(findUser, password);
-        //        password = hashedPassword;
-        //    }
-        //    return password;
-        //}
 
         private async Task<Product> getProduct(int productId)
         {
