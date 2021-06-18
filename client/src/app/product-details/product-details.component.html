@@ -27,20 +27,21 @@
     <!----pytania-->
     <h2>Dodaj komentarz</h2>
 
-    <form>
+    <form [formGroup]="opinionForm" (ngSubmit)="onSubmit(opinionForm.value.name,opinionForm.value.surname,opinionForm.value.description,
+    product.id)">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Imie</label>
-                <input type="text" class="form-control" id="inputEmail4">
+                <input type="text" class="form-control" formControlName="name" >
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Nazwisko</label>
-                <input type="text" class="form-control" id="inputEmail4">
+                <input type="text" class="form-control" formControlName="surname" >
             </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">Pytanie</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" formControlName="description"></textarea>
         </div>
         <button type="submit" class="btn btn-primary mb-2">Sign in</button>
     </form>
