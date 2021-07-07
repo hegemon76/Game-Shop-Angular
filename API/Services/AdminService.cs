@@ -21,7 +21,7 @@ namespace API.Services
         Task<Product> CreateNewProduct(CreateNewProductDto dto, IFormFile image);
         Task DeleteProduct(int productId);
         Task UpdateProduct(CreateNewProductDto dto, int productId);
-        Task UpdateUser(User user, int userId);
+        Task UpdateUser(UserDto user, int userId);
         Task SetRoleForUser(SetRoleForUser dto);
         Task<List<UserDto>> GetAllUsers();
     }
@@ -119,18 +119,44 @@ namespace API.Services
             //  _logger.LogInformation($"Product {product.Name} has been updated by AdminId= {_userContextService.GetUserId}");
         }
 
-        public async Task UpdateUser(User user, int userId)
+        public async Task UpdateUser(UserDto user, int userId)
         {
-            var hashedPassword = _passwordHasher.HashPassword(user, user.PasswordHash);
-            
-            user.Id = userId;
-            user.PasswordHash = hashedPassword;
-            
-            _context.Update(user);
+            var findUser =await _context.Users
+                .Include(x=>x.Address)
+                .Include(x=>x.Role)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (findUser is null)
+            {
+                throw new NotFoundException("did not find user");
+            }
+
+            string newHashedPassword;
+
+            if (findUser.PasswordHash != user.PasswordHash)
+            {
+                newHashedPassword = _passwordHasher.HashPassword(findUser, user.PasswordHash);
+                findUser.PasswordHash = newHashedPassword;
+            }
+
+            findUser.Address.City = user.Address.City;
+            findUser.Address.Country = user.Address.Country;
+            findUser.Address.BuildingNumber = user.Address.BuildingNumber;
+            findUser.Address.Street = user.Address.Street;
+            findUser.Address.ZipCode = user.Address.ZipCode;
+            findUser.RoleId = user.Role.Id;
+            findUser.LastName = user.LastName;
+            findUser.FirstName = user.FirstName;
+            findUser.UserName = user.UserName;
+            findUser.Email = user.Email;
+            findUser.LastName = user.LastName;
+            findUser.DateOfBirth = user.DateOfBirth;
+
             await _context.SaveChangesAsync();
         }
 
-        //privates
+
+
         private async Task<Product> getProduct(int productId)
         {
             var product = await _context.Products
@@ -143,7 +169,7 @@ namespace API.Services
 
         private string uploadImage(IFormFile image)
         {
-            const string defaultName = "Default.png";
+            const string defaultName = "/assets/Default.png";
 
             if (image != null && image.Length > 0)
             {

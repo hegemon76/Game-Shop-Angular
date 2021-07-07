@@ -9,6 +9,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class NavBarComponent implements OnInit {
   isLogged: boolean = false;
   currentUser: any = null;
+  isAdmin:boolean = false;
 
   constructor(private accountService: AccountService) { }
 
@@ -18,11 +19,17 @@ export class NavBarComponent implements OnInit {
 
   getLoggedUser() {
     this.currentUser = this.accountService.getUser();
-    if(this.currentUser != null){
+    if(this.currentUser != null)
+    {
       this.isLogged = true;
-      console.log(this.currentUser.userName);
+      let role= this.currentUser.role;
+      if (role == 'Admin')
+      {
+        this.isAdmin=true;
+      }
     }
-  }
+    }
+  
   logout(): void {
     this.accountService.logout();
     window.location.reload();

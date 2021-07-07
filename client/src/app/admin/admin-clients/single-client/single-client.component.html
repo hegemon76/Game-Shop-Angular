@@ -1,9 +1,9 @@
 <form [formGroup]="clientForm" (ngSubmit)="onSubmit(client.id, clientForm.value.userName, clientForm.value.passwordHash,
 clientForm.value.email, clientForm.value.firstName, clientForm.value.lastName,
-client.addressId, clientForm.value.addressZipCode, clientForm.value.addressCountry,
+client.address.id, clientForm.value.addressZipCode, clientForm.value.addressCountry,
 clientForm.value.addressStreet, clientForm.value.addressCity,
 clientForm.value.addressBuildingNumber, clientForm.value.dateOfBirth,
-client.roleId, clientForm.value.roleName)">
+client.role.id, clientForm.value.roleName)">
 <div class="border border-primary mb-2 p-1">
     <div class="row ml-2 mt-2 ">
         <div class="col-1">

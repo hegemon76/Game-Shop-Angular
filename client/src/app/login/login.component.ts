@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.accountService.login(this.form.getRawValue()).subscribe(response => {
       console.log(response);
-      if(response){
+      if(response){   
         window.location.reload()
       }
+      
     });
     this.router.navigate(['']);
   }

@@ -25,6 +25,12 @@ export class ShopService {
         })
       )
   }
+
+  addOpinion(id: number, body: any){
+    const endpoint = this.baseUrl + 'videogames/product/' + id + '/addopinion';
+
+    return this.http.post(endpoint, body);
+  }
   //#region ---------GENRE SECTION
   getGenres() {
     return this.http.get<IGenre[]>(this.baseUrl + 'videogames/search/genres');

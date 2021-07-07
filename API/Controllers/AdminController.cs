@@ -62,7 +62,7 @@ namespace API.Controllers
         }
 
         [HttpPut("user/{userId}/update")]
-        public async Task<ActionResult> UpdateUser([FromRoute] int userId, [FromBody] User user)
+        public async Task<ActionResult> UpdateUser([FromRoute] int userId, [FromBody] UserDto user)
         {
             await _service.UpdateUser(user, userId);
             return Ok(user);

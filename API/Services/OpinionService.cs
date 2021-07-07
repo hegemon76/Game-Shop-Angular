@@ -54,9 +54,10 @@ namespace API.Services
 
             var newOpinion = _mapper.Map<Opinion>(opinion);
             newOpinion.ProductId = productId;
-            newOpinion.UserName = _userContextService.GetUserName;
+            newOpinion.Name = opinion.Name;
+            newOpinion.Surname= opinion.Surname;
 
-             _context.Opinions.Add(newOpinion);
+            _context.Opinions.Add(newOpinion);
             await _context.SaveChangesAsync();
 
         }

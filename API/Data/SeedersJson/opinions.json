@@ -2,26 +2,31 @@
 	{
 		"Description": "The Best game ever",
 		"ProductId": 1,
-		"UserName": "Zirex"
+		"Name": "Zirex",
+		"Surname": "Zirex"
 	},
 	{
 		"Description": "i love it",
 		"ProductId": 2,
-		"UserName": "Piotr"
+		"UserName": "Piotr",
+		"Surname": "Piotr"
 	},
 	{
 		"Description": "that's what i like",
 		"ProductId": 2,
-		"UserName": "Tymoteusz"
+		"UserName": "Tymoteusz",
+		"Surname": "Tymoteusz"
 	},
 	{
 		"Description": "I play it all day all night",
 		"ProductId": 5,
-		"UserName": "CyberMarian"
+		"UserName": "CyberMarian",
+		"Surname": "CyberMarian"
 	},
 	{
 		"Description": "fabolous",
 		"ProductId": 7,
-		"UserName": "PiotrIPawel"
+		"UserName": "PiotrIPawel",
+		"Surname": "PiotrIPawel"
 	}
 ]

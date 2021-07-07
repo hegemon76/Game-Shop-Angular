@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace API.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; set; }
+        [Column(TypeName ="date")]
         public DateTime DateOfBirth { get; set; }
         public Role Role { get; set; }
     }

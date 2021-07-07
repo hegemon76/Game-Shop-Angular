@@ -7,7 +7,8 @@ namespace API.Models
 {
     public class OpinionDto
     {
-        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public string Description { get; set; }
     }
 }

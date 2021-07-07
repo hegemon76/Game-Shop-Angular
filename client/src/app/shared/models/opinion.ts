@@ -1,4 +1,4 @@
 export interface IOpinion{
-    userName: string;
+    name: string;
     description: string;
 }

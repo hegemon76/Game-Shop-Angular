@@ -28,13 +28,14 @@ namespace API.Controllers
             return Ok(opinions);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("addopinion")]
         public async Task<ActionResult<CreateNewOpinionDto>> AddOpinion([FromBody] CreateNewOpinionDto dto, [FromRoute] int id)
         {
             await _service.AddOpinion(dto, id);
 
-            return Created($"api/videogames/product/{id}/opinions", null);
+            //return Created($"api/videogames/product/{id}/opinions", null);
+            return dto;
         }
 
 

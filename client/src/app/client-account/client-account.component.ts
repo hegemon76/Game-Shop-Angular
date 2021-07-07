@@ -11,33 +11,36 @@ export class ClientAccountComponent implements OnInit {
   client: IClient;
   isMyDataActivated: boolean = false;
   isOrdersActive: boolean = false;
-  
+
   constructor(private clientAccountService: ClientAccountService) { }
-  
+
   ngOnInit(): void {
+    let client = JSON.parse(localStorage.getItem('user'));
+    this.getUser(client.id);
   }
-  
+
   toggleMyDataMode() {
     this.deactivateAll();
     this.isMyDataActivated = true;
-    this.getUser(1);
   }
 
-  getUser(id:number) {
+  getUser(id: number) {
     this.clientAccountService.getUser(id).subscribe(response => {
-      this.client = response;
+      if (response) {
+        this.client = response;
+      }
     }, error => {
       console.log(error);
     });
   }
-  
-    toggleOrdersActive() {
+
+  toggleOrdersActive() {
     this.deactivateAll();
     this.isOrdersActive = true;
   }
-  
+
   deactivateAll() {
     this.isOrdersActive = false;
-    this.isMyDataActivated =false;
+    this.isMyDataActivated = false;
   }
 }
