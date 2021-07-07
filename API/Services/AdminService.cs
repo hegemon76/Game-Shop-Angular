@@ -169,7 +169,7 @@ namespace API.Services
 
         private string uploadImage(IFormFile image)
         {
-            const string defaultName = "Default.png";
+            const string defaultName = "/assets/Default.png";
 
             if (image != null && image.Length > 0)
             {
