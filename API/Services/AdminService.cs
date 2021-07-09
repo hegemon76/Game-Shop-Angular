@@ -24,6 +24,7 @@ namespace API.Services
         Task UpdateUser(UserDto user, int userId);
         Task SetRoleForUser(SetRoleForUser dto);
         Task<List<UserDto>> GetAllUsers();
+
     }
 
     public class AdminService : IAdminService
